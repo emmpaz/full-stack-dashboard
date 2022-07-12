@@ -8,14 +8,25 @@ import javax.persistence.Id;
 @Entity
 public class Company {
     @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @Column(name = "companyid", nullable = false)
+    private Long companyid;
+
+    @Column(name = "companyName", nullable = false, columnDefinition = "varchar(255)")
+    private String companyName;
 
     public Long getId() {
-        return id;
+        return companyid;
+    }
+
+    public String getCompanyName() {
+        return companyName;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.companyid = id;
+    }
+
+    public void setCompanyName(String name) {
+        this.companyName = name;
     }
 }
