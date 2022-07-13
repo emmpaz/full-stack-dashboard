@@ -11,20 +11,19 @@ public class Campaign {
     @Column(name = "campaignid", nullable = false)
     private Long campaignid;
 
-    @Id
     @Column(name = "managerid", nullable = false)
     private Long managerid;
 
-    @Column(name = "campaignName", nullable = false, columnDefinition = "varchar(255)")
+    @Column(name = "campaign_name", nullable = false, columnDefinition = "varchar(255)")
     private String campaignName;
 
-    @Column(name = "startDate", nullable = false, columnDefinition = "DATE")
+    @Column(name = "start_date", nullable = false, columnDefinition = "DATE")
     private Date startDate;
 
-    @Column(name = "endDate", nullable = false, columnDefinition = "DATE")
+    @Column(name = "end_date", nullable = false, columnDefinition = "DATE")
     private Date endDate;
 
-    @Column(name = "isActive", nullable = false, columnDefinition = "boolean default false")
+    @Column(name = "is_active", nullable = false, columnDefinition = "boolean default false")
     private Boolean isActive;
 
     public Long getCampaignId() {

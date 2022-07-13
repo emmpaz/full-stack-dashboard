@@ -5,15 +5,20 @@ import org.hibernate.annotations.Cache;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "user")
 public class User {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name="name", nullable = false, columnDefinition = "varchar(255)")
-    private String name;
+    @Column(name="first", nullable = false, columnDefinition = "varchar(255)")
+    private String firstname;
+
+    @Column(name="last", nullable = false, columnDefinition = "varchar(255)")
+    private String lastname;
 
     @Column(name="username", nullable = false, columnDefinition = "varchar(255)")
     private String username;
@@ -37,12 +42,20 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public Long getId() {

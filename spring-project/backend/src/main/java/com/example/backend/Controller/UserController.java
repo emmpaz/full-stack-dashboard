@@ -1,26 +1,29 @@
 package com.example.backend.Controller;
 
 
+import com.example.backend.Models.User;
 import com.example.backend.Repositories.IUserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class UserController{
 
+    @Autowired
+    IUserRepo userRepo;
+
+    public UserController(IUserRepo userRepo){
+        this.userRepo = userRepo;
+    }
 
 
-
-    @GetMapping("/{userid}")
-    public HashMap<String, String> userInfo(){
-        HashMap<String, String>  map = new HashMap<>();
-
-        map.put("name", "john");
-        map.put("id", "2134214141");
-        map.put("password", "password");
-
-        return map;
+    @GetMapping("/users")
+    public List<User> allUsers(){
+        return this.userRepo.findAll();
     }
 }
