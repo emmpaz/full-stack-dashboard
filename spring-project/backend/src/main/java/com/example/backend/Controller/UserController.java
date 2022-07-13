@@ -4,9 +4,7 @@ package com.example.backend.Controller;
 import com.example.backend.Models.User;
 import com.example.backend.Repositories.IUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,8 +20,16 @@ public class UserController{
     }
 
 
-    @GetMapping("/users")
+    @GetMapping("/user")
     public List<User> allUsers(){
-        return this.userRepo.findAll();
+        return userRepo.findAll();
     }
+
+    @GetMapping("/user/{id}")
+    public User getUserById(
+            @PathVariable("id") String id){
+        return userRepo.getReferenceById(Long.valueOf(id));
+    }
+
+
 }
