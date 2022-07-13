@@ -24,8 +24,8 @@ public class Campaign {
     @Column(name = "endDate", nullable = false, columnDefinition = "DATE")
     private Date endDate;
 
-    @Column(name = "active", nullable = false, columnDefinition = "boolean default false")
-    private Boolean active;
+    @Column(name = "isActive", nullable = false, columnDefinition = "boolean default false")
+    private Boolean isActive;
 
     public Long getCampaignId() {
         return campaignid;
@@ -44,7 +44,7 @@ public class Campaign {
     }
 
     public Boolean isActive() {
-        return active;
+        return isActive;
     }
 
     public Date getEndDate() {
@@ -72,6 +72,6 @@ public class Campaign {
     }
     
     public void setActivity(Boolean newActivity) {
-        this.active = newActivity;
+        this.isActive = newActivity;
     }
 }
