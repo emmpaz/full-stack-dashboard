@@ -6,15 +6,15 @@ import com.example.backend.Repositories.IUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController{
 
-    @Autowired
-    IUserRepo iUserRepo;
 
+    IUserRepo iUserRepo;
+    @Autowired
     public UserController(IUserRepo iUserRepo){
         this.iUserRepo = iUserRepo;
     }
@@ -26,9 +26,9 @@ public class UserController{
     }
 
     @GetMapping("/user/{id}")
-    public User getUserById(
-            @PathVariable("id") String id){
-        return iUserRepo.getReferenceById(Long.valueOf(id));
+    public Optional<User> getUserById(
+            @PathVariable("id") Long id){
+        return iUserRepo.findById(id);
     }
 
     @PostMapping("/user")

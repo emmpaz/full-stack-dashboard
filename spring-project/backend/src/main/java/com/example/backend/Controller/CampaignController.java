@@ -3,10 +3,12 @@ package com.example.backend.Controller;
 import com.example.backend.Models.Campaign;
 import com.example.backend.Models.User;
 import com.example.backend.Repositories.ICampaignRepo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class CampaignController{
@@ -24,12 +26,18 @@ public class CampaignController{
     }
 
     @GetMapping("/campaign/{id}")
-    public Campaign getCampaignByID(@PathVariable("id") String id){
-        return iCampaignRepo.getReferenceById(Long.valueOf(id));
+    public Optional<Campaign> getCampaignByID(@PathVariable("id") Long id){
+        return iCampaignRepo.findById(id);
     }
 
     @PostMapping("/campaign")
     public void addCampaign(
+            @RequestBody Campaign campaign){
+        iCampaignRepo.save(campaign);
+    }
+    //not working yet
+    @PutMapping("/campaign")
+    public void updateCampaign(
             @RequestBody Campaign campaign){
         iCampaignRepo.save(campaign);
     }
