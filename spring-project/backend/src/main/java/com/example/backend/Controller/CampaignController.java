@@ -1,11 +1,10 @@
 package com.example.backend.Controller;
 
 import com.example.backend.Models.Campaign;
+import com.example.backend.Models.User;
 import com.example.backend.Repositories.ICampaignRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +26,11 @@ public class CampaignController{
     @GetMapping("/campaign/{id}")
     public Campaign getCampaignByID(@PathVariable("id") String id){
         return iCampaignRepo.getReferenceById(Long.valueOf(id));
+    }
+
+    @PostMapping("/campaign")
+    public void addCampaign(
+            @RequestBody Campaign campaign){
+        iCampaignRepo.save(campaign);
     }
 }

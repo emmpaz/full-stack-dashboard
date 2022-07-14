@@ -13,22 +13,28 @@ import java.util.List;
 public class UserController{
 
     @Autowired
-    IUserRepo userRepo;
+    IUserRepo iUserRepo;
 
-    public UserController(IUserRepo userRepo){
-        this.userRepo = userRepo;
+    public UserController(IUserRepo iUserRepo){
+        this.iUserRepo = iUserRepo;
     }
 
 
     @GetMapping("/user")
     public List<User> allUsers(){
-        return userRepo.findAll();
+        return iUserRepo.findAll();
     }
 
     @GetMapping("/user/{id}")
     public User getUserById(
             @PathVariable("id") String id){
-        return userRepo.getReferenceById(Long.valueOf(id));
+        return iUserRepo.getReferenceById(Long.valueOf(id));
+    }
+
+    @PostMapping("/user")
+    public void addUser(
+            @RequestBody User user){
+        iUserRepo.save(user);
     }
 
 
