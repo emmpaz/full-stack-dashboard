@@ -1,15 +1,14 @@
 package com.example.backend.Controller;
 
 import com.example.backend.Models.Campaign;
-import com.example.backend.Models.User;
 import com.example.backend.Repositories.ICampaignRepo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 public class CampaignController{
 
