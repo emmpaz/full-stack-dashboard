@@ -26,6 +26,30 @@ public class Campaign {
     @Column(name = "is_active", nullable = false, columnDefinition = "boolean default false")
     private Boolean isActive;
 
+    public Long getCampaignid() {
+        return campaignid;
+    }
+
+    public void setCampaignid(Long campaignid) {
+        this.campaignid = campaignid;
+    }
+
+    public Long getManagerid() {
+        return managerid;
+    }
+
+    public void setManagerid(Long managerid) {
+        this.managerid = managerid;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
     public Long getCampaignId() {
         return campaignid;
     }

@@ -37,5 +37,11 @@ public class UserController{
         iUserRepo.save(user);
     }
 
+    @PutMapping("/user")
+    public void updateUser(
+            @RequestBody User user) {
+        iUserRepo.save(user);
+    }
+
 
 }

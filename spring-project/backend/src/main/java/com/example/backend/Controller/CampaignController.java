@@ -35,7 +35,6 @@ public class CampaignController{
             @RequestBody Campaign campaign){
         iCampaignRepo.save(campaign);
     }
-    //not working yet
     @PutMapping("/campaign")
     public void updateCampaign(
             @RequestBody Campaign campaign){
