@@ -3,9 +3,11 @@ package com.example.backend.Models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
+@Table(name = "campaign")
 public class Campaign {
     @Id
     @Column(name = "campaignid", nullable = false)
@@ -23,7 +25,7 @@ public class Campaign {
     @Column(name = "end_date", nullable = false, columnDefinition = "DATE")
     private Date endDate;
 
-    @Column(name = "is_active", nullable = false, columnDefinition = "boolean default false")
+    @Column(name = "is_active", nullable = false, columnDefinition = "tinyint")
     private Boolean isActive;
 
     public Long getCampaignid() {
