@@ -1,9 +1,13 @@
 import logo from './logo.svg';
-import { Component } from 'react';
+import { Component, Link } from 'react';
 import './App.css';
-import axios from 'axios';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, useNavigate, Route, Routes } from 'react-router-dom';
 
-
+import Dashboard from './pages/dashboard.js';
+import Create from './pages/create.js';
+import View from './pages/view.js';
+//import axios from 'axios';
 
 class App extends Component{
 
@@ -16,10 +20,10 @@ class App extends Component{
   }
 
   componentDidMount(){
-    this.getAPI()
+    //this.getAPI()
   }
 
-  getAPI(){
+ /* getAPI(){
     axios.get("http://localhost:8080/user/211").then((response) => {
       //const{id, firstname,lastname,username, password } = response
       this.setState({
@@ -27,11 +31,22 @@ class App extends Component{
         name: response.data.firstname + " " + response.data.lastname
       })
     })
-  }
+  }*/
 
   render(){
     return (
-      <div className="App">
+        <div>
+          <Router>
+            <Routes>
+              <Route path="/" element = {<Dashboard />}/>
+              <Route path="/create" element = {<Create />} />
+              <Route path="/view" element = {<View />} />
+            </Routes>
+          </Router>
+        </div>
+        /*  <p>slay</p>
+          <button onClick={() => navigate("/create")}>Create New Campaign</button>*/
+    /*  <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>{this.state.username}</p>
@@ -47,7 +62,7 @@ class App extends Component{
             Learn React
           </a>
         </header>
-      </div>
+      </div>*/
     );
   }
 }
