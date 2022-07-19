@@ -3,24 +3,19 @@ package com.example.backend.Models;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "company")
 public class Company {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="comp_seq_gen")
+    @SequenceGenerator(name="comp_seq_gen", sequenceName="MY_COM_SEQ")
     @Column(name = "companyid", nullable = false)
     private Long companyid;
 
-    @Column(name = "company_name", nullable = false, columnDefinition = "varchar(255)")
-    private String companyName;
+    @Column(name = "company_name", columnDefinition = "varchar(255)")
+    private String company_name;
 /* 
     @OneToMany(mappedBy = "company")
     private Set<Company> companies = new HashSet<>();*/
@@ -30,7 +25,7 @@ public class Company {
     }
 
     public String getCompanyName() {
-        return companyName;
+        return company_name;
     }
 
     public void setId(Long id) {
@@ -38,6 +33,6 @@ public class Company {
     }
 
     public void setCompanyName(String name) {
-        this.companyName = name;
+        this.company_name = name;
     }
 }
