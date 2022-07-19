@@ -10,6 +10,7 @@ const Dashboard = (props) => {
             <p>slay girlboss!</p>
             <button onClick={() => navigate("/view")}>View Campaign</button>
             <button onClick={() => navigate("/create")}>Create New Campaign</button>
+            <button onClick={() => navigate("/login")}>Logout</button>
         </div>
     );
 };
