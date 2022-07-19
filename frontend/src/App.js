@@ -7,7 +7,9 @@ import { BrowserRouter as Router, useNavigate, Route, Routes } from 'react-route
 import Dashboard from './pages/dashboard.js';
 import Create from './pages/create.js';
 import View from './pages/view.js';
-//import axios from 'axios';
+import Login from './pages/login.js';
+
+import axios from 'axios';
 
 class App extends Component{
 
@@ -20,10 +22,10 @@ class App extends Component{
   }
 
   componentDidMount(){
-    //this.getAPI()
+    this.getAPI()
   }
 
- /* getAPI(){
+  getAPI(){
     axios.get("http://localhost:8080/user/211").then((response) => {
       //const{id, firstname,lastname,username, password } = response
       this.setState({
@@ -31,21 +33,26 @@ class App extends Component{
         name: response.data.firstname + " " + response.data.lastname
       })
     })
-  }*/
+  }
 
   render(){
     return (
-        <div>
+        <div className="App">
+          <header className="App-header">
+          <p>{this.state.username}</p>
+          <p>
+            {this.state.name}
+          </p>
           <Router>
             <Routes>
               <Route path="/" element = {<Dashboard />}/>
               <Route path="/create" element = {<Create />} />
               <Route path="/view" element = {<View />} />
+              <Route path="/login" element = {<Login />} />
             </Routes>
           </Router>
+          </header>
         </div>
-        /*  <p>slay</p>
-          <button onClick={() => navigate("/create")}>Create New Campaign</button>*/
     /*  <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
