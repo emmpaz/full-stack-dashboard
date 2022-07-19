@@ -5,16 +5,31 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "campaign")
 public class Campaign {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "campaignid", nullable = false)
     private Long campaignid;
 
     @Column(name = "managerid", nullable = false)
     private Long managerid;
+
+    @Column(name = "companyid", nullable = false)
+    private Long companyid;
 
     @Column(name = "campaign_name", nullable = false, columnDefinition = "varchar(255)")
     private String campaignName;
@@ -27,6 +42,13 @@ public class Campaign {
 
     @Column(name = "is_active", nullable = false, columnDefinition = "tinyint")
     private Boolean isActive;
+/* 
+    @ManyToMany(mappedBy = "manager_id") //maps the user and campaign class via manager_id
+    private Set<User> users = new HashSet<>();*/
+/* 
+    @ManyToOne //maps the company to their campaigns
+    @JoinColumn(name = "company_id")
+    private Company company;*/
 
     public Long getCampaignid() {
         return campaignid;

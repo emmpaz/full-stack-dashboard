@@ -6,6 +6,7 @@ const Login = (props) => {
 
     return(
         <div>
+            <button onClick={this.togglePop}>Create Account</button>
             <h1>Login</h1>
             <input 
                 type="text"
@@ -16,6 +17,7 @@ const Login = (props) => {
                 value="password"
             />
             <button onClick={() => navigate("/")}>Submit</button>
+            
         </div>
     );
 };

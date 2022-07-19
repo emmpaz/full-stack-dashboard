@@ -3,12 +3,11 @@ import { Component, Link } from 'react';
 import './App.css';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, useNavigate, Route, Routes } from 'react-router-dom';
-
+import PopUp from "./pages/components/popup.js";
 import Dashboard from './pages/dashboard.js';
 import Create from './pages/create.js';
 import View from './pages/view.js';
 import Login from './pages/login.js';
-
 import axios from 'axios';
 
 class App extends Component{

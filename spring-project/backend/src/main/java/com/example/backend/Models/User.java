@@ -2,15 +2,25 @@ package com.example.backend.Models;
 
 import org.hibernate.annotations.Cache;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
 public class User {
+    
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO, generator="my_entity_seq_gen")
+    @SequenceGenerator(name="my_entity_seq_gen", sequenceName="MY_ENTITY_SEQ")
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -25,6 +35,13 @@ public class User {
 
     @Column(name="password", nullable = false, columnDefinition = "varchar(255)")
     private String password;
+/* 
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "users",
+        joinColumns = { @JoinColumn(name = "id") },
+        inverseJoinColumns = { @JoinColumn(name = "manager_id") }
+    )*/
 
     public String getUsername() {
         return username;
