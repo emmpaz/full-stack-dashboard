@@ -18,7 +18,7 @@ const Login = () => {
                 placeholder="password"
             />
             <br></br>
-            <button onClick={() => navigate("/")}>Submit</button>
+            <button onClick={() => navigate("/dashboard")}>Submit</button>
             <br></br>
             <button onClick={() => navigate("/createAcc")}>New User?</button>
         </div>

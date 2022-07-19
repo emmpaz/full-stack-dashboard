@@ -15,21 +15,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "campaign")
 public class Campaign {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO, generator="campaign_seq_gen")
+    @SequenceGenerator(name="campaign_seq_gen", sequenceName="CAMPAIGN_SEQ")
     @Column(name = "campaignid", nullable = false)
     private Long campaignid;
 
     @Column(name = "managerid", nullable = false)
     private Long managerid;
 
-    @Column(name = "companyid", nullable = false)
-    private Long companyid;
+    @Column(name = "banner", nullable = false, columnDefinition = "varchar(255)")
+    private String banner;
+
+    @Column(name = "channel", nullable = false, columnDefinition = "varchar(255)")
+    private String channel;
+
+    @Column(name = "budget", nullable = false)
+    private Double budget;
 
     @Column(name = "campaign_name", nullable = false, columnDefinition = "varchar(255)")
     private String campaignName;

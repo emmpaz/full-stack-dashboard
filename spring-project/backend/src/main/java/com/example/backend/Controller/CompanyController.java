@@ -12,9 +12,8 @@ import java.util.Optional;
 @RestController
 public class CompanyController{
 
-    @Autowired
     ICompanyRepo iCompanyRepo;
-
+    @Autowired
     public CompanyController(ICompanyRepo iCompanyRepo){
         this.iCompanyRepo = iCompanyRepo;
     }

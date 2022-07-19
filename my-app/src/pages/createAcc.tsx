@@ -12,23 +12,30 @@ const CreateAccount = () => {
         password: '',
     });
 
-    const handleSubmit = async() => {
+
+
+    const handleSubmit = () => {
         const createAccountData = new FormData();
         createAccountData.append("firstname", formValue.firstname)
         createAccountData.append("lastname", formValue.lastname)
         createAccountData.append("username", formValue.username)
         createAccountData.append("password", formValue.password)
+        console.log(createAccountData);
 
+        const axios = require('axios')
+
+        axios.post('https://ps-springboot.azurewebsites.net/user', createAccountData);
+        /*          
         try {
             const response = await axios({
                 method: "post",
                 url: 'https://ps-springboot.azurewebsites.net/user',
                 data: createAccountData,
-                headers: { "Content-Type": "multipart/form-data" }
+               // headers: { "Content-Type": "multipart/form-data" }
             });
         } catch(error) {
             console.log(error)
-        };
+        };*/
     }
 
     const handleChange = (event: { target: { name: any; value: any; }; }) => {
@@ -43,7 +50,7 @@ const CreateAccount = () => {
 
     return(
         <div>
-            <form onSubmit={handleSubmit}>
+            <form method="HTTP_METHOD" onSubmit={handleSubmit}>
                 <p>Login Form</p>
                 <input
                     type="text"
