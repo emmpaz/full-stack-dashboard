@@ -11,10 +11,10 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator="comp_seq_gen")
     @SequenceGenerator(name="comp_seq_gen", sequenceName="MY_COM_SEQ")
-    @Column(name = "companyid", nullable = false)
+    @Column(name = "companyid")
     private Long companyid;
 
-    @Column(name = "company_name", nullable = false, columnDefinition = "varchar(255)")
+    @Column(name = "company_name", columnDefinition = "varchar(255)")
     private String company_name;
 /* 
     @OneToMany(mappedBy = "company")
@@ -24,7 +24,7 @@ public class Company {
         return companyid;
     }
 
-    public String getCompanyName() {
+    public String getCompany_name() {
         return company_name;
     }
 
@@ -32,7 +32,7 @@ public class Company {
         this.companyid = id;
     }
 
-    public void setCompanyName(String name) {
+    public void setCompany_name(String name) {
         this.company_name = name;
     }
 }
