@@ -4,6 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,6 +36,41 @@ public class Campaign {
     @Column(name = "banner", columnDefinition = "varchar(255)")
     private String banner;
 
+    public String getBanner() {
+        return banner;
+    }
+
+    public void setBanner(String banner) {
+        this.banner = banner;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
+
+    public Double getBudget() {
+        return budget;
+    }
+
+    public void setBudget(Double budget) {
+        this.budget = budget;
+    }
+
+    @Column(name = "company", columnDefinition = "varchar(255)")
+    private String company;
+
     @Column(name = "channel", columnDefinition = "varchar(255)")
     private String channel;
 
@@ -43,9 +81,11 @@ public class Campaign {
     private String campaignName;
 
     @Column(name = "start_date", columnDefinition = "DATE")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date startDate;
 
     @Column(name = "end_date", columnDefinition = "DATE")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date endDate;
 
     @Column(name = "is_active", columnDefinition = "tinyint")
