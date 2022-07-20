@@ -24,31 +24,31 @@ public class Campaign {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO, generator="campaign_seq_gen")
     @SequenceGenerator(name="campaign_seq_gen", sequenceName="CAMPAIGN_SEQ")
-    @Column(name = "campaignid", nullable = false)
-    private Long campaignid;
+    @Column(name = "campaignId", nullable = false)
+    private Long campaignId;
 
-    @Column(name = "managerid", nullable = false)
-    private Long managerid;
+    @Column(name = "managerId", nullable = false)
+    private Long managerId;
 
-    @Column(name = "banner", nullable = false, columnDefinition = "varchar(255)")
+    @Column(name = "banner", columnDefinition = "varchar(255)")
     private String banner;
 
-    @Column(name = "channel", nullable = false, columnDefinition = "varchar(255)")
+    @Column(name = "channel", columnDefinition = "varchar(255)")
     private String channel;
 
-    @Column(name = "budget", nullable = false)
+    @Column(name = "budget")
     private Double budget;
 
-    @Column(name = "campaign_name", nullable = false, columnDefinition = "varchar(255)")
+    @Column(name = "campaign_name", columnDefinition = "varchar(255)")
     private String campaignName;
 
-    @Column(name = "start_date", nullable = false, columnDefinition = "DATE")
+    @Column(name = "start_date", columnDefinition = "DATE")
     private Date startDate;
 
-    @Column(name = "end_date", nullable = false, columnDefinition = "DATE")
+    @Column(name = "end_date", columnDefinition = "DATE")
     private Date endDate;
 
-    @Column(name = "is_active", nullable = false, columnDefinition = "tinyint")
+    @Column(name = "is_active", columnDefinition = "tinyint")
     private Boolean isActive;
 /* 
     @ManyToMany(mappedBy = "manager_id") //maps the user and campaign class via manager_id
@@ -58,36 +58,28 @@ public class Campaign {
     @JoinColumn(name = "company_id")
     private Company company;*/
 
-    public Long getCampaignid() {
-        return campaignid;
+    public Long getCampaignId() {
+        return campaignId;
     }
 
-    public void setCampaignid(Long campaignid) {
-        this.campaignid = campaignid;
+    public void setCampaignId(Long campaignid) {
+        this.campaignId = campaignid;
     }
 
-    public Long getManagerid() {
-        return managerid;
+    public Long getManagerId() {
+        return managerId;
     }
 
-    public void setManagerid(Long managerid) {
-        this.managerid = managerid;
+    public void setManagerId(Long managerid) {
+        this.managerId = managerid;
     }
 
-    public Boolean getActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(Boolean active) {
+    public void setIsActive(Boolean active) {
         isActive = active;
-    }
-
-    public Long getCampaignId() {
-        return campaignid;
-    }
-    
-    public Long getManagerId() {
-        return managerid;
     }
 
     public String getCampaignName() {
@@ -98,20 +90,12 @@ public class Campaign {
         return startDate;
     }
 
-    public Boolean isActive() {
+  /*   public Boolean isActive() {
         return isActive;
-    }
+    }*/
 
     public Date getEndDate() {
         return endDate;
-    }
-
-    public void setCampaignId(Long id) {
-        this.campaignid = id;
-    }
-
-    public void setManagerId(Long id) {
-        this.managerid = id;
     }
 
     public void setCampaignName(String name) {
@@ -125,8 +109,8 @@ public class Campaign {
     public void setEndDate(Date date) {
         this.endDate = date;
     }
-    
+    /* 
     public void setActivity(Boolean newActivity) {
         this.isActive = newActivity;
-    }
+    }*/
 }
