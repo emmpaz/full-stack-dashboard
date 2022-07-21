@@ -36,9 +36,9 @@ const Login = () => {
             <h1 className="login">Login</h1>
             <CssTextField id="filled-basic" label="username" variant="standard"/>
             <br></br>
-            <CssTextField id="filled-basic" label="password" variant="standard" />
+            <CssTextField type="password" id="filled-basic" label="password" variant="standard" />
             <br></br>
-            <Button onClick={() => navigate("/dashboard")} style={{margin: 21}}>Submit</Button>
+            <Button onClick={() => navigate("/swap")} style={{margin: 21}}>Submit</Button>
             <br></br>
             <Button onClick={() => navigate("/createAcc")}>New User?</Button>
         </div>

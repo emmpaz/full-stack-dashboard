@@ -10,3 +10,10 @@ export type Campaign = {
     endDate: Date;
     isActive: Boolean;
 }
+
+export type User = {
+    firstname: String;
+    lastname: String;
+    username: String;
+    password: String;
+}
