@@ -1,50 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import { Campaign } from '../helper files/types';
+import { CreateCampaignComp } from '../components/createCampaignComp';
 
 const CreateCampaign = () => {
     const navigate = useNavigate();
+    const formData = {
+        managerId: 123,
+        banner: '',
+        company: '',
+        channel: '',
+        budget: 10000.00,
+        campaignName: '',
+        startDate: 2022-12-12,
+        endDate: 2023-1-12,
+        isActive: true,
+    }
+
+    const handleSubmit = () => {
+        const axios = require('axios')
+        axios.post('https://ps-springboot.azurewebsites.net/campaign', formData)
+    }
+
     
+
+
+
+
+
     return(
         <div>
             <h1>Create New Campaign</h1>
-            <p>Campaign Name
-                <input 
-                    type="text"
-                    placeholder="Campaign Name"
-                /></p>
-            <p>Client Name
-                <input
-                    type="text"
-                    placeholder="Client Name"></input>
-            </p>
-            <p>Channel
-                <select name="Channel Selection">
-                    <option value="On-Site">Onsite</option>
-                    <option value="Off-Site">Offsite</option>
-                    <option value="In-Store">In Store</option>
-                </select>
-            </p>
-            <p>Budget:
-                <input
-                    type="number">
-                </input>
-            </p>
-            <p>Start Date
-                <input 
-                    type="date"
-                />
-            </p>
-            <p>End Date
-                <input 
-                    type="date"
-                />
-            </p>
-            <p>
-                <button onClick={() => navigate("/dashboard")}>Submit</button>
-            </p>
+            <CreateCampaignComp />
         </div>
     );
-}
 
+}
 export default CreateCampaign;

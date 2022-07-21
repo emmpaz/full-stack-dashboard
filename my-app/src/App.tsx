@@ -11,6 +11,9 @@ import CreateCampaign from './pages/createCampaign';
 import { Homepage } from './pages/profileSelection';
 
 
+import axios from 'axios';
+
+
 function App() {
   return (
     <div className="App">
