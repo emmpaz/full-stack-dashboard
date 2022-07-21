@@ -31,7 +31,6 @@ const fetchCampaigns = () => {
     return(
         <div>
             <Button style={{float: 'right'}} onClick={() => navigate("/login")}>Logout</Button>
-            <h1>Welcome, </h1>
             <h1>List of Campaigns</h1>
             <Button onClick={() => navigate("/createCampaign")}>Create Campaign</Button>
             <div className='camp-container'>
