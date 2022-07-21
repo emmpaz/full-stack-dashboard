@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Box, Button, Input, TextField } from '@mui/material';
+import { Box, Button, Input } from '@mui/material';
 import { Campaign } from '../helper files/types';
 
 const defaultCampaign: Campaign = {

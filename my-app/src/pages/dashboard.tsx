@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Campaign } from '../helper files/types';
 import {Button} from "@mui/material";
 import {useIsMount} from '../helper files/mounting';
-import { compare_by_date, compare_by_name } from '../helper files/comparators';
+import { compare_by_date, compare_by_name, compare_by_budget} from '../helper files/comparators';
 import { CampaignList } from '../components/campaignList';
 
 const get_campaigns = axios.create({
@@ -40,12 +40,17 @@ const Dashboard = () => {
         const list: Campaign[] = [...myCampaigns]
         list.sort(compare_by_name);
         setCampaigns(list);
-        console.log(myCampaigns);
     }
 
     const sortEndDateHandler = () => {
         const list: Campaign[] = [...myCampaigns]
         list.sort(compare_by_date);
+        setCampaigns(list);
+    }
+
+    const sortBudgetHandler = () => {
+        const list: Campaign[] = [...myCampaigns]
+        list.sort(compare_by_budget);
         setCampaigns(list);
     }
     return(
@@ -55,7 +60,7 @@ const Dashboard = () => {
             <Button onClick={() => navigate("/createCampaign")}>Create Campaign</Button>
             <Button onClick={sortNameHandler} style={{margin: 21}}>A-Z</Button>
            <Button  onClick={sortEndDateHandler} style={{margin: 21}}>end date</Button>
-           <Button  style={{margin: 21}}>SPEND</Button>
+           <Button  onClick={sortBudgetHandler} style={{margin: 21}}>SPEND</Button>
             <div className='camp-container'>
                 {myCampaigns.map((campaign) => (
                     <CampaignList campaign={ campaign }/>
