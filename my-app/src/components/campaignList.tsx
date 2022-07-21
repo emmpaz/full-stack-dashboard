@@ -6,7 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import ListItemButton from '@mui/material/ListItemButton';
-import { Campaign } from '../pages/types';
+import { Campaign } from '../helper files/types';
 
 export const CampaignList = (props: {campaign: Campaign}) => {
     const { campaign } = props
@@ -17,6 +17,8 @@ export const CampaignList = (props: {campaign: Campaign}) => {
                         <ListItemButton>
                             <ListItemText 
                                 primary={campaign.campaignName}
+                                secondary={campaign.endDate.toString() + "  $" + campaign.budget}
+                                
                                 sx={{ color: 'black' }} />
                         </ListItemButton>                   
                     </ListItem>

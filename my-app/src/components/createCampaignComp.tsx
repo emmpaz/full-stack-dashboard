@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Input } from '@mui/material';
-import { Campaign } from '../pages/types';
+import { Campaign } from '../helper files/types';
 
 export const CreateCampaignComp = () => {
     const newCampaign: Campaign = {

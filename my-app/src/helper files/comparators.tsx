@@ -10,3 +10,7 @@ export const compare_by_date = (x: Campaign, y: Campaign) => {
     else
         return -1
 }
+
+export const compare_by_budget = (x: Campaign, y: Campaign) => {
+    return x.budget - y.budget
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { Campaign } from './types';
+import { Campaign } from '../helper files/types';
 import { CreateCampaignComp } from '../components/createCampaignComp';
 
 const CreateCampaign = () => {
