@@ -8,6 +8,9 @@ import CreateAccount from './pages/createAcc';
 import Login from './pages/login';
 import Dashboard from './pages/dashboard';
 
+import axios from 'axios';
+
+
 function App() {
   return (
     <div className="App">
