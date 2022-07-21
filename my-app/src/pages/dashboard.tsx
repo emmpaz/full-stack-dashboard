@@ -117,8 +117,8 @@ const Dashboard = () => {
                     <div>
                         <h1>List of Campaigns</h1>
                         <Button onClick={() => navigate("/createCampaign")}>Create Campaign</Button>
-                        <Button onClick={sortNameHandler} style={{margin: 21}}>A-Z</Button>
-                        <Button  onClick={sortEndDateHandler} style={{margin: 21}}>end date</Button>
+                        <Button variant={(sortName === "A-Z" || sortName === "Z-A") ? "contained": "text"} onClick={sortNameHandler} style={{margin: 21}}>{(sortName === "default") ? "A-Z" : sortName}</Button>
+                        <Button variant={(sortDate === "earliest" || sortDate === "latest") ? "contained": "text"} onClick={sortEndDateHandler} style={{margin: 21}}>{(sortDate === "default") ? "end DATE" + String.fromCharCode(8593) : sortDate}</Button>
                         <Button  onClick={sortBudgetHandler} style={{margin: 21}}>SPEND</Button>
                         <div className='camp-container'>
                             {myCampaigns.map((campaign) => (
