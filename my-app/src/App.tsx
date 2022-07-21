@@ -9,6 +9,7 @@ import Login from './pages/login';
 import Dashboard from './pages/dashboard';
 import CreateCampaign from './pages/createCampaign';
 import { Homepage } from './pages/profileSelection';
+import DetailView from './pages/detailView'
 
 
 import axios from 'axios';
@@ -25,6 +26,7 @@ function App() {
               <Route path="/login" element = {<Login />}/>
               <Route path="/dashboard" element = {<Dashboard />}/>
               <Route path="/createCampaign" element = {<CreateCampaign />}/>
+              <Route path="/detailView" element = {<DetailView />}/>
             </Routes>
           </Router>
       </header>
