@@ -20,6 +20,7 @@ export const CampaignList = (props: {campaign: Campaign}) => {
                         <ListItemButton>
                             <ListItemText 
                                 primary={campaign.campaignName}
+                                secondary={campaign.endDate.toString() + "     $" + campaign.budget}
                                 sx={{ color: 'black' }} />
                         </ListItemButton>                   
                     </ListItem>

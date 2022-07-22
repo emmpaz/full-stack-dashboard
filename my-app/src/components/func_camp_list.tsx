@@ -13,7 +13,8 @@ export const CampListItem = (props: {
             <Paper
             elevation={2}
             sx={{
-                p: 2.5,
+                width: '100%',
+                p: 3.5,
                 margin: 'auto'
             }}
             >

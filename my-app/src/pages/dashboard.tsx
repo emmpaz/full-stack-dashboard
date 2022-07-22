@@ -15,6 +15,7 @@ import {useIsMount} from '../helper files/mounting';
 import { compare_by_date, compare_by_name, compare_by_budget, compare_by_name_reversed, compare_by_date_reversed, compare_by_budget_reversed} from '../helper files/comparators';
 import { CampaignList } from '../components/campaignList';
 import { end_date_down, end_date_up, spend_down, spend_up } from '../helper files/dashboard_states';
+import { CampListItem } from '../components/func_camp_list';
 
 
 const sortNameState = [
@@ -133,7 +134,7 @@ const Dashboard = () => {
     return(
         <BigContainer>
             <TitleContainer> 
-            <Button style={{float: 'right'}} onClick={() => navigate("/login")}>Logout</Button>
+            <Button style={{float: 'right' ,margin: 21}} onClick={() => navigate("/login")}>Logout</Button>
             </TitleContainer>
             <MidContainer>
                 <CampaignContainer>
@@ -145,7 +146,11 @@ const Dashboard = () => {
                         <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>
                         <div className='camp-container'>
                             {myCampaigns.map((campaign) => (
-                                <CampaignList campaign={ campaign }/>
+                                <CampListItem 
+                                    year="2022"
+                                    title={campaign.campaignName.toString()}
+                                    budget={campaign.budget.toString()}
+                                    end={campaign.endDate.toString()}/>
                             ))}
                         </div>
                     </div>
