@@ -24,6 +24,16 @@ public class CampaignController{
         return iCampaignRepo.findAll();
     }
 
+    @GetMapping("/active_campaigns")
+    public List<Campaign> activeCampaigns(){
+        return iCampaignRepo.searchCampaignByIsActive();
+    }
+
+    @GetMapping("/archived_campaigns")
+    public List<Campaign> archivedCampaigns(){
+        return iCampaignRepo.searchCampaignByIsActiveNot();
+    }
+
     @GetMapping("/campaign/{id}")
     public Optional<Campaign> getCampaignByID(@PathVariable("id") Long id){
         return iCampaignRepo.findById(id);
