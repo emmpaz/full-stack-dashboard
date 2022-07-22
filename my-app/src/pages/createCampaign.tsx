@@ -15,18 +15,13 @@ const CreateCampaign = () => {
         campaignName: '',
         startDate: 2022-12-12,
         endDate: 2023-1-12,
-        isActive: true,
+        isActive: false,
     }
 
     const handleSubmit = () => {
         const axios = require('axios')
         axios.post('https://ps-springboot.azurewebsites.net/campaign', formData)
     }
-
-    
-
-
-
 
 
     return(

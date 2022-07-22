@@ -49,7 +49,7 @@ export const CreateCampaignComp = () => {
             <Input style ={{width: '100%'}} type="text" name="company" placeholder="Client Name" value={newCampaign.company} onChange={handleInputChange}></Input><br />
             <FormControl style ={{width: '100%'}} variant="standard">
               <InputLabel id="banner_id">Banner</InputLabel>
-              <Select style ={{width: '100%'}} labelId="banner_id" label="banner" value={newCampaign.banner} onChange={handleInputChange}>
+              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={newCampaign.banner} onChange={handleInputChange}>
                 <MenuItem value="Fresh Direct">Fresh Direct</MenuItem>
                 <MenuItem value="Food Lion">Food Lion</MenuItem>
                 <MenuItem value="Stop and Shop">Stop and Shop</MenuItem>
