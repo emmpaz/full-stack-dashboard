@@ -16,7 +16,7 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
 
   const CssTextField = styled(TextField)({
     '& label':{
-        color:'white'
+        color:'darkgray'
     },
     '& .MuiInput-underline':{
         borderBottomColor:'white'
