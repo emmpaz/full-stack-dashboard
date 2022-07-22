@@ -7,18 +7,19 @@ import { BrowserRouter as Router, useNavigate, Route, Routes } from 'react-route
 import CreateAccount from './pages/createAcc';
 import Login from './pages/login';
 import Dashboard from './pages/dashboard';
+import CreateCampaign from './pages/createCampaign';
 import { Homepage } from './pages/profileSelection';
+import DetailView from './pages/detailView'
+
+
+import axios from 'axios';
 import { DashTwo } from './pages/dashboard_2';
-import { Typography } from '@mui/material';
 
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Typography>
-          
-        </Typography>
         <Router>
             <Routes>
               <Route path="/" element = {<DashTwo />}/>
@@ -26,6 +27,8 @@ function App() {
               <Route path="/createAcc" element = {<CreateAccount />}/>
               <Route path="/login" element = {<Login />}/>
               <Route path="/dashboard" element = {<Dashboard />}/>
+              <Route path="/createCampaign" element = {<CreateCampaign />}/>
+              <Route path="/detailView" element = {<DetailView />}/>
             </Routes>
           </Router>
       </header>
