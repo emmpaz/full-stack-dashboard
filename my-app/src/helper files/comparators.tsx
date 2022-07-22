@@ -25,3 +25,7 @@ export const compare_by_date_reversed = (x: Campaign, y: Campaign) => {
 export const compare_by_budget = (x: Campaign, y: Campaign) => {
     return x.budget - y.budget
 }
+
+export const compare_by_budget_reversed = (x: Campaign, y: Campaign) => {
+    return y.budget - x.budget
+}

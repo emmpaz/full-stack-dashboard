@@ -29,6 +29,7 @@ function App() {
               <Route path="/dashboard" element = {<Dashboard />}/>
               <Route path="/createCampaign" element = {<CreateCampaign />}/>
               <Route path="/detailView" element = {<DetailView />}/>
+              <Route path="/dashboard_2" element= {<DashTwo/>}/>
             </Routes>
           </Router>
       </header>
