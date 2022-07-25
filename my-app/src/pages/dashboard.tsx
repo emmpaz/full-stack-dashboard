@@ -18,6 +18,7 @@ import { compare_by_date, compare_by_name, compare_by_budget, compare_by_name_re
 import { CampListItem } from '../components/func_camp_list';
 import { CampaignList } from '../components/campaignList';
 import { end_date_down, end_date_up, spend_down, spend_up } from '../helper files/dashboard_states';
+import { BannerSelect } from '../components/bannerSelect';
 import '../css files/dashboard.css';
 import Search from '../components/searchbar';
 import Graph from '../components/graph';
@@ -65,10 +66,11 @@ const Dashboard = () => {
     const [isActive, setActive] = useState<Boolean>(true);
 
 
+
     useEffect(() => {
         if (isMount) {
             fetchCampaigns("active");
-            let tmpBanner: string = bannerId as string;
+            //let tmpBanner: string = bannerId as string;
             //fetchCampaignsByBanner(tmpBanner);
             console.log('fetching');
         } else {
@@ -241,8 +243,8 @@ const Dashboard = () => {
                         <div className='camp-container' >
                             {myCampaigns.map((campaign) => (
                                 <Box onClick={() => navigate("/detailView", { state: { currentCamp: campaign }})}>
-                                <CampListItem 
-                                    
+                                <CampListItem
+
                                     year="2022"
                                     title={campaign.campaignName.toString()}
                                     budget={campaign.budget.toString()}

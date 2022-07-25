@@ -39,6 +39,11 @@ public class CampaignController{
         return iCampaignRepo.findById(id);
     }
 
+    @GetMapping("/banner/1")
+    public List<Campaign> freshDirectCampaigns(){
+        return iCampaignRepo.filterCampaignByFreshDirect();
+    }
+
     @PostMapping("/campaign")
     public void addCampaign(
             @RequestBody Campaign campaign){

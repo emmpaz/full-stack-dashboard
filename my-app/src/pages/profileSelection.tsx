@@ -9,7 +9,7 @@ import { useNavigate, BrowserRouter as Router, Route, Link } from 'react-router-
 import { link } from 'fs';
 import { Campaign } from '../helper files/types';
 import { TitleContainer } from '../components/containers';
-// import { getCampaigns } from '../helper files/getCampaigns';
+import { getCampaigns } from '../helper files/getCampaigns';
 //import deepOrange from '@mui/material/colors/deepOrange'
 //import deepPurple from '@mui/material/colors/deepPurple'
 
@@ -23,7 +23,7 @@ export const Homepage = () => {
       <Button sx={{ color: '#00C832 !important' }} value="7">Logout</Button>
      </Box>
       </TitleContainer>
-    
+
         <CenterContentDiv>
           <SlayAvatar
             alt="freshDirect"
@@ -98,7 +98,7 @@ export const SlayAvatar = (props: AvatarStyles) => {
   }
 
 
-  const handleClick = () => {  
+  const handleClick = () => {
     navigate('/dashboard', { state: { id: 7 } })
     //navigate(link ?? '/dashboard')
   };
