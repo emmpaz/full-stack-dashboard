@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Campaign } from "./types";
-
+import {useIsMount} from '../helper files/mounting';
 export const getCampains = () => {
 const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
 
     useEffect(() => {
-        if (isMount) {
+        if (useIsMount()) {
             fetchCampaigns();
             console.log('fetching');
         } else {

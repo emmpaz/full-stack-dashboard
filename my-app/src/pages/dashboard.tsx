@@ -1,18 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import {BigContainer} from '../components/containers';
+import { TitleContainer } from '../components/containers';
+import { MidContainer } from '../components/containers';
+import { CampaignContainer } from '../components/containers';
+import { OtherContainer } from '../components/containers';
+import { RevContainer } from '../components/containers';
+import { GraphContainer } from '../components/containers';
+import { Box } from '@mui/material';
 import { Campaign } from '../helper files/types';
 import {Button} from "@mui/material";
 import {useIsMount} from '../helper files/mounting';
-import { compare_by_date, compare_by_name, compare_by_budget} from '../helper files/comparators';
+import { compare_by_date, compare_by_name, compare_by_budget, compare_by_name_reversed, compare_by_date_reversed, compare_by_budget_reversed} from '../helper files/comparators';
+import { CampListItem } from '../components/func_camp_list';
 import { CampaignList } from '../components/campaignList';
+import { end_date_down, end_date_up, spend_down, spend_up } from '../helper files/dashboard_states';
 
 const get_campaigns = axios.create({
     baseURL: 'https://ps-springboot.azurewebsites.net/campaign'
 })
 
+const sortNameState = [
+    "A-Z",
+    "Z-A",
+    "default"
+]
+
+const sortDateState = [
+    end_date_down,
+    end_date_up,
+    "default"
+]
+
+const sortSpendState = [
+    spend_down,
+    spend_up,
+    "default"
+]
+
 const Dashboard = () => {
     const navigate = useNavigate();
+    const isMount = useIsMount();
 
     //campaign lists states
     const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
@@ -25,7 +54,6 @@ const Dashboard = () => {
 
     //active and archived states
     const [isActive, setActive] = useState<Boolean>(true);
-    const isMount = useIsMount();
 
 
 
@@ -41,7 +69,7 @@ const Dashboard = () => {
     const fetchCampaigns = (active_or_not: String) => {
         axios.get(`https://ps-springboot.azurewebsites.net/${active_or_not}_campaigns`).then((res) => {
         console.log(res);
-
+        setList(res.data);
         setCampaigns(res.data);
         })
         .catch((err) => {
@@ -80,19 +108,70 @@ const Dashboard = () => {
     }
 
     const sortNameHandler = () => {
+        setDate(sortDateState[2]);
+        setSpend(sortSpendState[2]);
+
         const list: Campaign[] = [...myCampaigns]
+        if(sortName === "default"){
+            setName(sortNameState[0]);
+            list.sort(compare_by_name);
+            setCampaigns(list);
+        }
+        else if(sortName === "A-Z"){
+            setName(sortNameState[1]);
+            list.sort(compare_by_name_reversed);
+            setCampaigns(list);
+        }
+        else{
+            setName(sortNameState[2]);
+            setCampaigns(originalList);
+        }
         list.sort(compare_by_name);
         setCampaigns(list);
     }
 
     const sortEndDateHandler = () => {
+        setName(sortNameState[2]);
+        setSpend(sortSpendState[2]);
+
         const list: Campaign[] = [...myCampaigns]
+        if(sortDate === "default"){
+            setDate(sortDateState[0]);
+            list.sort(compare_by_date);
+            setCampaigns(list);
+        }
+        else if(sortDate.localeCompare(end_date_up)){
+            setDate(sortDateState[1]);
+            list.sort(compare_by_date_reversed);
+            setCampaigns(list);
+        }
+        else{
+            setDate(sortDateState[2]);
+            setCampaigns(originalList);
+        }
         list.sort(compare_by_date);
         setCampaigns(list);
     }
 
     const sortBudgetHandler = () => {
+        setName(sortNameState[2]);
+        setDate(sortDateState[2]);
+
         const list: Campaign[] = [...myCampaigns]
+        if(sortSpend === "default"){
+            setSpend(sortSpendState[0]);
+            list.sort(compare_by_budget);
+            setCampaigns(list);
+        }
+        else if(sortSpend.localeCompare(spend_up)){
+            setSpend(sortSpendState[1]);
+            list.sort(compare_by_budget_reversed);
+            setCampaigns(list);
+        }
+        else{
+            setSpend(sortSpendState[2]);
+            setCampaigns(originalList);
+        }
         list.sort(compare_by_budget);
         setCampaigns(list);
     }
