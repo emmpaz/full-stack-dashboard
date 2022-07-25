@@ -91,7 +91,7 @@ const Dashboard = () => {
     };
 
     const bannerSelectHandler = (event: SelectChangeEvent) => {
-        setBannerId(event.target.value as string)
+       // setBannerId(event.target.value as string)
         fetchCampaignsByBanner(event.target.value);
     }
 
