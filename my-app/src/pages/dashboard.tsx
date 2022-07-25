@@ -48,6 +48,7 @@ const Dashboard = () => {
     //campaign lists states
     const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
     const [originalList, setList] = useState<Campaign[]>([]);
+    const [bannerId, setBannerId] = useState('');
 
     //sorting states
     const [sortName, setName] = useState<String>(sortNameState[2]);
@@ -56,7 +57,6 @@ const Dashboard = () => {
 
     //active and archived states
     const [isActive, setActive] = useState<Boolean>(true);
-
 
 
     useEffect(() => {
@@ -79,8 +79,8 @@ const Dashboard = () => {
         });
     };
 
-    const fetchCampaignsByBanner = (bannerId: number) => {
-        axios.get('http://localhost:8080/banner/1').then((res) => {
+    const fetchCampaignsByBanner = (bannerId: String) => {
+        axios.get(`http://localhost:8080/banner/${bannerId}`).then((res) => {
         console.log(res);
         setList(res.data);
         setCampaigns(res.data);
@@ -90,8 +90,9 @@ const Dashboard = () => {
         });
     };
 
-    const bannerSelectHandler = () => {
-        fetchCampaignsByBanner(1);
+    const bannerSelectHandler = (event: SelectChangeEvent) => {
+        setBannerId(event.target.value as string)
+        fetchCampaignsByBanner(event.target.value);
     }
 
     const archivedCampaignsHandler = () => {
@@ -201,12 +202,12 @@ const Dashboard = () => {
                 <FormControl style ={{width: '100%'}} variant="standard">
                     <InputLabel id="banner_id">Banner</InputLabel>
                     <Select style ={{width: '100%'}} labelId="banner_id" name="banner" onChange={bannerSelectHandler}>
-                        <MenuItem value="Fresh Direct">Fresh Direct</MenuItem>
-                        <MenuItem value="Food Lion">Food Lion</MenuItem>
-                        <MenuItem value="Stop and Shop">Stop and Shop</MenuItem>
-                        <MenuItem value="The Giant Company">The Giant Company</MenuItem>
-                        <MenuItem value="Giant">Giant</MenuItem>
-                        <MenuItem value="Hannaford">Hannaford</MenuItem>
+                        <MenuItem value="1">Fresh Direct</MenuItem>
+                        <MenuItem value="2">Food Lion</MenuItem>
+                        <MenuItem value="3">Stop and Shop</MenuItem>
+                        <MenuItem value="4">The Giant Company</MenuItem>
+                        <MenuItem value="5">Giant</MenuItem>
+                        <MenuItem value="6">Hannaford</MenuItem>
                     </Select>
                 </FormControl>
             </Box>
