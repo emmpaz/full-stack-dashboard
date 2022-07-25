@@ -8,7 +8,9 @@ import { CampaignContainer } from '../components/containers';
 import { OtherContainer } from '../components/containers';
 import { RevContainer } from '../components/containers';
 import { GraphContainer } from '../components/containers';
-import { Box, Paper } from '@mui/material';
+import { Paper } from '@mui/material';
+import { Box, InputLabel, MenuItem, FormControl } from '@mui/material';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Campaign } from '../helper files/types';
 import {Button} from "@mui/material";
 import {useIsMount} from '../helper files/mounting';
@@ -19,6 +21,7 @@ import { end_date_down, end_date_up, spend_down, spend_up } from '../helper file
 import '../css files/dashboard.css';
 import Search from '../components/searchbar';
 import Graph from '../components/graph';
+import { BannerSelect } from '../components/bannerSelect';
 
 const get_campaigns = axios.create({
     baseURL: 'https://ps-springboot.azurewebsites.net/campaign'
@@ -49,6 +52,7 @@ const Dashboard = () => {
     //campaign lists states
     const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
     const [originalList, setList] = useState<Campaign[]>([]);
+    const [bannerId, setBannerId] = useState('');
 
     //sorting states
     const [sortName, setName] = useState<String>(sortNameState[2]);
@@ -57,7 +61,6 @@ const Dashboard = () => {
 
     //active and archived states
     const [isActive, setActive] = useState<Boolean>(true);
-
 
 
     useEffect(() => {
@@ -79,6 +82,22 @@ const Dashboard = () => {
         console.log(err);
         });
     };
+
+    const fetchCampaignsByBanner = (bannerId: String) => {
+        axios.get(`http://localhost:8080/banner/${bannerId}`).then((res) => {
+        console.log(res);
+        setList(res.data);
+        setCampaigns(res.data);
+        })
+        .catch((err) => {
+        console.log(err);
+        });
+    };
+
+    const bannerSelectHandler = (event: SelectChangeEvent) => {
+       // setBannerId(event.target.value as string)
+        fetchCampaignsByBanner(event.target.value);
+    }
 
     const archivedCampaignsHandler = () => {
         if(!isActive){
@@ -109,6 +128,7 @@ const Dashboard = () => {
             fetchCampaigns("active")
         }
     }
+
 
     const sortNameHandler = () => {
         setDate(sortDateState[2]);
@@ -182,6 +202,19 @@ const Dashboard = () => {
         <BigContainer>
             <TitleContainer> 
             <Button style={{float: 'right' ,margin: 21}} onClick={() => navigate("/login")}>Logout</Button>
+            <Box sx={{ float: 'right', minWidth: 120 }}>
+                <FormControl style ={{width: '100%'}} variant="standard">
+                    <InputLabel id="banner_id">Banner</InputLabel>
+                    <Select style ={{width: '100%'}} labelId="banner_id" name="banner" onChange={bannerSelectHandler}>
+                        <MenuItem value="1">Fresh Direct</MenuItem>
+                        <MenuItem value="2">Food Lion</MenuItem>
+                        <MenuItem value="3">Stop and Shop</MenuItem>
+                        <MenuItem value="4">The Giant Company</MenuItem>
+                        <MenuItem value="5">Giant</MenuItem>
+                        <MenuItem value="6">Hannaford</MenuItem>
+                    </Select>
+                </FormControl>
+            </Box>
             </TitleContainer>
             <MidContainer>
                 <CampaignContainer>

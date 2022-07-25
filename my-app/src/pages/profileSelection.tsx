@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import foodLionLogo from '../assets/images/foodLion.jpg';
 import freshDirectLogo from '../assets/images/freshDirect.jpg';
 import hannafordLogo from '../assets/images/hannaford.png';
@@ -7,14 +7,17 @@ import Avatar from '@mui/material/Avatar';
 import { Box, Container, SxProps, Theme, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { link } from 'fs';
+import { Campaign } from '../helper files/types';
+import { getCampaigns } from '../helper files/getCampaigns';
 //import deepOrange from '@mui/material/colors/deepOrange'
 //import deepPurple from '@mui/material/colors/deepPurple'
 
 export const Homepage = () => {
+  const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
+
   return (
         <CenterContentDiv>
           <SlayAvatar
-
             alt="foodLionLogo"
             src={foodLionLogo}
             sx={{}}
@@ -49,9 +52,29 @@ export const SlayAvatar = (props: AvatarStyles) => {
   const { link, alt, src, sx, text } = props
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate(link ?? '/dashboard')
+  //const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
+
+  const getBannerId = (banner: String) => {
+    if(banner == "Fresh Direct") {
+      return 1;
+    } else if (banner == "Food Lion") {
+      return 2;
+    } else if (banner == "Stop and Shop") {
+      return 3;
+    } else if (banner == "The Giant Company") {
+      return 4;
+    } else if (banner == "Giant") {
+      return 5;
+    } else if (banner == "Hannaford") {
+      return 6;
+    } else {return 0;};
   }
+
+
+  const handleClick = () => {  
+    
+    navigate(link ?? '/dashboard')
+  };
 
   return(
       <Box sx={{
