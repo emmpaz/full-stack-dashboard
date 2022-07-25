@@ -26,6 +26,7 @@ const Search = (props : {list : Campaign[]}) => {
     const searchList = () => {
         return(
            <Scroll>
+                {/*tests*/}
                 {/*<SearchList list={filteredCampaigns}/>*/}
            </Scroll>     
         )
