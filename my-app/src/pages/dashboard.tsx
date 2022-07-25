@@ -8,7 +8,8 @@ import { CampaignContainer } from '../components/containers';
 import { OtherContainer } from '../components/containers';
 import { RevContainer } from '../components/containers';
 import { GraphContainer } from '../components/containers';
-import { Box } from '@mui/material';
+import { Box, InputLabel, MenuItem, FormControl } from '@mui/material';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Campaign } from '../helper files/types';
 import {Button} from "@mui/material";
 import {useIsMount} from '../helper files/mounting';
@@ -16,6 +17,7 @@ import { compare_by_date, compare_by_name, compare_by_budget, compare_by_name_re
 import { CampListItem } from '../components/func_camp_list';
 import { CampaignList } from '../components/campaignList';
 import { end_date_down, end_date_up, spend_down, spend_up } from '../helper files/dashboard_states';
+import { BannerSelect } from '../components/bannerSelect';
 
 const get_campaigns = axios.create({
     baseURL: 'https://ps-springboot.azurewebsites.net/campaign'
@@ -77,6 +79,21 @@ const Dashboard = () => {
         });
     };
 
+    const fetchCampaignsByBanner = (bannerId: number) => {
+        axios.get('http://localhost:8080/banner/1').then((res) => {
+        console.log(res);
+        setList(res.data);
+        setCampaigns(res.data);
+        })
+        .catch((err) => {
+        console.log(err);
+        });
+    };
+
+    const bannerSelectHandler = () => {
+        fetchCampaignsByBanner(1);
+    }
+
     const archivedCampaignsHandler = () => {
         if(!isActive){
             setDate(sortDateState[2])
@@ -106,6 +123,7 @@ const Dashboard = () => {
             fetchCampaigns("active")
         }
     }
+
 
     const sortNameHandler = () => {
         setDate(sortDateState[2]);
@@ -179,6 +197,19 @@ const Dashboard = () => {
         <BigContainer>
             <TitleContainer> 
             <Button style={{float: 'right' ,margin: 21}} onClick={() => navigate("/login")}>Logout</Button>
+            <Box sx={{ float: 'right', minWidth: 120 }}>
+                <FormControl style ={{width: '100%'}} variant="standard">
+                    <InputLabel id="banner_id">Banner</InputLabel>
+                    <Select style ={{width: '100%'}} labelId="banner_id" name="banner" onChange={bannerSelectHandler}>
+                        <MenuItem value="Fresh Direct">Fresh Direct</MenuItem>
+                        <MenuItem value="Food Lion">Food Lion</MenuItem>
+                        <MenuItem value="Stop and Shop">Stop and Shop</MenuItem>
+                        <MenuItem value="The Giant Company">The Giant Company</MenuItem>
+                        <MenuItem value="Giant">Giant</MenuItem>
+                        <MenuItem value="Hannaford">Hannaford</MenuItem>
+                    </Select>
+                </FormControl>
+            </Box>
             </TitleContainer>
             <MidContainer>
                 <CampaignContainer>

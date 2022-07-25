@@ -36,7 +36,7 @@ public class Campaign {
     @Column(name = "banner", columnDefinition = "varchar(255)")
     private String banner;
 
-    @Column(name = "bannerId")
+    @Column(name = "bannerId", nullable = false)
     private int bannerId;
 
     public int getBannerId() {

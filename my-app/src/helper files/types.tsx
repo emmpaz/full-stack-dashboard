@@ -2,6 +2,7 @@
 export type Campaign = {
     managerId: number;
     banner: String;
+    bannerId: number;
     channel: String;
     company: String;
     budget: number;

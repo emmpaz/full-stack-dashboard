@@ -6,6 +6,7 @@ import { Campaign } from '../helper files/types';
 const defaultCampaign: Campaign = {
     managerId: 123,
     banner: '',
+    bannerId: 1,
     company: '',
     channel: '',
     budget: 0,
@@ -26,8 +27,26 @@ export const CreateCampaignComp = () => {
         });
       };
 
+      const getBannerId = (banner: String) => {
+        if(banner == "Fresh Direct") {
+          return 1;
+        } else if (banner == "Food Lion") {
+          return 2;
+        } else if (banner == "Stop and Shop") {
+          return 3;
+        } else if (banner == "The Giant Company") {
+          return 4;
+        } else if (banner == "Giant") {
+          return 5;
+        } else if (banner == "Hannaford") {
+          return 6;
+        } else {return 0;};
+      }
+
     const handleSubmit = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
+
+        newCampaign.bannerId = getBannerId(newCampaign.banner);
 
         axios.post('https://ps-springboot.azurewebsites.net/campaign', newCampaign)
             .then(res => {

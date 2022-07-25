@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Campaign } from "./types";
 import {useIsMount} from '../helper files/mounting';
-export const getCampains = () => {
+
+
+export const getCampaigns = () => {
 const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
 
     useEffect(() => {
@@ -22,6 +24,17 @@ const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
         })
         .catch((err) => {
         console.log(err);
+        });
+    };
+
+    const fetchCampaignsByBanner = (bannerId: number) => {
+        axios.get(`https://ps-springboot.azurewebsites.net/banner/${bannerId}`).then((res) => {
+            console.log(res);
+
+            setCampaigns(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
         });
     };
 
