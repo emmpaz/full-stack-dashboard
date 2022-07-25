@@ -18,4 +18,19 @@ public interface ICampaignRepo extends JpaRepository<Campaign, Long> {
 
     @Query(value = "Select * from [dbo].[campaign] where campaign.banner_id = 1", nativeQuery = true)
     public List<Campaign> filterCampaignByFreshDirect();
+
+    @Query(value = "Select * from [dbo].[campaign] where campaign.banner_id = 2", nativeQuery = true)
+    public List<Campaign> filterCampaignByFoodLion();
+
+    @Query(value = "Select * from [dbo].[campaign] where campaign.banner_id = 3", nativeQuery = true)
+    public List<Campaign> filterCampaignByStopAndShop();
+
+    @Query(value = "Select * from [dbo].[campaign] where campaign.banner_id = 4", nativeQuery = true)
+    public List<Campaign> filterCampaignByTheGiantCompany();
+
+    @Query(value = "Select * from [dbo].[campaign] where campaign.banner_id = 5", nativeQuery = true)
+    public List<Campaign> filterCampaignByGiant();
+
+    @Query(value = "Select * from [dbo].[campaign] where campaign.banner_id = 6", nativeQuery = true)
+    public List<Campaign> filterCampaignByHannaford();
 }

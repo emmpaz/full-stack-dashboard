@@ -44,6 +44,31 @@ public class CampaignController{
         return iCampaignRepo.filterCampaignByFreshDirect();
     }
 
+    @GetMapping("/banner/2")
+    public List<Campaign> foodLionCampaigns(){
+        return iCampaignRepo.filterCampaignByFoodLion();
+    }
+
+    @GetMapping("/banner/3")
+    public List<Campaign> stopAndShopCampaigns(){
+        return iCampaignRepo.filterCampaignByStopAndShop();
+    }
+
+    @GetMapping("/banner/4")
+    public List<Campaign> theGiantCompanyCampaigns(){
+        return iCampaignRepo.filterCampaignByTheGiantCompany();
+    }
+
+    @GetMapping("/banner/5")
+    public List<Campaign> giantCampaigns(){
+        return iCampaignRepo.filterCampaignByGiant();
+    }
+
+    @GetMapping("/banner/6")
+    public List<Campaign> hannafordCampaigns(){
+        return iCampaignRepo.filterCampaignByHannaford();
+    }
+
     @PostMapping("/campaign")
     public void addCampaign(
             @RequestBody Campaign campaign){
