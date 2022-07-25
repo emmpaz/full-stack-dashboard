@@ -72,7 +72,7 @@ export const SlayAvatar = (props: AvatarStyles) => {
 
 
   const handleClick = () => {  
-
+    
     navigate(link ?? '/dashboard')
   };
 
