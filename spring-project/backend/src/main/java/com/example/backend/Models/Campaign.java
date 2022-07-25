@@ -36,6 +36,17 @@ public class Campaign {
     @Column(name = "banner", columnDefinition = "varchar(255)")
     private String banner;
 
+    @Column(name = "bannerId")
+    private int bannerId;
+
+    public int getBannerId() {
+        return bannerId;
+    }
+
+    public void setBannerId(int id) {
+        this.bannerId = id;
+    }
+
     public String getBanner() {
         return banner;
     }
