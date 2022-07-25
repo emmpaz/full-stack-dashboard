@@ -13,10 +13,10 @@ export function BannerSelect() {
   
   const handleChange = (event: SelectChangeEvent) => {
     setBanners(event.target.value);
-    fetchCampaigns(1);
+    fetchCampaignsByBanner(1);
   }; 
 
-  const fetchCampaigns = (bannerId: number) => {
+  const fetchCampaignsByBanner = (bannerId: number) => {
     axios.get('http://localhost:8080/banner/1').then((res) => {
     console.log(res);
     setList(res.data);

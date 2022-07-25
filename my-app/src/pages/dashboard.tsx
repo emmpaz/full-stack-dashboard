@@ -213,7 +213,7 @@ const Dashboard = () => {
     }
     return(
         <BigContainer>
-            <TitleContainer> 
+            <TitleContainer>
             <Box sx={{ float: 'right', minWidth: 120 }}>
                 <FormControl style ={{width: '100%'}} variant="standard">
                     <InputLabel id="banner_id">Banner</InputLabel>
