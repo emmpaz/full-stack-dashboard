@@ -76,7 +76,7 @@ export const CreateCampaignComp = () => {
                 <MenuItem value="Hannaford">Hannaford</MenuItem>
               </Select>
             </FormControl> <br />
-            <Input style ={{width: '100%'}} type="number" name="budget" value={newCampaign.budget} onChange={handleInputChange}></Input><br />
+            <Input style ={{width: '100%'}} type="number" placeholder="budget" name="budget" value={newCampaign.budget} onChange={handleInputChange}></Input><br />
             <InputLabel>Campaign Dates</InputLabel>
             <Input style={{width: '72%'}} type="date" name="startDate" value={newCampaign.startDate} onChange={handleInputChange}></Input>
             <p><small>to</small></p>
