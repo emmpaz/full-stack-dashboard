@@ -9,7 +9,7 @@ export const BigContainer = (props: React.PropsWithChildren) => {
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="xl">
-          <Box sx={{ bgcolor: 'pink'}}>
+          <Box sx={{ bgcolor: 'white'}}>
             {children}
           </ Box>
         </Container>
@@ -23,7 +23,7 @@ export const TitleContainer = (props: React.PropsWithChildren) => {
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="xl">
-          <Box sx={{ bgcolor: 'pink', height: '10vh' }}>
+          <Box sx={{ bgcolor: 'white', height: '10vh' }}>
             {children}
           </ Box>
         </Container>
@@ -36,7 +36,7 @@ export const MidContainer = (props: React.PropsWithChildren) => {
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="xl">
-          <Box sx={{ bgcolor: 'pink', display: 'flex', flexDirection: 'row'}}>
+          <Box sx={{ bgcolor: 'white', display: 'flex', flexDirection: 'row'}}>
             {children}
           </ Box>
         </Container>
@@ -50,7 +50,7 @@ export const CampaignContainer = (props: React.PropsWithChildren) => {
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="xl">
-          <Box sx={{ bgcolor: 'pink', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+          <Box sx={{ bgcolor: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             {children}
           </ Box>
         </Container>
@@ -64,7 +64,7 @@ export const OtherContainer = (props: React.PropsWithChildren) => {
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="xl">
-          <Box sx={{ bgcolor: 'pink', display: 'flex', flexDirection: 'column'}}>
+          <Box sx={{ bgcolor: 'white', display: 'flex', flexDirection: 'column'}}>
             {children}
           </ Box>
         </Container>
@@ -78,7 +78,7 @@ export const RevContainer = (props: React.PropsWithChildren) => {
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="xl">
-          <Box sx={{ bgcolor: 'pink'}}>
+          <Box sx={{ bgcolor: 'white'}}>
             {children}
           </ Box>
         </Container>
@@ -92,7 +92,7 @@ export const GraphContainer = (props: React.PropsWithChildren) => {
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="xl">
-          <Box sx={{ bgcolor: 'pink'}}>
+          <Box sx={{ bgcolor: 'white'}}>
             {children}
           </ Box>
         </Container>

@@ -18,6 +18,7 @@ import { CampaignList } from '../components/campaignList';
 import { end_date_down, end_date_up, spend_down, spend_up } from '../helper files/dashboard_states';
 import '../css files/dashboard.css';
 import Search from '../components/searchbar';
+import Graph from '../components/graph';
 
 const get_campaigns = axios.create({
     baseURL: 'https://ps-springboot.azurewebsites.net/campaign'
@@ -209,9 +210,11 @@ const Dashboard = () => {
                 <OtherContainer> 
                     <RevContainer> 
                         <h1> Ad Rev Total </h1>
+                        <Paper> $19,242,293 </Paper>
                     </RevContainer>
                     <GraphContainer> 
                         <h1> Graph </h1>
+                        <Graph> </Graph>
                     </GraphContainer>
                 </OtherContainer>
             </MidContainer>
