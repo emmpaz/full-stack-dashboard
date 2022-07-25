@@ -8,7 +8,7 @@ import { CampaignContainer } from '../components/containers';
 import { OtherContainer } from '../components/containers';
 import { RevContainer } from '../components/containers';
 import { GraphContainer } from '../components/containers';
-import { Box } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import { Campaign } from '../helper files/types';
 import {Button} from "@mui/material";
 import {useIsMount} from '../helper files/mounting';
@@ -16,6 +16,7 @@ import { compare_by_date, compare_by_name, compare_by_budget, compare_by_name_re
 import { CampListItem } from '../components/func_camp_list';
 import { CampaignList } from '../components/campaignList';
 import { end_date_down, end_date_up, spend_down, spend_up } from '../helper files/dashboard_states';
+import Graph from '../components/graph';
 
 const get_campaigns = axios.create({
     baseURL: 'https://ps-springboot.azurewebsites.net/campaign'
@@ -204,9 +205,11 @@ const Dashboard = () => {
                 <OtherContainer> 
                     <RevContainer> 
                         <h1> Ad Rev Total </h1>
+                        <Paper> $19,242,293 </Paper>
                     </RevContainer>
                     <GraphContainer> 
                         <h1> Graph </h1>
+                        <Graph> </Graph>
                     </GraphContainer>
                 </OtherContainer>
             </MidContainer>
