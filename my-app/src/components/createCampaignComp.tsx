@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Box, Button, Input, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import { Campaign } from '../helper files/types';
+import { OnsiteOptions } from './OnsiteOptions';
+import { InStoreOptions } from './InStoreOptions';
+import { SocialMedia } from './socialMedia';
 
 const defaultCampaign: Campaign = {
     managerId: 123,
@@ -17,13 +20,28 @@ const defaultCampaign: Campaign = {
 
 export const CreateCampaignComp = () => {
     const [newCampaign, setNewCampaign] = useState<Campaign>(defaultCampaign)
-
+    
+    const [channelSelectionOption, setchannelSelectionOption] = useState<JSX.Element>();
+    
+  
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
         setNewCampaign({
           ...newCampaign,
           [name]: value,
         });
+        if(name === "channel"){
+          if(value == "Off-Site"){
+            setchannelSelectionOption(<SocialMedia/>);
+          }
+          else if(value == "On-Site"){
+            setchannelSelectionOption(<OnsiteOptions/>);
+          }
+          else if(value == "In-Store"){
+            setchannelSelectionOption(<InStoreOptions/>);
+          }
+          
+        }
       };
 
     const handleSubmit = (event: { preventDefault: () => void; }) => {
@@ -35,7 +53,7 @@ export const CreateCampaignComp = () => {
                 console.log(res.data);
             })
     }
-    
+
     return (
         <Box
         component="form"
@@ -58,6 +76,11 @@ export const CreateCampaignComp = () => {
                 <MenuItem value="Hannaford">Hannaford</MenuItem>
               </Select>
             </FormControl> <br />
+            <Input style ={{width: '100%'}} type="number" name="budget" value={newCampaign.budget} onChange={handleInputChange}></Input><br />
+            <InputLabel>Campaign Dates</InputLabel>
+            <Input style={{width: '72%'}} type="date" name="startDate" value={newCampaign.startDate} onChange={handleInputChange}></Input>
+            <p><small>to</small></p>
+            <Input style={{width: '72%'}} type="date" name="endDate" value={newCampaign.endDate} onChange={handleInputChange}></Input><br />
             <FormControl style ={{width: '100%'}} variant="standard">
               <InputLabel id="channel_id">Channel</InputLabel>
               <Select style ={{width: '100%'}} label="channel" name="channel" value={newCampaign.channel} onChange={handleInputChange}>
@@ -65,11 +88,7 @@ export const CreateCampaignComp = () => {
                 <MenuItem value="Off-Site">Off-Site</MenuItem>
                 <MenuItem value="In-Store">In-Store</MenuItem>
             </Select></FormControl> <br />
-            <Input style ={{width: '100%'}} type="number" name="budget" value={newCampaign.budget} onChange={handleInputChange}></Input><br />
-            <InputLabel>Campaign Dates</InputLabel>
-            <Input style={{width: '72%'}} type="date" name="startDate" value={newCampaign.startDate} onChange={handleInputChange}></Input>
-            <p><small>to</small></p>
-            <Input style={{width: '72%'}} type="date" name="endDate" value={newCampaign.endDate} onChange={handleInputChange}></Input><br />
+            {channelSelectionOption}
             <Button type="submit" onClick={handleSubmit}>Submit</Button>
         </Box>
     )

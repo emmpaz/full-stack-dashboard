@@ -8,7 +8,7 @@ import { CampaignContainer } from '../components/containers';
 import { OtherContainer } from '../components/containers';
 import { RevContainer } from '../components/containers';
 import { GraphContainer } from '../components/containers';
-import { Box } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import { Campaign } from '../helper files/types';
 import {Button} from "@mui/material";
 import {useIsMount} from '../helper files/mounting';
@@ -16,6 +16,8 @@ import { compare_by_date, compare_by_name, compare_by_budget, compare_by_name_re
 import { CampListItem } from '../components/func_camp_list';
 import { CampaignList } from '../components/campaignList';
 import { end_date_down, end_date_up, spend_down, spend_up } from '../helper files/dashboard_states';
+import '../css files/dashboard.css';
+import Search from '../components/searchbar';
 
 const get_campaigns = axios.create({
     baseURL: 'https://ps-springboot.azurewebsites.net/campaign'
@@ -198,6 +200,9 @@ const Dashboard = () => {
                                     budget={campaign.budget.toString()}
                                     end={campaign.endDate.toString()}/>
                             ))}
+                        </div>
+                        <div>
+                            <Search list={myCampaigns}/>
                         </div>
                     </div>
                 </CampaignContainer>
