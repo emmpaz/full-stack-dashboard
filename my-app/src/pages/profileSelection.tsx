@@ -5,7 +5,7 @@ import hannafordLogo from '../assets/images/hannaford.png';
 //import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import { Box, Container, SxProps, Theme, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { link } from 'fs';
 import { Campaign } from '../helper files/types';
 import { getCampaigns } from '../helper files/getCampaigns';
@@ -21,7 +21,7 @@ export const Homepage = () => {
             alt="foodLionLogo"
             src={foodLionLogo}
             sx={{}}
-            text="Food Lion 2"
+            text="Food Lion"
           />
           <SlayAvatar
             alt="freshDirect"
@@ -54,7 +54,7 @@ export const SlayAvatar = (props: AvatarStyles) => {
 
   //const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
 
-  const getBannerId = (banner: String) => {
+  const getBannerId = (banner: string) => {
     if(banner == "Fresh Direct") {
       return 1;
     } else if (banner == "Food Lion") {
@@ -72,8 +72,8 @@ export const SlayAvatar = (props: AvatarStyles) => {
 
 
   const handleClick = () => {  
-    
-    navigate(link ?? '/dashboard')
+    navigate('/dashboard', { state: { id: 7 } })
+    //navigate(link ?? '/dashboard')
   };
 
   return(
@@ -89,7 +89,7 @@ export const SlayAvatar = (props: AvatarStyles) => {
               borderRadius: 12.5
             },
       }}>
-        <Avatar alt={alt} src={src} sx={sx} onClick={handleClick}></Avatar>
+        <Avatar alt={alt} src={src} sx={sx} onClick={() => navigate("/dashboard", { state: { bannerId: getBannerId(props.text) } })}></Avatar>
         <Typography variant="h6" sx={{fontSize: 10}}>{text}</Typography>
       </Box>
   )

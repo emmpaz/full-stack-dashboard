@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import {BigContainer} from '../components/containers';
 import { TitleContainer } from '../components/containers';
@@ -52,7 +52,9 @@ const Dashboard = () => {
     //campaign lists states
     const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
     const [originalList, setList] = useState<Campaign[]>([]);
-    const [bannerId, setBannerId] = useState('');
+    //const [bannerId, setBannerId] = useState('');
+    const { state } = useLocation();
+    const [bannerId, setBannerId] = useState(state);
 
     //sorting states
     const [sortName, setName] = useState<String>(sortNameState[2]);
@@ -66,6 +68,8 @@ const Dashboard = () => {
     useEffect(() => {
         if (isMount) {
             fetchCampaigns("active");
+            let tmpBanner: string = bannerId as string;
+            fetchCampaignsByBanner(tmpBanner);
             console.log('fetching');
         } else {
         console.log('Subsequent Render');
@@ -96,7 +100,14 @@ const Dashboard = () => {
 
     const bannerSelectHandler = (event: SelectChangeEvent) => {
        // setBannerId(event.target.value as string)
+        if(event.target.value == "7") {
+            navigate("/login");
+        }
         fetchCampaignsByBanner(event.target.value);
+    }
+
+    const bannerSelectOnLoad = (bannerId: String) => {
+        fetchCampaignsByBanner(bannerId);
     }
 
     const archivedCampaignsHandler = () => {
@@ -201,7 +212,6 @@ const Dashboard = () => {
     return(
         <BigContainer>
             <TitleContainer> 
-            <Button style={{float: 'right' ,margin: 21}} onClick={() => navigate("/login")}>Logout</Button>
             <Box sx={{ float: 'right', minWidth: 120 }}>
                 <FormControl style ={{width: '100%'}} variant="standard">
                     <InputLabel id="banner_id">Banner</InputLabel>
@@ -212,6 +222,7 @@ const Dashboard = () => {
                         <MenuItem value="4">The Giant Company</MenuItem>
                         <MenuItem value="5">Giant</MenuItem>
                         <MenuItem value="6">Hannaford</MenuItem>
+                        <MenuItem sx={{ color: '#00C832 !important' }} value="7">Logout</MenuItem>
                     </Select>
                 </FormControl>
             </Box>
