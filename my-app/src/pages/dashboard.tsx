@@ -231,6 +231,7 @@ const Dashboard = () => {
                 <CampaignContainer>
                     <div>
                         <h1>List of Campaigns</h1>
+                        <Search list={myCampaigns}/>
                         <Button variant={(isActive) ? "contained" : "text"} onClick={activeCampaignsHandler}>Active</Button>
                         <Button variant={(!isActive) ? "contained" : "text"} onClick={archivedCampaignsHandler}>Archived</Button>
                         <Button onClick={() => navigate("/createCampaign")}>Create Campaign</Button>
@@ -245,9 +246,6 @@ const Dashboard = () => {
                                     budget={campaign.budget.toString()}
                                     end={campaign.endDate.toString()}/>
                             ))}
-                        </div>
-                        <div>
-                            <Search list={myCampaigns}/>
                         </div>
                     </div>
                 </CampaignContainer>
