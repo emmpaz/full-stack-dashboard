@@ -78,6 +78,8 @@ export const SocialMedia = () => {
               </Select>
             </FormControl>
 
+            {/* NEED TARGET AUDIENCE GENDER SLIDER */}
+
             </Box>
             
             

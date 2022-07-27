@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Campaign} from '../helper files/types.js';
-import SearchList from './campaignlist_new';
 import Scroll from './scroll';
 
 const Search = (props : {list : Campaign[]}) => {
@@ -26,8 +25,14 @@ const Search = (props : {list : Campaign[]}) => {
     const searchList = () => {
         return(
            <Scroll>
-                {/*tests*/}
-                {/*<SearchList list={filteredCampaigns}/>*/}
+                {filteredCampaigns.map((campaign) => {
+                    return(
+                    <div>
+                        <p>{campaign.campaignName}</p>
+                        <br></br>
+                    </div>
+                    )
+                })}
            </Scroll>     
         )
     }
