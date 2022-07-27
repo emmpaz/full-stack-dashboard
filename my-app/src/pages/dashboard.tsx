@@ -239,7 +239,7 @@ const Dashboard = () => {
                         <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>
                         <div className='camp-container'>
                             {myCampaigns.map((campaign) => (
-                                <CampListItem 
+                                <CampListItem
                                     year="2022"
                                     title={campaign.campaignName.toString()}
                                     budget={campaign.budget.toString()}
