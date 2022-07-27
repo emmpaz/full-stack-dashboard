@@ -231,6 +231,7 @@ const Dashboard = () => {
                 <CampaignContainer>
                     <div>
                         <h1>List of Campaigns</h1>
+                        <Search list={myCampaigns}/>
                         <Button variant={(isActive) ? "contained" : "text"} onClick={activeCampaignsHandler}>Active</Button>
                         <Button variant={(!isActive) ? "contained" : "text"} onClick={archivedCampaignsHandler}>Archived</Button>
                         <Button onClick={() => navigate("/createCampaign")}>Create Campaign</Button>
@@ -239,17 +240,18 @@ const Dashboard = () => {
                         <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>
                         <div className='camp-container' >
                             {myCampaigns.map((campaign) => (
+<<<<<<< HEAD
                                 <Box onClick={() => navigate("/detailView", { state: { currentCamp: campaign }})}>
                                 <CampListItem 
                                     
+=======
+                                <CampListItem
+>>>>>>> b924684fefa05e684507d22dd66abe9344c9d1d6
                                     year="2022"
                                     title={campaign.campaignName.toString()}
                                     budget={campaign.budget.toString()}
                                     end={campaign.endDate.toString()} /></Box>
                             ))}
-                        </div>
-                        <div>
-                            <Search list={myCampaigns}/>
                         </div>
                     </div>
                 </CampaignContainer>
