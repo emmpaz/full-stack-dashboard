@@ -240,13 +240,9 @@ const Dashboard = () => {
                         <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>
                         <div className='camp-container' >
                             {myCampaigns.map((campaign) => (
-<<<<<<< HEAD
                                 <Box onClick={() => navigate("/detailView", { state: { currentCamp: campaign }})}>
                                 <CampListItem 
                                     
-=======
-                                <CampListItem
->>>>>>> b924684fefa05e684507d22dd66abe9344c9d1d6
                                     year="2022"
                                     title={campaign.campaignName.toString()}
                                     budget={campaign.budget.toString()}
