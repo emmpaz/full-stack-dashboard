@@ -1,9 +1,10 @@
 import React from 'react';
 import { CampListItem } from './func_camp_list';
 import { Campaign } from '../helper files/types';
+import { useNavigate } from 'react-router-dom';
 
 const SearchList = (props: {list : Campaign[]}) => {
-    
+    const navigate = useNavigate();
     const array = [...props.list]
     
     return(

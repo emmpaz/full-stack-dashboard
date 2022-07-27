@@ -9,7 +9,7 @@ import Login from './pages/login';
 import Dashboard from './pages/dashboard';
 import CreateCampaign from './pages/createCampaign';
 import { Homepage } from './pages/profileSelection';
-import DetailView from './pages/detailView'
+import DetailView from './pages/detailView';
 
 
 import axios from 'axios';

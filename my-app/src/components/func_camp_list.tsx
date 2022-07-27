@@ -1,5 +1,6 @@
 import { Box, ButtonBase, Grid, List, ListItemButton, ListItemText, Paper, Typography } from "@mui/material";
 import React from "react";
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 
 
 export const CampListItem = (props: {
@@ -7,9 +8,12 @@ export const CampListItem = (props: {
     title: string; 
     end: string; 
     budget: string; 
-}) => {
+
+}) => 
+    {
+    const navigate = useNavigate();
     return (
-        <ButtonBase>
+        <ButtonBase >
             <Paper
             elevation={2}
             sx={{

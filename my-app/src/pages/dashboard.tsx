@@ -69,7 +69,7 @@ const Dashboard = () => {
         if (isMount) {
             fetchCampaigns("active");
             let tmpBanner: string = bannerId as string;
-            fetchCampaignsByBanner(tmpBanner);
+            //fetchCampaignsByBanner(tmpBanner);
             console.log('fetching');
         } else {
         console.log('Subsequent Render');
@@ -88,7 +88,7 @@ const Dashboard = () => {
     };
 
     const fetchCampaignsByBanner = (bannerId: String) => {
-        axios.get(`http://localhost:8080/banner/${bannerId}`).then((res) => {
+        axios.get(`https://ps-springboot.azurewebsites.net/banner/${bannerId}`).then((res) => {
         console.log(res);
         setList(res.data);
         setCampaigns(res.data);
@@ -237,13 +237,15 @@ const Dashboard = () => {
                         <Button variant={(sortName === "A-Z" || sortName === "Z-A") ? "contained": "text"} onClick={sortNameHandler} style={{margin: 21}}>{(sortName === "default") ? "A-Z" : sortName}</Button>
                         <Button variant={(sortDate === end_date_down || sortDate === end_date_up) ? "contained": "text"} onClick={sortEndDateHandler} style={{margin: 21}}>{(sortDate === "default") ? end_date_down : sortDate}</Button>
                         <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>
-                        <div className='camp-container'>
+                        <div className='camp-container' >
                             {myCampaigns.map((campaign) => (
+                                <Box onClick={() => navigate("/detailView", { state: { currentCamp: campaign }})}>
                                 <CampListItem 
+                                    
                                     year="2022"
                                     title={campaign.campaignName.toString()}
                                     budget={campaign.budget.toString()}
-                                    end={campaign.endDate.toString()}/>
+                                    end={campaign.endDate.toString()} /></Box>
                             ))}
                         </div>
                         <div>
