@@ -16,18 +16,44 @@ export const Homepage = () => {
   const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
 
   return (
+    <div>
+      <TitleContainer>
+      <Box sx={{ float: 'right', minWidth: 120 }}>
+      <Button sx={{ color: '#00C832 !important' }} value="7">Logout</Button>
+     </Box>
+      </TitleContainer>
+
         <CenterContentDiv>
-          <SlayAvatar
-            alt="foodLionLogo"
-            src={foodLionLogo}
-            sx={{}}
-            text="Food Lion"
-          />
           <SlayAvatar
             alt="freshDirect"
             src={freshDirectLogo}
             sx={{}}
             text="Fresh Direct"
+          />
+          <SlayAvatar
+            alt="foodLionLogo"
+            src={foodLionLogo}
+            sx={{}}
+            text="Food Lion"
+            text="Food Lion"
+          />
+          <SlayAvatar
+            alt="stopAndShop"
+            src={hannafordLogo}
+            sx={{}}
+            text="Stop and Shop"
+          />
+          <SlayAvatar
+            alt="The Giant Company"
+            src={hannafordLogo}
+            sx={{}}
+            text="The Giant Company"
+          />
+          <SlayAvatar
+            alt="Giant"
+            src={hannafordLogo}
+            sx={{}}
+            text="Giant"
           />
           <SlayAvatar
             alt="hannaford"
@@ -36,6 +62,7 @@ export const Homepage = () => {
             text="Hannaford"
           />
         </CenterContentDiv>
+        </div>
          );
 }
 
@@ -71,8 +98,8 @@ export const SlayAvatar = (props: AvatarStyles) => {
   }
 
 
-  const handleClick = () => {  
-    navigate('/dashboard', { state: { id: 1 } })
+  const handleClick = () => {
+    navigate('/dashboard', { state: { id: 7 } })
     //navigate(link ?? '/dashboard')
   };
 
@@ -89,7 +116,7 @@ export const SlayAvatar = (props: AvatarStyles) => {
               borderRadius: 12.5
             },
       }}>
-        
+
         <Avatar alt={alt} src={src} sx={sx} onClick={() => navigate("/dashboard", { state: { bannerId: getBannerId(props.text) } })}></Avatar>
         <Typography variant="h6" sx={{fontSize: 10}}>{text}</Typography>
       </Box>
