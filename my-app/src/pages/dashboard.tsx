@@ -54,7 +54,8 @@ const Dashboard = () => {
     const [originalList, setList] = useState<Campaign[]>([]);
     //const [bannerId, setBannerId] = useState('');
     const { state } = useLocation();
-    const [bannerId, setBannerId] = useState(state);
+    var initBannerId = (state as any).bannerId;
+    //const [bannerId, setBannerId] = useState(state);
 
     //sorting states
     const [sortName, setName] = useState<String>(sortNameState[2]);
@@ -68,9 +69,10 @@ const Dashboard = () => {
     useEffect(() => {
         if (isMount) {
             fetchCampaigns("active");
-            let tmpBanner: string = bannerId as string;
+           // let tmpBanner: string = bannerId as string;
             //fetchCampaignsByBanner(tmpBanner);
             console.log('fetching');
+            fetchCampaignsByBanner(initBannerId);
         } else {
         console.log('Subsequent Render');
         }
