@@ -12,17 +12,16 @@ import { Paper } from '@mui/material';
 import { Box, InputLabel, MenuItem, FormControl } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Campaign } from '../helper files/types';
-import {Button} from "@mui/material";
+import {Button, IconButton} from "@mui/material";
 import {useIsMount} from '../helper files/mounting';
 import { compare_by_date, compare_by_name, compare_by_budget, compare_by_name_reversed, compare_by_date_reversed, compare_by_budget_reversed} from '../helper files/comparators';
 import { CampListItem } from '../components/func_camp_list';
 import { CampaignList } from '../components/campaignList';
 import { end_date_down, end_date_up, spend_down, spend_up } from '../helper files/dashboard_states';
-import { BannerSelect } from '../components/bannerSelect';
 import '../css files/dashboard.css';
 import Search from '../components/searchbar';
 import Graph from '../components/graph';
-import { BannerSelect } from '../components/bannerSelect';
+
 
 const get_campaigns = axios.create({
     baseURL: 'https://ps-springboot.azurewebsites.net/campaign'
@@ -65,11 +64,12 @@ const Dashboard = () => {
 
     //active and archived states
     const [isActive, setActive] = useState<Boolean>(true);
-
-
+    
+    const [budgetDisplay, setBudgetDisplay] = useState<number>(0);
+    var budgetTotal = 0;
     useEffect(() => {
         if (isMount) {
-            fetchCampaigns("active");
+            //fetchCampaigns("active");
            // let tmpBanner: string = bannerId as string;
             //fetchCampaignsByBanner(tmpBanner);
             console.log('fetching');
@@ -236,22 +236,22 @@ const Dashboard = () => {
                         <Button variant={(sortDate === end_date_down || sortDate === end_date_up) ? "contained": "text"} onClick={sortEndDateHandler} style={{margin: 21}}>{(sortDate === "default") ? end_date_down : sortDate}</Button>
                         <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>
                         <div className='camp-container' style={{display:'grid'}} >
-                            {myCampaigns.map((campaign) => (
-                                <Box onClick={() => navigate("/detailView", { state: { currentCamp: campaign }})}>
-                                <CampListItem
-
-                                    year="2022"
-                                    title={campaign.campaignName.toString()}
-                                    budget={campaign.budget.toString()}
-                                    end={campaign.endDate.toString()} /></Box>
-                            ))}
+                            {myCampaigns.map((campaign) => {
+                                return(
+                                    <Box onClick={() => navigate("/detailView", { state: { currentCamp: campaign }})}>
+                                    <CampListItem
+                                        year="2022"
+                                        title={campaign.campaignName.toString()}
+                                        budget={campaign.budget.toString()}
+                                        end={campaign.endDate.toString()} /></Box>
+                            )})}
                         </div>
                     </div>
                 </CampaignContainer>
                 <OtherContainer> 
                     <RevContainer> 
                         <h1> Ad Rev Total </h1>
-                        <Paper> $19,242,293 </Paper>
+                        <Paper> {budgetDisplay}</Paper>
                     </RevContainer>
                     <GraphContainer> 
                         <h1> Graph </h1>

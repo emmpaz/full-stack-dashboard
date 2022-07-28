@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {Campaign} from '../helper files/types.js';
 import { CampListItem } from './func_camp_list';
 import Scroll from './scroll';
-import { TextField } from "@mui/material";
+import { Icon, IconButton, TextField } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import { SearchListItem } from './searchListItem';
 
 const CssTextField = styled(TextField)({
     '& label':{
-        color:'darkgray'
+        color:'black',
     },
     '& .MuiInput-underline':{
         borderBottomColor:'white'
@@ -26,6 +26,8 @@ const Search = (props : {list : Campaign[]}) => {
     const [searchField, setSearchField] = useState("");
     const [displaySearch, setDisplySearch] = useState<Boolean>(false);
     
+    const [searchClear, setsearchClear] = useState("");
+
     const array = [...props.list]
     const filteredCampaigns = array.filter(
         (campaign : Campaign) => {
@@ -39,11 +41,17 @@ const Search = (props : {list : Campaign[]}) => {
     );
 
     const handleChange = (e: any) => {
+        setsearchClear(e.target.value);
         setSearchField(e.target.value);
         if(e.target.value == "")
             setDisplySearch(false)
         else
             setDisplySearch(true)
+    }
+
+    const clearHandle = () => {
+        setsearchClear("");
+        setDisplySearch(false)
     }
 
     const searchList = () => {
@@ -62,10 +70,13 @@ const Search = (props : {list : Campaign[]}) => {
         }
     }
     return(
-        <section>
+        <section style={{zIndex:'1', position:'relative'}}>
             <div>
                 <div style={{width:'100%', height: '100%'}}>
-                <CssTextField id="filled-basic" label="search" variant="standard" onChange = {handleChange}/>
+                <CssTextField value={searchClear} id="filled-basic" label="search" variant="standard" onChange = {handleChange}/>
+                <IconButton disableFocusRipple={true} onClick={clearHandle}>
+                    <Icon fontSize='medium'>x</Icon>
+                </IconButton>
                 </div>
             </div>
             {searchList()}

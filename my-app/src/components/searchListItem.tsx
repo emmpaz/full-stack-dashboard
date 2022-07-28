@@ -11,10 +11,11 @@ export const SearchListItem = (props: {
             <Paper
             sx={{
                 width:'100%',
-                margin:'2px'
+                margin:'3px',
+                opacity: '1'
             }}>
                 <Grid>
-                    <Typography>{props.campaignName}</Typography>
+                    <Typography variant="h4">{props.campaignName}</Typography>
                 </Grid>
             </Paper>
         </ButtonBase>
