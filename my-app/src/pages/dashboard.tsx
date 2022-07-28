@@ -162,8 +162,6 @@ const Dashboard = () => {
             setName(sortNameState[2]);
             setCampaigns(originalList);
         }
-        list.sort(compare_by_name);
-        setCampaigns(list);
     }
 
     const sortEndDateHandler = () => {
@@ -185,8 +183,6 @@ const Dashboard = () => {
             setDate(sortDateState[2]);
             setCampaigns(originalList);
         }
-        list.sort(compare_by_date);
-        setCampaigns(list);
     }
 
     const sortBudgetHandler = () => {
@@ -208,8 +204,6 @@ const Dashboard = () => {
             setSpend(sortSpendState[2]);
             setCampaigns(originalList);
         }
-        list.sort(compare_by_budget);
-        setCampaigns(list);
     }
     return(
         <BigContainer>
@@ -240,7 +234,7 @@ const Dashboard = () => {
                         <Button variant={(sortName === "A-Z" || sortName === "Z-A") ? "contained": "text"} onClick={sortNameHandler} style={{margin: 21}}>{(sortName === "default") ? "A-Z" : sortName}</Button>
                         <Button variant={(sortDate === end_date_down || sortDate === end_date_up) ? "contained": "text"} onClick={sortEndDateHandler} style={{margin: 21}}>{(sortDate === "default") ? end_date_down : sortDate}</Button>
                         <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>
-                        <div className='camp-container' >
+                        <div className='camp-container' style={{display:'grid'}} >
                             {myCampaigns.map((campaign) => (
                                 <Box onClick={() => navigate("/detailView", { state: { currentCamp: campaign }})}>
                                 <CampListItem 
