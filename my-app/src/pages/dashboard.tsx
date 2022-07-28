@@ -18,11 +18,10 @@ import { compare_by_date, compare_by_name, compare_by_budget, compare_by_name_re
 import { CampListItem } from '../components/func_camp_list';
 import { CampaignList } from '../components/campaignList';
 import { end_date_down, end_date_up, spend_down, spend_up } from '../helper files/dashboard_states';
-import { BannerSelect } from '../components/bannerSelect';
 import '../css files/dashboard.css';
 import Search from '../components/searchbar';
 import Graph from '../components/graph';
-import { BannerSelect } from '../components/bannerSelect';
+
 
 const get_campaigns = axios.create({
     baseURL: 'https://ps-springboot.azurewebsites.net/campaign'
@@ -69,18 +68,18 @@ const Dashboard = () => {
 
     useEffect(() => {
         if (isMount) {
-            fetchCampaigns("active");
+            fetchCampaigns("active", initBannerId);
            // let tmpBanner: string = bannerId as string;
             //fetchCampaignsByBanner(tmpBanner);
             console.log('fetching');
-            fetchCampaignsByBanner(initBannerId);
+            //fetchCampaignsByBanner(initBannerId);
         } else {
         console.log('Subsequent Render');
         }
   });
 
-    const fetchCampaigns = (active_or_not: String) => {
-        axios.get(`https://ps-springboot.azurewebsites.net/${active_or_not}_campaigns`).then((res) => {
+    const fetchCampaigns = (active_or_not: String, initBannerId : any) => {
+        axios.get(`https://ps-springboot.azurewebsites.net/${active_or_not}_campaigns/${initBannerId}`).then((res) => {
         console.log(res);
         setList(res.data);
         setCampaigns(res.data);
@@ -120,7 +119,7 @@ const Dashboard = () => {
             setSpend(sortSpendState[2])
             
             setActive(!isActive)
-            fetchCampaigns("active")
+            fetchCampaigns("active", initBannerId)
         }
         else{
             setDate(sortDateState[2])
@@ -128,7 +127,7 @@ const Dashboard = () => {
             setSpend(sortSpendState[2])
 
             setActive(!isActive)
-            fetchCampaigns("archived")
+            fetchCampaigns("archived", initBannerId)
         }
     }
 
@@ -139,7 +138,7 @@ const Dashboard = () => {
             setSpend(sortSpendState[2])
 
             setActive(!isActive)
-            fetchCampaigns("active")
+            fetchCampaigns("active", initBannerId)
         }
     }
 

@@ -24,14 +24,18 @@ public class CampaignController{
         return iCampaignRepo.findAll();
     }
 
-    @GetMapping("/active_campaigns")
-    public List<Campaign> activeCampaigns(){
-        return iCampaignRepo.searchCampaignByIsActive();
+    @GetMapping("/active_campaigns/{bannerId}")
+    public List<Campaign> activeCampaigns(
+            @PathVariable("bannerId") String bannerId
+    ){
+        return iCampaignRepo.searchCampaignByIsActive(bannerId);
     }
 
-    @GetMapping("/archived_campaigns")
-    public List<Campaign> archivedCampaigns(){
-        return iCampaignRepo.searchCampaignByIsActiveNot();
+    @GetMapping("/archived_campaigns/{bannerId}")
+    public List<Campaign> archivedCampaigns(
+            @PathVariable("bannerId") String bannerId
+    ){
+        return iCampaignRepo.searchCampaignByIsActiveNot(bannerId);
     }
 
     @GetMapping("/campaign/{id}")
