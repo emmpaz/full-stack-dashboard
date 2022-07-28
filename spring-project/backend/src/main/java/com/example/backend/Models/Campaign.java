@@ -46,7 +46,7 @@ public class Campaign {
     private String channel;
 
     //off-site options
-    @Column(name = "social", columnDefinition = "varchar(255") //options: facebook, instagram, twitter, youtube
+    @Column(name = "social", columnDefinition = "varchar(255)") //options: facebook, instagram, twitter, youtube
     private String social;
     
     @Column(name = "targetAge", columnDefinition = "varchar(255)") //for off and on-site
