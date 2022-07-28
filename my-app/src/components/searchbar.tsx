@@ -4,6 +4,7 @@ import { CampListItem } from './func_camp_list';
 import Scroll from './scroll';
 import { TextField } from "@mui/material";
 import { styled } from '@mui/material/styles';
+import { SearchListItem } from './searchListItem';
 
 const CssTextField = styled(TextField)({
     '& label':{
@@ -49,14 +50,13 @@ const Search = (props : {list : Campaign[]}) => {
         if(displaySearch){
             return(
             <Scroll>
+                <div style={{display:'grid'}}>
                     {filteredCampaigns.map((campaign) => {
                         return(
-                        <div>
-                            <p>{campaign.campaignName}</p>
-                            <br></br>
-                        </div>  
+                        <SearchListItem campaignName={campaign.campaignName}/>
                         )
                     })}
+                </div>
             </Scroll>     
             )
         }
@@ -64,7 +64,9 @@ const Search = (props : {list : Campaign[]}) => {
     return(
         <section>
             <div>
-                <CssTextField id="filled-basic" label="search" placeholder="search campaign" variant="standard" onChange = {handleChange}/>
+                <div style={{width:'100%', height: '100%'}}>
+                <CssTextField id="filled-basic" label="search" variant="standard" onChange = {handleChange}/>
+                </div>
             </div>
             {searchList()}
         </section>

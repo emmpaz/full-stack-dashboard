@@ -7,7 +7,7 @@
     "@azure/identity": "^2.0.4",
     "@azure/msal-browser": "^2.28.0",
     "@azure/msal-react": "^1.4.4",
-    "@azure/storage-blob": "^12.9.0",
+    "@azure/storage-blob": "^12.11.0",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/material": "^5.9.1",
@@ -33,7 +33,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "refreshVSToken" : "vsts-npm-auth -config .npmrc"
+    "refreshVSToken": "vsts-npm-auth -config .npmrc"
   },
   "eslintConfig": {
     "extends": [
