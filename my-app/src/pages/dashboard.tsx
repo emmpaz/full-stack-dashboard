@@ -55,7 +55,8 @@ const Dashboard = () => {
     const [originalList, setList] = useState<Campaign[]>([]);
     //const [bannerId, setBannerId] = useState('');
     const { state } = useLocation();
-    const [bannerId, setBannerId] = useState(state);
+    var initBannerId = (state as any).bannerId;
+    //const [bannerId, setBannerId] = useState(state);
 
     //sorting states
     const [sortName, setName] = useState<String>(sortNameState[2]);
@@ -66,13 +67,13 @@ const Dashboard = () => {
     const [isActive, setActive] = useState<Boolean>(true);
 
 
-
     useEffect(() => {
         if (isMount) {
             fetchCampaigns("active");
-            //let tmpBanner: string = bannerId as string;
+           // let tmpBanner: string = bannerId as string;
             //fetchCampaignsByBanner(tmpBanner);
             console.log('fetching');
+            fetchCampaignsByBanner(initBannerId);
         } else {
         console.log('Subsequent Render');
         }
@@ -207,7 +208,7 @@ const Dashboard = () => {
     }
     return(
         <BigContainer>
-            <TitleContainer>
+            <TitleContainer> 
             <Box sx={{ float: 'right', minWidth: 120 }}>
                 <FormControl style ={{width: '100%'}} variant="standard">
                     <InputLabel id="banner_id">Banner</InputLabel>

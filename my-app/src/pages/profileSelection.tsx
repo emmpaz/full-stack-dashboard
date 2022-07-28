@@ -4,11 +4,10 @@ import freshDirectLogo from '../assets/images/freshDirect.jpg';
 import hannafordLogo from '../assets/images/hannaford.png';
 //import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-import { MenuItem, Box, Container, SxProps, Theme, Typography } from '@mui/material';
+import { Box, Container, SxProps, Theme, Typography } from '@mui/material';
 import { useNavigate, BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { link } from 'fs';
 import { Campaign } from '../helper files/types';
-import { TitleContainer } from '../components/containers';
 import { getCampaigns } from '../helper files/getCampaigns';
 //import deepOrange from '@mui/material/colors/deepOrange'
 //import deepPurple from '@mui/material/colors/deepPurple'
@@ -35,6 +34,7 @@ export const Homepage = () => {
             alt="foodLionLogo"
             src={foodLionLogo}
             sx={{}}
+            text="Food Lion"
             text="Food Lion"
           />
           <SlayAvatar
@@ -116,7 +116,7 @@ export const SlayAvatar = (props: AvatarStyles) => {
               borderRadius: 12.5
             },
       }}>
-        
+
         <Avatar alt={alt} src={src} sx={sx} onClick={() => navigate("/dashboard", { state: { bannerId: getBannerId(props.text) } })}></Avatar>
         <Typography variant="h6" sx={{fontSize: 10}}>{text}</Typography>
       </Box>
