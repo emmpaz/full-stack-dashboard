@@ -83,18 +83,18 @@ export const SlayAvatar = (props: AvatarStyles) => {
 
   const getBannerId = (banner: string) => {
     if(banner == "Fresh Direct") {
-      return 1;
+      return "1";
     } else if (banner == "Food Lion") {
-      return 2;
+      return "2";
     } else if (banner == "Stop and Shop") {
-      return 3;
+      return "3";
     } else if (banner == "The Giant Company") {
-      return 4;
+      return "4";
     } else if (banner == "Giant") {
-      return 5;
+      return "5";
     } else if (banner == "Hannaford") {
-      return 6;
-    } else {return 0;};
+      return "6";
+    } else {return "0";};
   }
 
 
@@ -116,6 +116,7 @@ export const SlayAvatar = (props: AvatarStyles) => {
               borderRadius: 12.5
             },
       }}>
+        
         <Avatar alt={alt} src={src} sx={sx} onClick={() => navigate("/dashboard", { state: { bannerId: getBannerId(props.text) } })}></Avatar>
         <Typography variant="h6" sx={{fontSize: 10}}>{text}</Typography>
       </Box>
