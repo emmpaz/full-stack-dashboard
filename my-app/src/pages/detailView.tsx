@@ -45,8 +45,8 @@ const DetailView = () => {
     
     return(
         <div>
-            <Grid container direction="row" spacing={20} sx={{ flexGrow: 1 }}>
-                <Paper elevation={3} sx={{borderRadius: 5}}>
+            <Grid container direction="row">
+                <Paper elevation={3} sx={{borderRadius: 5, margin: 2}}>
                     <Box p={3}>
                         <Typography variant='h5'>{campaign.currentCamp.campaignName}</Typography>           
                         <Typography variant='h6'>{campaign.currentCamp.company}</Typography>
@@ -54,7 +54,7 @@ const DetailView = () => {
                         <Typography variant='body1' color='#00C832 !important'>Budget: {' $'}{campaign.currentCamp.budget}</Typography>
                     </Box>
                 </Paper>
-                <Paper elevation={3} sx={{borderRadius: 5}}>
+                <Paper elevation={3} sx={{borderRadius: 5, margin: 7}}>
                     <Box p={3}>
                         <Typography variant='h5'>Preview</Typography>
                     </Box>

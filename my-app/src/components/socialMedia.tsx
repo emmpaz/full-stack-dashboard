@@ -1,8 +1,11 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react';
+import { Campaign } from '../helper files/types';
 
 
-export const SocialMedia = () => {
+export const SocialMedia = (currentCamp: Campaign) => {
+
+
 
 
     const [socialMedia, setSocialMedia] = useState<String>("");
@@ -32,7 +35,7 @@ export const SocialMedia = () => {
         >
         <FormControl style ={{width: '100%'}} variant="standard">
               <InputLabel id="banner_id">Social Media</InputLabel>
-              <Select style ={{width: '100%'}} labelId="social_media_id" name="social_media" value={socialMedia} onChange={handleSocialChange}>
+              <Select style ={{width: '100%'}} labelId="social_media_id" name="social_media" value={currentCamp.social} onChange={handleSocialChange}>
                 <MenuItem value="Facebook">Facebook</MenuItem>
                 <MenuItem value="Instagram">Instagram</MenuItem>
                 <MenuItem value="Twitter">Twitter</MenuItem>
@@ -42,7 +45,7 @@ export const SocialMedia = () => {
 
         <FormControl style ={{width: '100%'}} variant="standard">
               <InputLabel id="banner_id">Target Audience Age Range</InputLabel>
-              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={ageRange} onChange={handleAgeChange}>
+              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={currentCamp.targetAge} onChange={handleAgeChange}>
                 <MenuItem value="Under 18">Under 18</MenuItem>
                 <MenuItem value="18-24 years old">18-24 years old</MenuItem>
                 <MenuItem value="25-34 years old">25-34 years old</MenuItem>
@@ -56,7 +59,7 @@ export const SocialMedia = () => {
 
             <FormControl style ={{width: '100%'}} variant="standard">
               <InputLabel id="banner_id">Target Audience Region</InputLabel>
-              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={region} onChange={handleRegionChange}>
+              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={currentCamp.targetRegion} onChange={handleRegionChange}>
                 <MenuItem value="DE">DE</MenuItem>
                 <MenuItem value="VA">VA</MenuItem>
                 <MenuItem value="GA">GA</MenuItem>

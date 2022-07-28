@@ -1,8 +1,9 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react';
+import { Campaign } from '../helper files/types';
 
 
-export const OnsiteOptions = () => {
+export const OnsiteOptions = (currentCamp: Campaign) => {
     const [onsiteOptions, setOnsiteOptions] = useState<String>("");
     const handleOnsiteChange = (e: any) => {
         setOnsiteOptions(e.target.value);
@@ -34,7 +35,7 @@ export const OnsiteOptions = () => {
        
         <FormControl style ={{width: '100%'}} variant="standard">
               <InputLabel id="banner_id">Onsite Options</InputLabel>
-              <Select style ={{width: '100%'}} labelId="social_media_id" name="social_media" value={onsiteOptions} onChange={handleOnsiteChange}>
+              <Select style ={{width: '100%'}} labelId="social_media_id" name="social_media" value={currentCamp.onsiteOptions} onChange={handleOnsiteChange}>
               <MenuItem value="Sponsored Product">Sponsored Product</MenuItem>
                 <MenuItem value="On-Site Creative">On-Site creative</MenuItem>
               </Select>
@@ -42,7 +43,7 @@ export const OnsiteOptions = () => {
 
             <FormControl style ={{width: '100%'}} variant="standard">
               <InputLabel id="banner_id">Website Location</InputLabel>
-              <Select style ={{width: '100%'}} labelId="social_media_id" name="social_media" value={websiteOptions} onChange={handleWebsiteChange}>
+              <Select style ={{width: '100%'}} labelId="social_media_id" name="social_media" value={currentCamp.websiteLocation} onChange={handleWebsiteChange}>
                 <MenuItem value="Homepage">Homepage</MenuItem>
                 <MenuItem value="Product Page">Product Page</MenuItem>
                 <MenuItem value="Shopping Cart">Shopping Cart</MenuItem>
@@ -51,7 +52,7 @@ export const OnsiteOptions = () => {
 
             <FormControl style ={{width: '100%'}} variant="standard">
               <InputLabel id="banner_id">Target Audience Age Range</InputLabel>
-              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={ageRange} onChange={handleAgeChange}>
+              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={currentCamp.targetAge} onChange={handleAgeChange}>
                 <MenuItem value="Under 18">Under 18</MenuItem>
                 <MenuItem value="18-24 years old">18-24 years old</MenuItem>
                 <MenuItem value="25-34 years old">25-34 years old</MenuItem>
@@ -65,7 +66,7 @@ export const OnsiteOptions = () => {
 
             <FormControl style ={{width: '100%'}} variant="standard">
               <InputLabel id="banner_id">Target Audience Region</InputLabel>
-              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={region} onChange={handleRegionChange}>
+              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={currentCamp.targetRegion} onChange={handleRegionChange}>
                 <MenuItem value="DE">DE</MenuItem>
                 <MenuItem value="VA">VA</MenuItem>
                 <MenuItem value="GA">GA</MenuItem>
