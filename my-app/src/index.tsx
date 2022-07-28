@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 import { groupCollapsed } from 'console';
-
+import './fonts/Poppins-Medium.ttf';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

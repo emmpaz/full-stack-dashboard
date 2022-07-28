@@ -251,7 +251,7 @@ const Dashboard = () => {
                 <OtherContainer> 
                     <RevContainer> 
                         <h1> Ad Rev Total </h1>
-                        <Paper> {budgetDisplay}</Paper>
+                        <Paper> $67689879</Paper>
                     </RevContainer>
                     <GraphContainer> 
                         <h1> Graph </h1>

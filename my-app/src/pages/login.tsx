@@ -5,42 +5,36 @@ import { TextField } from "@mui/material";
 import {Button, ButtonProps} from "@mui/material";
 import { purple } from '@mui/material/colors';
 import { duration, styled } from '@mui/material/styles';
-
-const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
-    color: theme.palette.getContrastText(purple[500]),
-    backgroundColor: purple[500],
-    '&:hover': {
-      backgroundColor: purple[700],
-    },
-  }));
+import '../css files/login.css';
 
   const CssTextField = styled(TextField)({
     '& label':{
         color:'darkgray'
     },
     '& .MuiInput-underline':{
-        borderBottomColor:'white'
+        borderBottomColor:'black'
     },
     '& label.Mui-focused': {
-      color: 'white',
+      color: 'darkgrey',
     },
     '& .MuiInput-underline:after': {
-      borderBottomColor: 'white',
+      borderBottomColor: 'black',
     },
   });
+
 const Login = () => {
     const navigate = useNavigate();
 
     return(
         <div>
-            <h1 className="login">Login</h1>
-            <CssTextField id="filled-basic" label="username" variant="standard"/>
+            <h1 className="login-title">Login</h1>
+            <CssTextField style={{margin:'7px'}} fullWidth id="filled-basic" label="username" variant="filled"/>
             <br></br>
-            <CssTextField type="password" id="filled-basic" label="password" variant="standard" />
+            <CssTextField style={{margin:'7px'}} fullWidth type="password" id="filled-basic" label="password" variant="filled" />
             <br></br>
-            <Button onClick={() => navigate("/swap")} style={{margin: 21}}>Submit</Button>
+            <Button onClick={() => navigate("/swap")} style={{margin: 15}} size="large">Submit</Button>
             <br></br>
-            <Button onClick={() => navigate("/createAcc")}>New User?</Button>
+            <Button onClick={() => navigate("/createAcc")} style={{margin: 15}} size="large">New User?</Button>
         </div>
     );
 }
