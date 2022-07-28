@@ -1,8 +1,9 @@
 import { Input, Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react';
+import { Campaign } from '../helper files/types';
 
 
-export const InStoreOptions = () => {
+export const InStoreOptions = (currentCamp: Campaign) => {
 
     const [inStoreOptions, setInStoreOptions] = useState<String>("");
     const handleInStoreChange = (e: any) => {
@@ -25,7 +26,7 @@ export const InStoreOptions = () => {
 
         <FormControl style ={{width: '100%'}} variant="standard">
               <InputLabel id="banner_id">In-Store Options</InputLabel>
-              <Select style ={{width: '100%'}} labelId="in_store_options_id" name="in_store_options" value={inStoreOptions} onChange={handleInStoreChange}>
+              <Select style ={{width: '100%'}} labelId="in_store_options_id" name="in_store_options" value={currentCamp.instoreOptions} onChange={handleInStoreChange}>
                 <MenuItem value="In-Store TV">In-Store TV</MenuItem>
                 <MenuItem value="POS Screen<">POS Screen</MenuItem>
               </Select>
@@ -33,7 +34,7 @@ export const InStoreOptions = () => {
 
             <FormControl style ={{width: '100%'}} variant="standard">
               <InputLabel id="banner_id">Store Location</InputLabel>
-              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={region} onChange={handleRegionChange}>
+              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={currentCamp.targetRegion} onChange={handleRegionChange}>
                 <MenuItem value="DE">DE</MenuItem>
                 <MenuItem value="VA">VA</MenuItem>
                 <MenuItem value="GA">GA</MenuItem>

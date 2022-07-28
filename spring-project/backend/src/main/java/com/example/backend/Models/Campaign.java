@@ -39,6 +39,84 @@ public class Campaign {
     @Column(name = "bannerId", nullable = false)
     private int bannerId;
 
+    @Column(name = "company", columnDefinition = "varchar(255)")
+    private String company;
+
+    @Column(name = "channel", columnDefinition = "varchar(255)") //only options: on-site, off-site, in-store
+    private String channel;
+
+    //off-site options
+    @Column(name = "social", columnDefinition = "varchar(255)") //options: facebook, instagram, twitter, youtube
+    private String social;
+    
+    @Column(name = "targetAge", columnDefinition = "varchar(255)") //for off and on-site
+    private String targetAge;
+ 
+    @Column(name = "targetRegion", columnDefinition = "varchar(255)") //for off and on-site
+    private String targetRegion;
+
+    //on-site options
+    @Column(name = "onsiteOptions", columnDefinition = "varchar(255)") 
+    private String onsiteOptions;
+
+    @Column(name = "websiteLocation", columnDefinition = "varchar(255)")
+    private String websiteLocation;
+
+    public String getWebsiteLocation() {
+        return websiteLocation;
+    }
+
+    public void setWebsiteLocation(String websiteLocation) {
+        this.websiteLocation = websiteLocation;
+    }
+
+    //in-store options
+    @Column(name = "instoreOptions", columnDefinition = "varchar(255)")
+    private String instoreOptions;
+
+    public String getInstoreOptions() {
+        return instoreOptions;
+    }
+
+    public void setInstoreOptions(String instoreOptions) {
+        this.instoreOptions = instoreOptions;
+    }
+
+    @Column(name = "storeLocation", columnDefinition = "varchar(255)")
+    private String storeLocation;
+
+    public String getStoreLocation() {
+        return storeLocation;
+    }
+
+    public void setStoreLocation(String storeLocation) {
+        this.storeLocation = storeLocation;
+    }
+
+    @Column(name = "budget")
+    private Double budget;
+
+    @Column(name = "campaign_name", columnDefinition = "varchar(255)")
+    private String campaignName;
+
+    @Column(name = "start_date", columnDefinition = "DATE")
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date startDate;
+
+    @Column(name = "end_date", columnDefinition = "DATE")
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date endDate;
+
+    @Column(name = "is_active", columnDefinition = "tinyint")
+    private Boolean isActive;
+/* 
+    @ManyToMany(mappedBy = "manager_id") //maps the user and campaign class via manager_id
+    private Set<User> users = new HashSet<>();*/
+/* 
+    @ManyToOne //maps the company to their campaigns
+    @JoinColumn(name = "company_id")
+    private Company company;*/
+
     public int getBannerId() {
         return bannerId;
     }
@@ -79,36 +157,6 @@ public class Campaign {
         this.budget = budget;
     }
 
-    @Column(name = "company", columnDefinition = "varchar(255)")
-    private String company;
-
-    @Column(name = "channel", columnDefinition = "varchar(255)")
-    private String channel;
-
-    @Column(name = "budget")
-    private Double budget;
-
-    @Column(name = "campaign_name", columnDefinition = "varchar(255)")
-    private String campaignName;
-
-    @Column(name = "start_date", columnDefinition = "DATE")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date startDate;
-
-    @Column(name = "end_date", columnDefinition = "DATE")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date endDate;
-
-    @Column(name = "is_active", columnDefinition = "tinyint")
-    private Boolean isActive;
-/* 
-    @ManyToMany(mappedBy = "manager_id") //maps the user and campaign class via manager_id
-    private Set<User> users = new HashSet<>();*/
-/* 
-    @ManyToOne //maps the company to their campaigns
-    @JoinColumn(name = "company_id")
-    private Company company;*/
-
     public Long getCampaignId() {
         return campaignId;
     }
@@ -141,10 +189,6 @@ public class Campaign {
         return startDate;
     }
 
-  /*   public Boolean isActive() {
-        return isActive;
-    }*/
-
     public Date getEndDate() {
         return endDate;
     }
@@ -160,8 +204,37 @@ public class Campaign {
     public void setEndDate(Date date) {
         this.endDate = date;
     }
-    /* 
-    public void setActivity(Boolean newActivity) {
-        this.isActive = newActivity;
-    }*/
+
+    public String getSocial() {
+        return social;
+    }
+
+    public void setSocial(String social) {
+        this.social = social;
+    }
+
+    public String getTargetAge() {
+        return targetAge;
+    }
+
+    public void setTargetAge(String targetAge) {
+        this.targetAge = targetAge;
+    }
+
+    public String getTargetRegion() {
+        return targetRegion;
+    }
+
+    public void setTargetRegion(String targetRegion) {
+        this.targetRegion = targetRegion;
+    }
+
+    public String getOnsiteOptons() {
+        return onsiteOptions;
+    }
+
+    public void setOnsiteOptions(String onsiteOptions) {
+        this.onsiteOptions = onsiteOptions;
+    }
+    
 }

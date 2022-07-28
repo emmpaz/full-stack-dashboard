@@ -10,6 +10,14 @@ export type Campaign = {
     startDate: Date;
     endDate: Date;
     isActive: Boolean;
+
+    social: String;
+    targetAge: String;
+    targetRegion: String;
+    onsiteOptions: String;
+    websiteLocation: String;
+    instoreOptions: String;
+    storeLocation: String;
 }
 
 export type User = {

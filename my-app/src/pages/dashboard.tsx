@@ -64,23 +64,23 @@ const Dashboard = () => {
 
     //active and archived states
     const [isActive, setActive] = useState<Boolean>(true);
-    
-    const [budgetDisplay, setBudgetDisplay] = useState<number>(0);
-    var budgetTotal = 0;
+
+
     useEffect(() => {
         if (isMount) {
             //fetchCampaigns("active");
+            fetchCampaigns("active", initBannerId);
            // let tmpBanner: string = bannerId as string;
             //fetchCampaignsByBanner(tmpBanner);
             console.log('fetching');
-            fetchCampaignsByBanner(initBannerId);
+            //fetchCampaignsByBanner(initBannerId);
         } else {
         console.log('Subsequent Render');
         }
   });
 
-    const fetchCampaigns = (active_or_not: String) => {
-        axios.get(`https://ps-springboot.azurewebsites.net/${active_or_not}_campaigns`).then((res) => {
+    const fetchCampaigns = (active_or_not: String, initBannerId : any) => {
+        axios.get(`https://ps-springboot.azurewebsites.net/${active_or_not}_campaigns/${initBannerId}`).then((res) => {
         console.log(res);
         setList(res.data);
         setCampaigns(res.data);
@@ -120,7 +120,7 @@ const Dashboard = () => {
             setSpend(sortSpendState[2])
             
             setActive(!isActive)
-            fetchCampaigns("active")
+            fetchCampaigns("active", initBannerId)
         }
         else{
             setDate(sortDateState[2])
@@ -128,7 +128,7 @@ const Dashboard = () => {
             setSpend(sortSpendState[2])
 
             setActive(!isActive)
-            fetchCampaigns("archived")
+            fetchCampaigns("archived", initBannerId)
         }
     }
 
@@ -139,7 +139,7 @@ const Dashboard = () => {
             setSpend(sortSpendState[2])
 
             setActive(!isActive)
-            fetchCampaigns("active")
+            fetchCampaigns("active", initBannerId)
         }
     }
 

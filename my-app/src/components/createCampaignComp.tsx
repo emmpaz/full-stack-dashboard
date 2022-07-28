@@ -17,6 +17,14 @@ const defaultCampaign: Campaign = {
     startDate: new Date(2022-12-12),
     endDate: new Date(2023-1-12),
     isActive: true,
+
+    social: '',
+    targetAge: '',
+    targetRegion: '',
+    onsiteOptions: '',
+    websiteLocation: '',
+    instoreOptions: '',
+    storeLocation: '',
 }
 
 export const CreateCampaignComp = () => {
@@ -33,13 +41,13 @@ export const CreateCampaignComp = () => {
         });
         if(name === "channel"){
           if(value == "Off-Site"){
-            setchannelSelectionOption(<SocialMedia/>);
+            setchannelSelectionOption(<SocialMedia {...newCampaign}/>);
           }
           else if(value == "On-Site"){
-            setchannelSelectionOption(<OnsiteOptions/>);
+            setchannelSelectionOption(<OnsiteOptions {...newCampaign}/>);
           }
           else if(value == "In-Store"){
-            setchannelSelectionOption(<InStoreOptions/>);
+            setchannelSelectionOption(<InStoreOptions {...newCampaign}/>);
           }
           
         }
