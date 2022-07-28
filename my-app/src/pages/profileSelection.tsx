@@ -12,55 +12,92 @@ import { getCampaigns } from '../helper files/getCampaigns';
 import { TitleContainer } from '../components/containers';
 //import deepOrange from '@mui/material/colors/deepOrange'
 //import deepPurple from '@mui/material/colors/deepPurple'
-
+import '../css files/profile-selection.css';
+import { fontFamily } from '@mui/system';
 export const Homepage = () => {
   const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
 
   return (
-    <div>
-      <TitleContainer>
-      <Box sx={{ float: 'right', minWidth: 120 }}>
-      <Button sx={{ color: '#00C832 !important' }} value="7">Logout</Button>
-     </Box>
-      </TitleContainer>
 
+    <div className="profile-background">
+      <div className="logout">
+        <Box sx={{
+          margin: '30px 60px 0 0'
+        }}>
+          <Button sx={{ 
+            color: '#00C832 !important',
+            margin: 'top 50px',
+            fontFamily: "PoppinsMedium",
+            }} value="7">Logout</Button>
+        </Box>
+      </div>
         <CenterContentDiv>
-          <SlayAvatar
-            alt="freshDirect"
-            src={freshDirectLogo}
-            sx={{}}
-            text="Fresh Direct"
-          />
-          <SlayAvatar
-            alt="foodLionLogo"
-            src={foodLionLogo}
-            sx={{}}
-            text="Food Lion"
-          />
-          <SlayAvatar
-            alt="stopAndShop"
-            src={hannafordLogo}
-            sx={{}}
-            text="Stop and Shop"
-          />
-          <SlayAvatar
-            alt="The Giant Company"
-            src={hannafordLogo}
-            sx={{}}
-            text="The Giant Company"
-          />
-          <SlayAvatar
-            alt="Giant"
-            src={hannafordLogo}
-            sx={{}}
-            text="Giant"
-          />
-          <SlayAvatar
-            alt="hannaford"
-            src={hannafordLogo}
-            sx={{}}
-            text="Hannaford"
-          />
+          <div>
+            <SlayAvatar
+              alt="freshDirect"
+              src={freshDirectLogo}
+              sx={{
+                height:150,
+                width:150
+              }}
+              text="Fresh Direct"
+            />
+          </div>
+          <div>
+            <SlayAvatar
+              alt="foodLionLogo"
+              src={foodLionLogo}
+              sx={{
+                height:150,
+                width:150
+              }}
+              text="Food Lion"
+            />
+          </div>
+          <div>
+            <SlayAvatar
+              alt="stopAndShop"
+              src={hannafordLogo}
+              sx={{
+                height:150,
+                width:150
+              }}
+              text="Stop and Shop"
+            />
+          </div>
+          <div>
+            <SlayAvatar
+              alt="The Giant Company"
+              src={hannafordLogo}
+              sx={{
+                height:150,
+                width:150
+              }}
+              text="The Giant Company"
+            />
+          </div>
+          <div>
+            <SlayAvatar
+              alt="Giant"
+              src={hannafordLogo}
+              sx={{
+                height:150,
+                width:150
+              }}
+              text="Giant"
+            />
+          </div>
+          <div>
+            <SlayAvatar
+              alt="hannaford"
+              src={hannafordLogo}
+              sx={{
+                height:150,
+                width:150
+              }}
+              text="Hannaford"
+            />
+          </div>
         </CenterContentDiv>
         </div>
          );
@@ -118,7 +155,11 @@ export const SlayAvatar = (props: AvatarStyles) => {
       }}>
 
         <Avatar alt={alt} src={src} sx={sx} onClick={() => navigate("/dashboard", { state: { bannerId: getBannerId(props.text) } })}></Avatar>
-        <Typography variant="h6" sx={{fontSize: 10}}>{text}</Typography>
+        <Typography variant="h1" sx={{
+          fontSize: 20,
+          fontFamily: "PoppinsMedium",
+          color: "white",
+          margin: '10px'}}>{text}</Typography>
       </Box>
   )
 }
