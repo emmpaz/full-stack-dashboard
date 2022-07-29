@@ -35,13 +35,7 @@ public class User {
 
     @Column(name="password", nullable = false, columnDefinition = "varchar(255)")
     private String password;
-/* 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "users",
-        joinColumns = { @JoinColumn(name = "id") },
-        inverseJoinColumns = { @JoinColumn(name = "manager_id") }
-    )*/
+
 
     public String getUsername() {
         return username;

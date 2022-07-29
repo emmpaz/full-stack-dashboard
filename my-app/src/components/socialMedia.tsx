@@ -12,7 +12,6 @@ export const SocialMedia = (currentCamp: Campaign) => {
     const handleSocialChange = (e: any) => {
         setSocialMedia(e.target.value);
     }
-
     const [ageRange, setAgeRange] = useState<String>("");
     const handleAgeChange = (event : any) => {
         setAgeRange(event.target.value)
