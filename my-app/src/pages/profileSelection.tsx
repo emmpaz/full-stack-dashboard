@@ -4,11 +4,13 @@ import freshDirectLogo from '../assets/images/freshDirect.jpg';
 import hannafordLogo from '../assets/images/hannaford.png';
 //import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-import { Box, Container, SxProps, Theme, Typography } from '@mui/material';
+import { Button, Box, Container, SxProps, Theme, Typography } from '@mui/material';
 import { useNavigate, BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { link } from 'fs';
 import { Campaign } from '../helper files/types';
 import { getCampaigns } from '../helper files/getCampaigns';
+import Header from '../components/header';
+import { TitleContainer } from '../components/containers';
 //import deepOrange from '@mui/material/colors/deepOrange'
 //import deepPurple from '@mui/material/colors/deepPurple'
 
@@ -17,6 +19,7 @@ export const Homepage = () => {
 
   return (
     <div>
+      <Header></Header>
       <TitleContainer>
       <Box sx={{ float: 'right', minWidth: 120 }}>
       <Button sx={{ color: '#00C832 !important' }} value="7">Logout</Button>
@@ -34,7 +37,6 @@ export const Homepage = () => {
             alt="foodLionLogo"
             src={foodLionLogo}
             sx={{}}
-            text="Food Lion"
             text="Food Lion"
           />
           <SlayAvatar

@@ -2,6 +2,9 @@ import React from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import CreateAccountComp from "../components/createAccountComp";
+import Header from '../components/header';
+import { TitleContainer } from '../components/containers';
+import '../css files/createAcc.css';
 
 const CreateAccount = () => {
     const navigate = useNavigate();
@@ -20,8 +23,17 @@ const CreateAccount = () => {
 
     return(
         <div>
-            <h1>Create New Account</h1>
-            <CreateAccountComp />
+             <Header></Header>
+            <div>
+               
+                   
+                
+            
+                <div>
+                    <h1>Create New Account</h1>
+                        <CreateAccountComp />
+                </div>
+            </div>
         </div>
     );
 };
