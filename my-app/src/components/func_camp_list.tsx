@@ -19,7 +19,7 @@ export const CampListItem = (props: {
             sx={{
                 width: '100%',
                 p: 3.5,
-                margin: 'auto'
+                margin: '3.5px'
             }}
             >
                 <Grid container spacing={6}>
