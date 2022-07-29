@@ -7,19 +7,12 @@ import giantLogo from '../assets/images/giant.png';
 import stopShopLogo from '../assets/images/stop&shop.png';
 //import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-<<<<<<< HEAD
 import { Button, Box, Container, SxProps, Theme, Typography } from '@mui/material';
-=======
-import { Box, Button, Container, SxProps, Theme, Typography } from '@mui/material';
->>>>>>> 66fa042740d0faf9a65f83641d4a0a8914fd99a9
 import { useNavigate, BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import { Campaign } from '../helper files/types';
 import { getCampaigns } from '../helper files/getCampaigns';
-<<<<<<< HEAD
 import Header from '../components/header';
-=======
->>>>>>> 66fa042740d0faf9a65f83641d4a0a8914fd99a9
 import { TitleContainer } from '../components/containers';
 //import deepOrange from '@mui/material/colors/deepOrange'
 //import deepPurple from '@mui/material/colors/deepPurple'
@@ -29,53 +22,6 @@ export const Homepage = () => {
   const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
 
   return (
-<<<<<<< HEAD
-    <div>
-      <Header></Header>
-      <TitleContainer>
-      <Box sx={{ float: 'right', minWidth: 120 }}>
-      <Button sx={{ color: '#00C832 !important' }} value="7">Logout</Button>
-     </Box>
-      </TitleContainer>
-
-        <CenterContentDiv>
-          <SlayAvatar
-            alt="freshDirect"
-            src={freshDirectLogo}
-            sx={{}}
-            text="Fresh Direct"
-          />
-          <SlayAvatar
-            alt="foodLionLogo"
-            src={foodLionLogo}
-            sx={{}}
-            text="Food Lion"
-          />
-          <SlayAvatar
-            alt="stopAndShop"
-            src={hannafordLogo}
-            sx={{}}
-            text="Stop and Shop"
-          />
-          <SlayAvatar
-            alt="The Giant Company"
-            src={hannafordLogo}
-            sx={{}}
-            text="The Giant Company"
-          />
-          <SlayAvatar
-            alt="Giant"
-            src={hannafordLogo}
-            sx={{}}
-            text="Giant"
-          />
-          <SlayAvatar
-            alt="hannaford"
-            src={hannafordLogo}
-            sx={{}}
-            text="Hannaford"
-          />
-=======
     <div className="profile-background">
       <div className="logout">
         <Box sx={{
@@ -186,7 +132,6 @@ export const Homepage = () => {
               text="Hannaford"
             />
           </div>
->>>>>>> 66fa042740d0faf9a65f83641d4a0a8914fd99a9
         </CenterContentDiv>
         </div>
          );

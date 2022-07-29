@@ -1,0 +1,9 @@
+.detailedView-background{
+    width: 100%;
+    height: 100vh;
+}
+
+.header{
+    width: fit-content;
+    float: right;
+}

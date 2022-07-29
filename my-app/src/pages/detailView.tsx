@@ -1,11 +1,12 @@
-import { Box, Paper, Typography, BoxProps, Grid, checkboxClasses } from '@mui/material';
+import { Box, Paper, Typography, BoxProps, Grid, checkboxClasses, Fab } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { CampaignContainer, GraphContainer } from '../components/containers';
 import { CampListItem } from '../components/func_camp_list';
 import { Campaign } from '../helper files/types';
-
+import '../css files/detailedView.css';
+import CloseIcon from '@mui/icons-material/Close';
 const DetailView = () => {
     const { state } = useLocation();
     const campaign = state as any;
@@ -44,7 +45,17 @@ const DetailView = () => {
     
     
     return(
-        <div>
+        <div className="detailedView-background">
+            <div>
+                <div className="header">
+                    <Fab style={{
+                        marginRight: '30px',
+                        marginTop: '30px'
+                    }}>
+                        <CloseIcon />
+                    </Fab>
+                </div>
+            </div>
             <Grid container direction="row">
                 <Paper elevation={3} sx={{borderRadius: 5, margin: 2}}>
                     <Box p={3}>
