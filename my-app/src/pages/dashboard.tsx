@@ -12,7 +12,7 @@ import { Paper } from '@mui/material';
 import { Box, InputLabel, MenuItem, FormControl } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Campaign } from '../helper files/types';
-import {Button} from "@mui/material";
+import {Button, IconButton} from "@mui/material";
 import {useIsMount} from '../helper files/mounting';
 import { compare_by_date, compare_by_name, compare_by_budget, compare_by_name_reversed, compare_by_date_reversed, compare_by_budget_reversed} from '../helper files/comparators';
 import { CampListItem } from '../components/func_camp_list';
@@ -94,6 +94,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         if (isMount) {
+            //fetchCampaigns("active");
             fetchCampaigns("active", initBannerId);
            // let tmpBanner: string = bannerId as string;
             //fetchCampaignsByBanner(tmpBanner);
@@ -269,15 +270,15 @@ const Dashboard = () => {
                         <Button variant={(sortDate === end_date_down || sortDate === end_date_up) ? "contained": "text"} onClick={sortEndDateHandler} style={{margin: 21}}>{(sortDate === "default") ? end_date_down : sortDate}</Button>
                         <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>
                         <div className='camp-container' style={{display:'grid'}} >
-                            {myCampaigns.map((campaign) => (
-                                <Box onClick={() => navigate("/detailView", { state: { currentCamp: campaign }})}>
-                                <CampListItem
-
-                                    year="2022"
-                                    title={campaign.campaignName.toString()}
-                                    budget={campaign.budget.toString()}
-                                    end={campaign.endDate.toString()} /></Box>
-                            ))}
+                            {myCampaigns.map((campaign) => {
+                                return(
+                                    <Box onClick={() => navigate("/detailView", { state: { currentCamp: campaign }})}>
+                                    <CampListItem
+                                        year="2022"
+                                        title={campaign.campaignName.toString()}
+                                        budget={campaign.budget.toString()}
+                                        end={campaign.endDate.toString()} /></Box>
+                            )})}
                         </div>
                     </div>
                 </CampaignContainer>
