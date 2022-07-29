@@ -7,11 +7,12 @@ import giantLogo from '../assets/images/giant.png';
 import stopShopLogo from '../assets/images/stop&shop.png';
 //import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-import { Box, Container, SxProps, Theme, Typography, Button } from '@mui/material';
+import { Box, Button, Container, SxProps, Theme, Typography } from '@mui/material';
 import { useNavigate, BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import { Campaign } from '../helper files/types';
-
+import { getCampaigns } from '../helper files/getCampaigns';
+import { TitleContainer } from '../components/containers';
 //import deepOrange from '@mui/material/colors/deepOrange'
 //import deepPurple from '@mui/material/colors/deepPurple'
 import '../css files/profile-selection.css';
