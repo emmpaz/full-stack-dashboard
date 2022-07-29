@@ -65,18 +65,31 @@ const Dashboard = () => {
     //active and archived states
     const [isActive, setActive] = useState<Boolean>(true);
 
-    var budgetTotal = 0;
+   // var budgetTotal = 0.00;
+    var budgetTotal = calculateClientRevenue(initBannerId);
     var calculated = false;
     
-    function calculateClientRevenue(): number {
-        myCampaigns.forEach( (element) => {
-            if(element.bannerId == initBannerId) {
-                budgetTotal += element.budget;
+    function calculateClientRevenue(tmpBannerId: number): number {
+        var bannerBudget = 0;
+        /*myCampaigns.forEach( (element) => {
+            if(element.bannerId == tmpBannerId) {
+                bannerBudget=bannerBudget+element.budget;
+                console.log(element.budget);
             }
+        })*/
+        myCampaigns.forEach( (element) => {
+            bannerBudget+=element.budget;
         })
         calculated = true;
+        console.log(bannerBudget);
+        budgetTotal = bannerBudget;
+        return budgetTotal
+        //updateBudget();
+    };
+
+    function updateBudget(): number {
         return budgetTotal;
-    }
+    };
 
 
     useEffect(() => {
@@ -85,6 +98,10 @@ const Dashboard = () => {
            // let tmpBanner: string = bannerId as string;
             //fetchCampaignsByBanner(tmpBanner);
             console.log('fetching');
+            if(!calculated) {
+                console.log(initBannerId);
+                calculateClientRevenue(initBannerId);
+            }
             //fetchCampaignsByBanner(initBannerId);
         } else {
         console.log('Subsequent Render');
@@ -119,6 +136,10 @@ const Dashboard = () => {
             navigate("/login");
         }
         fetchCampaignsByBanner(event.target.value);
+        var tmpNum = Number(event.target.value);
+        console.log(tmpNum);
+        calculateClientRevenue(tmpNum);
+        
     }
 
     const bannerSelectOnLoad = (bannerId: String) => {
@@ -263,7 +284,9 @@ const Dashboard = () => {
                 <OtherContainer> 
                     <RevContainer> 
                         <h1> Ad Rev Total </h1>
-                        <Paper> ${calculateClientRevenue()} </Paper>
+                        <Paper>
+                           ${budgetTotal}
+                        </Paper>
                     </RevContainer>
                     <GraphContainer> 
                         <h1> Graph </h1>
