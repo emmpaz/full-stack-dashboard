@@ -65,6 +65,19 @@ const Dashboard = () => {
     //active and archived states
     const [isActive, setActive] = useState<Boolean>(true);
 
+    var budgetTotal = 0;
+    var calculated = false;
+    
+    function calculateClientRevenue(): number {
+        myCampaigns.forEach( (element) => {
+            if(element.bannerId == initBannerId) {
+                budgetTotal += element.budget;
+            }
+        })
+        calculated = true;
+        return budgetTotal;
+    }
+
 
     useEffect(() => {
         if (isMount) {
@@ -250,7 +263,7 @@ const Dashboard = () => {
                 <OtherContainer> 
                     <RevContainer> 
                         <h1> Ad Rev Total </h1>
-                        <Paper> $19,242,293 </Paper>
+                        <Paper> ${calculateClientRevenue()} </Paper>
                     </RevContainer>
                     <GraphContainer> 
                         <h1> Graph </h1>
