@@ -36,6 +36,7 @@ export const CreateCampaignComp = () => {
     var initBannerId = (state as any).bannerId;
     
     const componentHandler = (name :any, value : any) => {
+      console.log("called handler");
       setNewCampaign({
         ...newCampaign,
         [name] :value,
@@ -53,7 +54,6 @@ export const CreateCampaignComp = () => {
         });
 
         if(name === "channel"){
-          console.log("called");
           if(value == "Off-Site"){
             setchannelSelectionOption(<SocialMedia change={componentHandler} currentCamp={newCampaign}/>);
           }

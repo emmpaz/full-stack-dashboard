@@ -74,8 +74,13 @@ export const OnsiteOptions = (props:{currentCamp: Campaign, change : (name:any, 
             </FormControl>
 
             <FormControl style ={{width: '100%'}} variant="standard">
+<<<<<<< HEAD
               <InputLabel id="banner_id">Target Audience Region</InputLabel>
               <Select style ={{width: '100%'}} labelId="region_id" name="region" value={region} onChange={handleRegionChange}>
+=======
+              <InputLabel id="region_id">Target Audience Region</InputLabel>
+              <Select style ={{width: '100%'}} labelId="region_id" name="targetRegion" value={region} onChange={handleRegionChange}>
+>>>>>>> 7d8a61d63902d90acd6aaaf68e65afb71786f57f
                 <MenuItem value="DE">DE</MenuItem>
                 <MenuItem value="VA">VA</MenuItem>
                 <MenuItem value="GA">GA</MenuItem>
