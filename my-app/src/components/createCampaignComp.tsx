@@ -5,6 +5,7 @@ import { Campaign } from '../helper files/types';
 import { OnsiteOptions } from './OnsiteOptions';
 import { InStoreOptions } from './InStoreOptions';
 import { SocialMedia } from './socialMedia';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const defaultCampaign: Campaign = {
     managerId: 123,
@@ -28,9 +29,11 @@ const defaultCampaign: Campaign = {
 }
 
 export const CreateCampaignComp = () => {
-    const [newCampaign, setNewCampaign] = useState<Campaign>(defaultCampaign)
-    
+    const [newCampaign, setNewCampaign] = useState<Campaign>(defaultCampaign)   
     const [channelSelectionOption, setchannelSelectionOption] = useState<JSX.Element>();
+
+    const { state } = useLocation();
+    var initBannerId = (state as any).bannerId;
     
     const componentHandler = (name :any, value : any) => {
       setNewCampaign({
@@ -38,6 +41,8 @@ export const CreateCampaignComp = () => {
         [name] :value,
       })
     }
+
+    const navigate = useNavigate();
   
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
@@ -88,6 +93,8 @@ export const CreateCampaignComp = () => {
                 console.log(res);
                 console.log(res.data);
             })
+
+        navigate("/dashboard", {state: {bannerId: initBannerId}});
     }
 
     return (

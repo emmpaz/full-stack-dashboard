@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Box, Button, Input } from '@mui/material';
 import { User } from '../helper files/types';
+import { useNavigate } from 'react-router-dom';
 
 const defaultUser: User = {
     firstname: '',
@@ -12,6 +13,10 @@ const defaultUser: User = {
 
 export const CreateAccountComp = () => {
     const [newUser, setNewUser] = useState<User>(defaultUser)
+
+    const navigate = useNavigate();
+
+    
 
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
@@ -29,6 +34,8 @@ export const CreateAccountComp = () => {
                 console.log(res);
                 console.log(res.data);
             })
+
+            navigate("/login");
     }
 
     return (
