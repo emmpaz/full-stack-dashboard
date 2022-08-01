@@ -3,23 +3,29 @@ import React, { useState } from 'react';
 import { Campaign } from '../helper files/types';
 
 
-export const SocialMedia = (currentCamp: Campaign) => {
+export const SocialMedia = (props: {currentCamp: Campaign, change : (name:any, value:any) => void}) => {
 
 
 
 
     const [socialMedia, setSocialMedia] = useState<String>("");
     const handleSocialChange = (e: any) => {
+        const {name , value} = e.target;
+        props.change(name, value);
         setSocialMedia(e.target.value);
     }
     const [ageRange, setAgeRange] = useState<String>("");
-    const handleAgeChange = (event : any) => {
-        setAgeRange(event.target.value)
+    const handleAgeChange = (e : any) => {
+        const {name , value} = e.target;
+        props.change(name, value);
+        setAgeRange(e.target.value)
     }
 
     const [region, setRegion] = useState<String>("");
-    const handleRegionChange = (event : any) => {
-        setRegion(event.target.value)
+    const handleRegionChange = (e : any) => {
+        const {name , value} = e.target;
+        props.change(name, value);
+        setRegion(e.target.value);
     }
 
 
@@ -33,8 +39,8 @@ export const SocialMedia = (currentCamp: Campaign) => {
         autoComplete="off"
         >
         <FormControl style ={{width: '100%'}} variant="standard">
-              <InputLabel id="banner_id">Social Media</InputLabel>
-              <Select style ={{width: '100%'}} labelId="social_media_id" name="social_media" value={currentCamp.social} onChange={handleSocialChange}>
+              <InputLabel id="social_id">Social Media</InputLabel>
+              <Select style ={{width: '100%'}} labelId="social_media_id" name="social" value={socialMedia} onChange={handleSocialChange}>
                 <MenuItem value="Facebook">Facebook</MenuItem>
                 <MenuItem value="Instagram">Instagram</MenuItem>
                 <MenuItem value="Twitter">Twitter</MenuItem>
@@ -43,8 +49,8 @@ export const SocialMedia = (currentCamp: Campaign) => {
             </FormControl>
 
         <FormControl style ={{width: '100%'}} variant="standard">
-              <InputLabel id="banner_id">Target Audience Age Range</InputLabel>
-              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={currentCamp.targetAge} onChange={handleAgeChange}>
+              <InputLabel id="age_id">Target Audience Age Range</InputLabel>
+              <Select style ={{width: '100%'}} labelId="age_id" name="targetAge" value={ageRange} onChange={handleAgeChange}>
                 <MenuItem value="Under 18">Under 18</MenuItem>
                 <MenuItem value="18-24 years old">18-24 years old</MenuItem>
                 <MenuItem value="25-34 years old">25-34 years old</MenuItem>
@@ -57,8 +63,8 @@ export const SocialMedia = (currentCamp: Campaign) => {
             </FormControl>
 
             <FormControl style ={{width: '100%'}} variant="standard">
-              <InputLabel id="banner_id">Target Audience Region</InputLabel>
-              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={currentCamp.targetRegion} onChange={handleRegionChange}>
+              <InputLabel id="region_id">Target Audience Region</InputLabel>
+              <Select style ={{width: '100%'}} labelId="region_id" name="targetRegion" value={region} onChange={handleRegionChange}>
                 <MenuItem value="DE">DE</MenuItem>
                 <MenuItem value="VA">VA</MenuItem>
                 <MenuItem value="GA">GA</MenuItem>

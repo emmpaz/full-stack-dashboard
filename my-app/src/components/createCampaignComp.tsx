@@ -32,22 +32,31 @@ export const CreateCampaignComp = () => {
     
     const [channelSelectionOption, setchannelSelectionOption] = useState<JSX.Element>();
     
+    const componentHandler = (name :any, value : any) => {
+      setNewCampaign({
+        ...newCampaign,
+        [name] :value,
+      })
+    }
   
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
+
         setNewCampaign({
           ...newCampaign,
           [name]: value,
         });
+
         if(name === "channel"){
+          console.log("called");
           if(value == "Off-Site"){
-            setchannelSelectionOption(<SocialMedia {...newCampaign}/>);
+            setchannelSelectionOption(<SocialMedia change={componentHandler} currentCamp={newCampaign}/>);
           }
           else if(value == "On-Site"){
-            setchannelSelectionOption(<OnsiteOptions {...newCampaign}/>);
+            setchannelSelectionOption(<OnsiteOptions change={componentHandler} currentCamp={newCampaign}/>);
           }
           else if(value == "In-Store"){
-            setchannelSelectionOption(<InStoreOptions {...newCampaign}/>);
+            setchannelSelectionOption(<InStoreOptions change={componentHandler} currentCamp={newCampaign}/>);
           }
           
         }
@@ -114,7 +123,8 @@ export const CreateCampaignComp = () => {
                 <MenuItem value="On-Site">On-Site</MenuItem>
                 <MenuItem value="Off-Site">Off-Site</MenuItem>
                 <MenuItem value="In-Store">In-Store</MenuItem>
-            </Select></FormControl> <br />
+              </Select>
+            </FormControl> <br />
             {channelSelectionOption}
             <Button type="submit" onClick={handleSubmit}>Submit</Button>
         </Box>

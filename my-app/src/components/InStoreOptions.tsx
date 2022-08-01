@@ -3,16 +3,20 @@ import React, { useState } from 'react';
 import { Campaign } from '../helper files/types';
 
 
-export const InStoreOptions = (currentCamp: Campaign) => {
+export const InStoreOptions = (props:{currentCamp: Campaign, change : (name:any, value:any) => void}) => {
 
     const [inStoreOptions, setInStoreOptions] = useState<String>("");
     const handleInStoreChange = (e: any) => {
+        const {name , value} = e.target;
+        props.change(name, value);
         setInStoreOptions(e.target.value);
     }
 
     const [region, setRegion] = useState<String>("");
-    const handleRegionChange = (event : any) => {
-        setRegion(event.target.value)
+    const handleRegionChange = (e : any) => {
+      const {name , value} = e.target;
+      props.change(name, value);
+      setRegion(e.target.value);
     }
 
     return(
@@ -25,16 +29,16 @@ export const InStoreOptions = (currentCamp: Campaign) => {
         autoComplete="off">
 
         <FormControl style ={{width: '100%'}} variant="standard">
-              <InputLabel id="banner_id">In-Store Options</InputLabel>
-              <Select style ={{width: '100%'}} labelId="in_store_options_id" name="in_store_options" value={currentCamp.instoreOptions} onChange={handleInStoreChange}>
+              <InputLabel id="instore_id">In-Store Options</InputLabel>
+              <Select style ={{width: '100%'}} labelId="in_store_options_id" name="instoreOptions" value={inStoreOptions} onChange={handleInStoreChange}>
                 <MenuItem value="In-Store TV">In-Store TV</MenuItem>
                 <MenuItem value="POS Screen<">POS Screen</MenuItem>
               </Select>
             </FormControl>
 
             <FormControl style ={{width: '100%'}} variant="standard">
-              <InputLabel id="banner_id">Store Location</InputLabel>
-              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={currentCamp.targetRegion} onChange={handleRegionChange}>
+              <InputLabel id="region_id">Store Location</InputLabel>
+              <Select style ={{width: '100%'}} labelId="region_id" name="targetRegion" value={region} onChange={handleRegionChange}>
                 <MenuItem value="DE">DE</MenuItem>
                 <MenuItem value="VA">VA</MenuItem>
                 <MenuItem value="GA">GA</MenuItem>

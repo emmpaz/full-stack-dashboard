@@ -8,10 +8,13 @@ import { Campaign } from '../helper files/types';
 import '../css files/detailedView.css';
 import CloseIcon from '@mui/icons-material/Close';
 import aholdLogo from '../assets/images/transparentAhold.png';
+import { useNavigate } from 'react-router-dom';
+
 const DetailView = () => {
     const { state } = useLocation();
     const campaign = state as any;
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+    const navigate = useNavigate();
 
     var clientAdRev = 0;
     var calculated = false;
@@ -53,7 +56,7 @@ const DetailView = () => {
                     <Fab style={{
                         marginRight: '30px',
                         marginTop: '30px'
-                    }}>
+                    }} onClick={() => navigate("/dashboard", {state: {bannerId : campaign.currentCamp.bannerId}})}>
                         <CloseIcon />
                     </Fab>
                 </div>
