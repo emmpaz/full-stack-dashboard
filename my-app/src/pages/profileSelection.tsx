@@ -41,8 +41,8 @@ export const Homepage = () => {
               alt="freshDirect"
               src={freshDirectLogo}
               sx={{
-                height:150,
-                width:150,
+                height:'75%',
+                width:'75%',
                 marginBottom: '25px',
                 transition: "all .2s ease-in-out",
                 "&:hover":{
@@ -57,8 +57,8 @@ export const Homepage = () => {
               alt="foodLionLogo"
               src={foodLionLogo}
               sx={{
-                height:150,
-                width:150,
+                height:'75%',
+                width:'75%',
                 marginBottom: '25px',
                 transition: "all .2s ease-in-out",
                 "&:hover":{
@@ -73,8 +73,8 @@ export const Homepage = () => {
               alt="stopAndShop"
               src={stopShopLogo}
               sx={{
-                height:150,
-                width:150,
+                height:'75%',
+                width:'75%',
                 marginBottom: '25px',
                 transition: "all .2s ease-in-out",
                 "&:hover":{
@@ -89,8 +89,8 @@ export const Homepage = () => {
               alt="The Giant Company"
               src={giantCompanyLogo}
               sx={{
-                height:150,
-                width:150,
+                height:'75%',
+                width:'75%',
                 marginBottom: '25px',
                 transition: "all .2s ease-in-out",
                 "&:hover":{
@@ -105,8 +105,8 @@ export const Homepage = () => {
               alt="Giant"
               src={giantLogo}
               sx={{
-                height:150,
-                width:150,
+                height:'75%',
+                width:'75%',
                 marginBottom: '25px',
                 transition: "all .2s ease-in-out",
                 "&:hover":{
@@ -121,8 +121,8 @@ export const Homepage = () => {
               alt="hannaford"
               src={hannafordLogo}
               sx={{
-                height:150,
-                width:150,
+                height:'75%',
+                width:'75%',
                 marginBottom: '25px',
                 transition: "all .2s ease-in-out",
                 "&:hover":{
