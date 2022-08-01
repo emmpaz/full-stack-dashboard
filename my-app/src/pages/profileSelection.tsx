@@ -181,7 +181,7 @@ export const SlayAvatar = (props: AvatarStyles) => {
           flexDirection: 'column', 
           m: 1,
           p: 1,
-          width: '200px',
+          width: '70%',
           "&:hover":
             {
             
