@@ -9,12 +9,15 @@ import '../css files/detailedView.css';
 import CloseIcon from '@mui/icons-material/Close';
 import aholdLogo from '../assets/images/transparentAhold.png';
 import { useNavigate } from 'react-router-dom';
+import { OnSiteOptions, WebLocation, TargetAge, TargetRegion, SocialMedia, InStoreOptions, StoreLocation } from '../helper files/channelHelper';
 
 const DetailView = () => {
     const { state } = useLocation();
     const campaign = state as any;
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
     const navigate = useNavigate();
+
+    const [channelSelectionOption, setchannelSelectionOption] = useState<JSX.Element>();
 
     var clientAdRev = 0;
     var calculated = false;
@@ -28,6 +31,16 @@ const DetailView = () => {
         calculated = true;
         return clientAdRev;
     }
+
+
+    function setChannelInfo(): string {
+        var currentChannel = campaign.currentCamp.channel;
+        if(currentChannel == "On-Site") {
+
+        };
+        
+        return " ";
+    } 
 
     const fetchCampaigns = () => {
         axios.get('https://ps-springboot.azurewebsites.net/campaign').then((res) => {
@@ -61,9 +74,10 @@ const DetailView = () => {
                     </Fab>
                 </div>
             </div>
-            <Grid container direction="row">
+            <div>
+            <Grid display="flex" justifyContent="center" alignItems="center" container direction="row" sx={{margin: 'auto'}}>
                 <Paper elevation={3} sx={{borderRadius: 5, margin: 2}}>
-                    <Box p={3}>
+                    <Box p={3} sx={{width: '350px'}}>
                         <Typography variant='h5'>{campaign.currentCamp.campaignName}</Typography>           
                         <Typography variant='h6'>{campaign.currentCamp.company}</Typography>
                         <Typography variant='body2'>{campaign.currentCamp.startDate} {' '} to {' '} {campaign.currentCamp.endDate}</Typography>
@@ -71,21 +85,30 @@ const DetailView = () => {
                     </Box>
                 </Paper>
                 <Paper elevation={3} sx={{borderRadius: 5, margin: 7}}>
-                    <Box p={3}>
+                    <Box p={3} sx={{width: '350px'}}>
                         <Typography variant='h5'>Preview</Typography>
+                        <Typography variant='body1'>Channel: {campaign.currentCamp.channel}</Typography>
+                        <Typography>{OnSiteOptions(campaign.currentCamp)}</Typography>
+                        <Typography>{SocialMedia(campaign.currentCamp)}</Typography>
+                        <Typography>{WebLocation(campaign.currentCamp)}</Typography>
+                        <Typography>{TargetAge(campaign.currentCamp)}</Typography>
+                        <Typography>{TargetRegion(campaign.currentCamp)}</Typography>
+                        <Typography>{InStoreOptions(campaign.currentCamp)}</Typography>
+                        <Typography>{StoreLocation(campaign.currentCamp)}</Typography>
                     </Box>
                 </Paper>
                 <Paper elevation={3} sx={{borderRadius: 5}}>
-                    <Box p={3}>
+                    <Box p={3} sx={{width: '350px'}}>
                         <Typography variant='h5'>{campaign.currentCamp.company}</Typography>
                         <Typography></Typography>
                     </Box>
                     <Box p={3}>
-                        <Typography variant='h5'>{'$'}{calculateClientRevenue()}</Typography>
+                        <Typography variant='h6'>Ad Revenue: </Typography>
+                        <Typography variant='h4' color='#00C832 !important'>{'$'}{calculateClientRevenue()}</Typography>
                     </Box>
                 </Paper>
             </Grid>
-        </div>
+        </div></div>
         
     )
 }
