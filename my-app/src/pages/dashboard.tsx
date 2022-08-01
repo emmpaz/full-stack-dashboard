@@ -261,7 +261,7 @@ const Dashboard = () => {
             <MidContainer>
                 <CampaignContainer>
                     <div>
-                        <h1>List of Campaigns</h1>
+                        <h1>My Campaigns </h1>
                         <Search list={myCampaigns}/>
                         <Button variant={(isActive) ? "contained" : "text"} onClick={activeCampaignsHandler}>Active</Button>
                         <Button variant={(!isActive) ? "contained" : "text"} onClick={archivedCampaignsHandler}>Archived</Button>
