@@ -7,6 +7,7 @@ import { CampListItem } from '../components/func_camp_list';
 import { Campaign } from '../helper files/types';
 import '../css files/detailedView.css';
 import CloseIcon from '@mui/icons-material/Close';
+import aholdLogo from '../assets/images/transparentAhold.png';
 const DetailView = () => {
     const { state } = useLocation();
     const campaign = state as any;
@@ -46,8 +47,9 @@ const DetailView = () => {
     
     return(
         <div className="detailedView-background">
-            <div>
-                <div className="header">
+            <div className="header">
+                <img className="ahold-logo" src={aholdLogo}/>
+                <div className="arrow-back">
                     <Fab style={{
                         marginRight: '30px',
                         marginTop: '30px'

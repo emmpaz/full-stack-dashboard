@@ -4,6 +4,19 @@
 }
 
 .header{
+    width: 100%;
+    height:auto;
+}
+
+.ahold-logo{
+    width: auto;
+    height: 100px;
+    float: left;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.arrow-back{
     width: fit-content;
     float: right;
 }
