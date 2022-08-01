@@ -229,7 +229,7 @@ public class Campaign {
         this.targetRegion = targetRegion;
     }
 
-    public String getOnsiteOptons() {
+    public String getOnsiteOptions() {
         return onsiteOptions;
     }
 

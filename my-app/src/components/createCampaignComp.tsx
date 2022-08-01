@@ -33,6 +33,7 @@ export const CreateCampaignComp = () => {
     const [channelSelectionOption, setchannelSelectionOption] = useState<JSX.Element>();
     
     const componentHandler = (name :any, value : any) => {
+      console.log("called handler");
       setNewCampaign({
         ...newCampaign,
         [name] :value,
@@ -48,7 +49,6 @@ export const CreateCampaignComp = () => {
         });
 
         if(name === "channel"){
-          console.log("called");
           if(value == "Off-Site"){
             setchannelSelectionOption(<SocialMedia change={componentHandler} currentCamp={newCampaign}/>);
           }
