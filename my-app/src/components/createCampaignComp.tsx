@@ -5,6 +5,7 @@ import { Campaign } from '../helper files/types';
 import { OnsiteOptions } from './OnsiteOptions';
 import { InStoreOptions } from './InStoreOptions';
 import { SocialMedia } from './socialMedia';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const defaultCampaign: Campaign = {
     managerId: 123,
@@ -35,6 +36,8 @@ export const CreateCampaignComp = () => {
       campaignTemp = {...campaignTemp, [name]:value};
       setNewCampaign(campaignTemp);
     }
+
+    const navigate = useNavigate();
   
     //handles all inputs (campiagn name, client, budget, start/end date)
     const handleInputChange = (e: any) => {
@@ -108,6 +111,8 @@ export const CreateCampaignComp = () => {
                 console.log(res);
                 console.log(res.data);
             })
+
+        navigate("/dashboard", {state: {bannerId: initBannerId}});
     }
 
     return (

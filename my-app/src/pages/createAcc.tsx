@@ -25,10 +25,6 @@ const CreateAccount = () => {
         <div>
              <Header></Header>
             <div>
-               
-                   
-                
-            
                 <div>
                     <h1>Create New Account</h1>
                         <CreateAccountComp />
