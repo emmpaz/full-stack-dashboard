@@ -29,43 +29,61 @@ const defaultCampaign: Campaign = {
 }
 
 export const CreateCampaignComp = () => {
-    const [newCampaign, setNewCampaign] = useState<Campaign>(defaultCampaign)   
-    const [channelSelectionOption, setchannelSelectionOption] = useState<JSX.Element>();
+    const [newCampaign, setNewCampaign] = useState<Campaign>(defaultCampaign)
 
-    const { state } = useLocation();
-    var initBannerId = (state as any).bannerId;
-    
     const componentHandler = (name :any, value : any) => {
-      console.log("called handler");
-      setNewCampaign({
-        ...newCampaign,
-        [name] :value,
-      })
+      var campaignTemp = JSON.parse(JSON.stringify(newCampaign));
+      campaignTemp = {...campaignTemp, [name]:value};
+      setNewCampaign(campaignTemp);
     }
 
     const navigate = useNavigate();
   
+    //handles all inputs (campiagn name, client, budget, start/end date)
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
-
-        setNewCampaign({
-          ...newCampaign,
-          [name]: value,
-        });
-
-        if(name === "channel"){
-          if(value == "Off-Site"){
-            setchannelSelectionOption(<SocialMedia change={componentHandler} currentCamp={newCampaign}/>);
-          }
-          else if(value == "On-Site"){
-            setchannelSelectionOption(<OnsiteOptions change={componentHandler} currentCamp={newCampaign}/>);
-          }
-          else if(value == "In-Store"){
-            setchannelSelectionOption(<InStoreOptions change={componentHandler} currentCamp={newCampaign}/>);
-          }
-          
+        var campaignTemp = JSON.parse(JSON.stringify(newCampaign));
+        campaignTemp = {...campaignTemp, [name]:value};
+        setNewCampaign(campaignTemp);
+        if(e.target.value == "Off-Site"){
+          setchannelSelectionOption(<SocialMedia change={componentHandler}/>);
+        }
+        else if(e.target.value == "On-Site"){
+          setchannelSelectionOption(<OnsiteOptions change={componentHandler}/>);
+        }
+        else if(e.target.value == "In-Store"){
+          setchannelSelectionOption(<InStoreOptions change={componentHandler}/>);
         }
       };
+
+      const [bannerDisplay, setBannerDisplay] = useState<string>("");
+      const handleBannerChange = (e: any) => {
+        const { name, value } = e.target;
+        setBannerDisplay(e.target.value);
+        var campaignTemp = JSON.parse(JSON.stringify(newCampaign));
+        campaignTemp = {...campaignTemp, [name]:value};
+        setNewCampaign(campaignTemp);
+      }
+
+      const [channelSelectionOption, setchannelSelectionOption] = useState<JSX.Element>();
+      const [channelDisplay, setChannelDisplay] = useState<string>("");
+      const handleChannelChange = (e: any) => {
+        setChannelDisplay(e.target.value);
+        const { name, value } = e.target;
+        var campaignTemp = JSON.parse(JSON.stringify(newCampaign));
+        campaignTemp = {...campaignTemp, [name]:value};
+        setNewCampaign(campaignTemp);
+        if(e.target.value == "Off-Site"){
+          setchannelSelectionOption(<SocialMedia change={componentHandler}/>);
+        }
+        else if(e.target.value == "On-Site"){
+          setchannelSelectionOption(<OnsiteOptions change={componentHandler}/>);
+        }
+        else if(e.target.value == "In-Store"){
+          setchannelSelectionOption(<InStoreOptions change={componentHandler}/>);
+        }
+      }
+
 
       const getBannerId = (banner: String) => {
         if(banner == "Fresh Direct") {
@@ -85,9 +103,9 @@ export const CreateCampaignComp = () => {
 
     const handleSubmit = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
-
-        newCampaign.bannerId = getBannerId(newCampaign.banner);
-
+        var campaignTemp = JSON.parse(JSON.stringify(newCampaign));
+        campaignTemp = {...campaignTemp, ['bannerId']:getBannerId(campaignTemp.banner)};
+        setNewCampaign(campaignTemp);
         axios.post('https://ps-springboot.azurewebsites.net/campaign', newCampaign)
             .then(res => {
                 console.log(res);
@@ -108,30 +126,32 @@ export const CreateCampaignComp = () => {
       >
             <Input style ={{width: '100%'}} type="text" name="campaignName" placeholder="Campaign Name" value={newCampaign.campaignName} onChange={handleInputChange}></Input><br />
             <Input style ={{width: '100%'}} type="text" name="company" placeholder="Client Name" value={newCampaign.company} onChange={handleInputChange}></Input><br />
-            <FormControl style ={{width: '100%'}} variant="standard">
+            <form style ={{width: '100%'}}>
               <InputLabel id="banner_id">Banner</InputLabel>
-              <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={newCampaign.banner} onChange={handleInputChange}>
-                <MenuItem value="Fresh Direct">Fresh Direct</MenuItem>
-                <MenuItem value="Food Lion">Food Lion</MenuItem>
-                <MenuItem value="Stop and Shop">Stop and Shop</MenuItem>
-                <MenuItem value="The Giant Company">The Giant Company</MenuItem>
-                <MenuItem value="Giant">Giant</MenuItem>
-                <MenuItem value="Hannaford">Hannaford</MenuItem>
-              </Select>
-            </FormControl> <br />
+              <select style ={{width: '100%'}} id="banner_selection" value={bannerDisplay} name="banner" onChange={handleBannerChange}>
+                <option value="none"></option>
+                <option value="Fresh Direct">Fresh Direct</option>
+                <option value="Food Lion">Food Lion</option>
+                <option value="Stop and Shop">Stop and Shop</option>
+                <option value="The Giant Company">The Giant Company</option>
+                <option value="Giant">Giant</option>
+                <option value="Hannaford">Hannaford</option>
+              </select>
+            </form> <br />
             <Input style ={{width: '100%'}} type="number" placeholder="budget" name="budget" value={newCampaign.budget} onChange={handleInputChange}></Input><br />
             <InputLabel>Campaign Dates</InputLabel>
             <Input style={{width: '72%'}} type="date" name="startDate" value={newCampaign.startDate} onChange={handleInputChange}></Input>
             <p><small>to</small></p>
             <Input style={{width: '72%'}} type="date" name="endDate" value={newCampaign.endDate} onChange={handleInputChange}></Input><br />
-            <FormControl style ={{width: '100%'}} variant="standard">
+            <form style ={{width: '100%'}}>
               <InputLabel id="channel_id">Channel</InputLabel>
-              <Select style ={{width: '100%'}} label="channel" name="channel" value={newCampaign.channel} onChange={handleInputChange}>
-                <MenuItem value="On-Site">On-Site</MenuItem>
-                <MenuItem value="Off-Site">Off-Site</MenuItem>
-                <MenuItem value="In-Store">In-Store</MenuItem>
-              </Select>
-            </FormControl> <br />
+              <select style ={{width: '100%'}} id="channel_selection" value={channelDisplay} name="channel" onChange={handleChannelChange}>
+                <option value="none"></option>
+                <option value="On-Site">On-Site</option>
+                <option value="Off-Site">Off-Site</option>
+                <option value="In-Store">In-Store</option>
+              </select>
+            </form>
             {channelSelectionOption}
             <Button type="submit" onClick={handleSubmit}>Submit</Button>
         </Box>

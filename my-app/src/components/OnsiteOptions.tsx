@@ -3,34 +3,37 @@ import React, { useState } from 'react';
 import { Campaign } from '../helper files/types';
 
 
-export const OnsiteOptions = (props:{currentCamp: Campaign, change : (name:any, value:any) => void}) => {
+export const OnsiteOptions = (props:{ change : (name:any, value:any) => void}) => {
     const [onsiteOptions, setOnsiteOptions] = useState<String>("");
 
     const handleOnsiteChange = (e: any) => {
+        setOnsiteOptions(e.target.value);
+
         const {name , value} = e.target;
         props.change(name, value);
-        setOnsiteOptions(e.target.value);
     }
 
     const [websiteOptions, setWebsiteOptions] = useState<String>("");
     const handleWebsiteChange = (e: any) => {
+        setWebsiteOptions(e.target.value);
+
         const {name , value} = e.target;
         props.change(name, value);
-        setWebsiteOptions(e.target.value);
     }
 
     const [ageRange, setAgeRange] = useState<String>("");
     const handleAgeChange = (e : any) => {
+        setAgeRange(e.target.value);
+
         const {name , value} = e.target;
         props.change(name, value);
-        setAgeRange(e.target.value)
     }
 
     const [region, setRegion] = useState<String>("");
     const handleRegionChange = (e : any) => {
+        setRegion(e.target.value);
         const {name , value} = e.target;
         props.change(name, value);
-        setRegion(e.target.value)
     }
 
     return(

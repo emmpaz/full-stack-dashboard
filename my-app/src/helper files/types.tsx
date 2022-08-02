@@ -1,23 +1,23 @@
 
 export type Campaign = {
     managerId: number;
-    banner: String;
+    banner: string;
     bannerId: number;
-    channel: String;
-    company: String;
+    channel: string;
+    company: string;
     budget: number;
-    campaignName: String;
+    campaignName: string;
     startDate: Date;
     endDate: Date;
     isActive: Boolean;
 
-    social: String;
-    targetAge: String;
-    targetRegion: String;
-    onsiteOptions: String;
-    websiteLocation: String;
-    instoreOptions: String;
-    storeLocation: String;
+    social: string;
+    targetAge: string;
+    targetRegion: string;
+    onsiteOptions: string;
+    websiteLocation: string;
+    instoreOptions: string;
+    storeLocation: string;
 }
 
 export type User = {

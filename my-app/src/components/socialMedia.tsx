@@ -1,31 +1,40 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Campaign } from '../helper files/types';
 
 
-export const SocialMedia = (props: {currentCamp: Campaign, change : (name:any, value:any) => void}) => {
+export const SocialMedia = (props: { change : (name:any, value:any) => void}) => {
 
 
 
 
     const [socialMedia, setSocialMedia] = useState<String>("");
-    const handleSocialChange = (e: any) => {
-        const {name , value} = e.target;
-        props.change(name, value);
+    const HandleSocialChange = (e: any) => {
         setSocialMedia(e.target.value);
+      
+        useEffect(() => {
+          const {name , value} = e.target;
+          props.change(name, value);
+        }, [socialMedia])
     }
-    const [ageRange, setAgeRange] = useState<String>("");
-    const handleAgeChange = (e : any) => {
-        const {name , value} = e.target;
-        props.change(name, value);
-        setAgeRange(e.target.value)
+    const [ageRange, setAgeRange] = useState<string>("");
+    const HandleAgeChange = (e : any) => {
+        setAgeRange(e.target.value);
+
+        useEffect(() => {
+          const {name , value} = e.target;
+          props.change(name, value);
+        }, [ageRange])
     }
 
-    const [region, setRegion] = useState<String>("");
-    const handleRegionChange = (e : any) => {
-        const {name , value} = e.target;
-        props.change(name, value);
+    const [region, setRegion] = useState<string>("");
+    const HandleRegionChange = (e : any) => {
         setRegion(e.target.value);
+
+        useEffect(() => {
+          const {name , value} = e.target;
+          props.change(name, value);
+        }, [region])
     }
 
 
@@ -40,7 +49,7 @@ export const SocialMedia = (props: {currentCamp: Campaign, change : (name:any, v
         >
         <FormControl style ={{width: '100%'}} variant="standard">
               <InputLabel id="social_id">Social Media</InputLabel>
-              <Select style ={{width: '100%'}} labelId="social_media_id" name="social" value={socialMedia} onChange={handleSocialChange}>
+              <Select style ={{width: '100%'}} labelId="social_media_id" name="social" value={socialMedia} onChange={HandleSocialChange}>
                 <MenuItem value="Facebook">Facebook</MenuItem>
                 <MenuItem value="Instagram">Instagram</MenuItem>
                 <MenuItem value="Twitter">Twitter</MenuItem>
@@ -50,7 +59,7 @@ export const SocialMedia = (props: {currentCamp: Campaign, change : (name:any, v
 
         <FormControl style ={{width: '100%'}} variant="standard">
               <InputLabel id="age_id">Target Audience Age Range</InputLabel>
-              <Select style ={{width: '100%'}} labelId="age_id" name="targetAge" value={ageRange} onChange={handleAgeChange}>
+              <Select style ={{width: '100%'}} labelId="age_id" name="targetAge" value={ageRange} onChange={HandleAgeChange}>
                 <MenuItem value="Under 18">Under 18</MenuItem>
                 <MenuItem value="18-24 years old">18-24 years old</MenuItem>
                 <MenuItem value="25-34 years old">25-34 years old</MenuItem>
@@ -64,7 +73,7 @@ export const SocialMedia = (props: {currentCamp: Campaign, change : (name:any, v
 
             <FormControl style ={{width: '100%'}} variant="standard">
               <InputLabel id="region_id">Target Audience Region</InputLabel>
-              <Select style ={{width: '100%'}} labelId="region_id" name="targetRegion" value={region} onChange={handleRegionChange}>
+              <Select style ={{width: '100%'}} labelId="region_id" name="targetRegion" value={region} onChange={HandleRegionChange}>
                 <MenuItem value="DE">DE</MenuItem>
                 <MenuItem value="VA">VA</MenuItem>
                 <MenuItem value="GA">GA</MenuItem>
