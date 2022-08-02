@@ -1,7 +1,7 @@
-import { PureComponent } from "react";
+import React, { PureComponent } from "react";
 // import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 // import { PieChart, Pie, Cell } from 'recharts';
-import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Sector, ResponsiveContainer, Cell } from 'recharts';
   // const data = [
   //   {
   //     name: 'Jan',
@@ -64,11 +64,11 @@ import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
   // }
 
   const data = [
-    { name: 'On-Site', value: 400 },
-    { name: 'Off-Site', value: 300 },
-    { name: 'In-Store', value: 300 },
+    { name: 'On-Site', value: 400, fill: '#e0d0ff'},
+    { name: 'Off-Site', value: 300, fill: '#beeeed'},
+    { name: 'In-Store', value: 300, fill: '#ffbce3'},
   ];
-  
+  // const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
   const renderActiveShape = (props: { cx: any; cy: any; midAngle: any; innerRadius: any; outerRadius: any; startAngle: any; endAngle: any; fill: any; payload: any; percent: any; value: any; }) => {
     const RADIAN = Math.PI / 180;
     const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
@@ -138,8 +138,9 @@ import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
               cy="20%"
               innerRadius={60}
               outerRadius={80}
-              fill="#86abf9"
+              // fill="#86abf9"
               dataKey="value"
+              fill="#fff"
               onMouseEnter={this.onPieEnter}
             />
           </PieChart>
