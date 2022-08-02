@@ -1,11 +1,15 @@
 package com.example.backend.Controller;
 
+import com.azure.core.exception.ResourceNotFoundException;
 import com.example.backend.Models.Campaign;
 import com.example.backend.Repositories.ICampaignRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin
@@ -83,4 +87,10 @@ public class CampaignController{
             @RequestBody Campaign campaign){
         iCampaignRepo.save(campaign);
     }
+
+    @DeleteMapping("campaign/{id}")
+    public void deleteCampaign(@PathVariable("id") Long id) {
+        iCampaignRepo.deleteById(id);
+    }
+    
 }
