@@ -1,4 +1,4 @@
-import { Box, Paper, Typography, BoxProps, Grid, checkboxClasses, Fab } from '@mui/material';
+import { Box, Paper, Typography, BoxProps, Grid, checkboxClasses, Fab, Button } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -21,6 +21,7 @@ const DetailView = () => {
 
     var clientAdRev = 0;
     var calculated = false;
+    var initBannerId = campaign.currentCamp.bannerId;
 
     function calculateClientRevenue(): number {
         campaigns.forEach( (element) => {
@@ -53,6 +54,21 @@ const DetailView = () => {
        /* if(calculated == false) {
             calculateClientRevenue();
         }*/
+    };
+
+
+    const deleteCampaign = () => {
+        var id = campaign.currentCamp.campaignId;
+        
+        axios.delete(`http://localhost:8080/campaign/${id}`).then((res) => {
+            setCampaigns(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+
+        navigate("/dashboard", {state: {bannerId : initBannerId}});
+
     };
     
     useEffect(() => {
@@ -100,7 +116,6 @@ const DetailView = () => {
                 <Paper elevation={3} sx={{borderRadius: 5}}>
                     <Box p={3} sx={{width: '350px'}}>
                         <Typography variant='h5'>{campaign.currentCamp.company}</Typography>
-                        <Typography></Typography>
                     </Box>
                     <Box p={3}>
                         <Typography variant='h6'>Ad Revenue: </Typography>
@@ -108,6 +123,8 @@ const DetailView = () => {
                     </Box>
                 </Paper>
             </Grid>
+            <Button variant="contained" color="success">Edit Campaign</Button>
+            <Button variant="contained" color="error" onClick={deleteCampaign}>Delete Campaign</Button>
         </div></div>
         
     )
