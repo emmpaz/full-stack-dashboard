@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Campaign } from '../helper files/types';
 
 
-export const SocialMedia = (props: { change : (name:any, value:any) => void}) => {
+export const SocialMedia = (props: { change : (name: string, value: string) => void}) => {
 
 
 
@@ -12,29 +12,23 @@ export const SocialMedia = (props: { change : (name:any, value:any) => void}) =>
     const HandleSocialChange = (e: any) => {
         setSocialMedia(e.target.value);
       
-        useEffect(() => {
-          const {name , value} = e.target;
-          props.change(name, value);
-        }, [socialMedia])
+        const {name , value} = e.target;
+        props.change(name, value);
     }
     const [ageRange, setAgeRange] = useState<string>("");
     const HandleAgeChange = (e : any) => {
         setAgeRange(e.target.value);
 
-        useEffect(() => {
-          const {name , value} = e.target;
-          props.change(name, value);
-        }, [ageRange])
+        const {name , value} = e.target;
+        props.change(name, value);
     }
 
     const [region, setRegion] = useState<string>("");
     const HandleRegionChange = (e : any) => {
         setRegion(e.target.value);
 
-        useEffect(() => {
-          const {name , value} = e.target;
-          props.change(name, value);
-        }, [region])
+        const {name , value} = e.target;
+        props.change(name, value);
     }
 
 
