@@ -62,6 +62,9 @@ public class Campaign {
     @Column(name = "websiteLocation", columnDefinition = "varchar(255)")
     private String websiteLocation;
 
+    @Column(name = "copy", columnDefinition = "text")
+    private String copy;
+
     public String getWebsiteLocation() {
         return websiteLocation;
     }
