@@ -252,7 +252,7 @@ const Dashboard = () => {
             </Box>
             </TitleContainer>
             <MidContainer>
-                <Paper sx={{width: '100vw', margin: 1}}>
+                <Paper elevation={4} sx={{width: '100vw', margin: 1}}>
                     <CampaignContainer>
                         <div>
                             <Grid container style={{
@@ -267,8 +267,8 @@ const Dashboard = () => {
                                 </Grid>
                                 <Grid item  direction="column" xs={4}>
                                     <ToggleButtonGroup>
-                                        <ToggleButton value = "active">Active</ToggleButton>
-                                        <ToggleButton value = "archive">Archive</ToggleButton>
+                                        <ToggleButton value = "active" onClick={activeCampaignsHandler}>Active</ToggleButton>
+                                        <ToggleButton value = "archive" onClick={archivedCampaignsHandler}>Archive</ToggleButton>
                                     </ToggleButtonGroup>                                
                                 </Grid>
                             </Grid>
@@ -313,7 +313,7 @@ const Dashboard = () => {
                         </div>
                     </CampaignContainer>
                 </Paper>
-                <Paper sx={{width: '100vw', margin: 1}}>
+                <Paper elevation={4} sx={{width: '100vw', margin: 1}}>
                 <OtherContainer> 
                     <RevContainer> 
                         <h1> Ad Rev Total </h1>
