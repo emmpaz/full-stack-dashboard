@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Box, Button, Input, Select, MenuItem, InputLabel, FormControl, TextField } from '@mui/material';
+import { Box, Button, Input, Select, MenuItem, InputLabel, FormControl, TextField, Fab } from '@mui/material';
 import { Campaign } from '../helper files/types';
 import { OnsiteOptions } from './OnsiteOptions';
 import { InStoreOptions } from './InStoreOptions';
 import { SocialMedia } from './socialMedia';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CssTextField, ColorButton } from '../css files/customTextField';
+import CloseIcon from '@mui/icons-material/Close';
 
 const defaultCampaign: Campaign = {
     managerId: 123,
