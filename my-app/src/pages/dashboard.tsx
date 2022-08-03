@@ -19,12 +19,18 @@ import { CampListItem } from '../components/func_camp_list';
 import { end_date_down, end_date_up, spend_down, spend_up } from '../helper files/dashboard_states';
 import '../css files/dashboard.css';
 import Search from '../components/searchbar';
+<<<<<<< HEAD
+import  Graph from '../components/graph';
+import { offSiteCalculation, inStoreCalculation, onSiteCalculation } from '../components/graphCalculations';
+
+=======
 import Graph from '../components/graph';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import JoshTheme from '../css files/allStyle';
 import aholdLogo from '../assets/images/transparentAhold.png';
+>>>>>>> 7cafb61b8df0d6d510baae9e740be8d0d1f24b83
 
 
 const get_campaigns = axios.create({
@@ -56,6 +62,9 @@ const Dashboard = () => {
     //campaign lists states
     const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
     const [originalList, setList] = useState<Campaign[]>([]);
+
+    var listForGraph = myCampaigns as Campaign[];
+
     //const [bannerId, setBannerId] = useState('');
     const { state } = useLocation();
     var initBannerId = (state as any).bannerId;
@@ -109,6 +118,24 @@ const Dashboard = () => {
     const fetchCampaigns = (active_or_not: String, initBannerId : any) => {
         console.log("fetching... " + initBannerId)
         axios.get(`https://ps-springboot.azurewebsites.net/${active_or_not}_campaigns/${initBannerId}`).then((res) => {
+<<<<<<< HEAD
+        //console.log(res);
+        setList(res.data);
+        setCampaigns(res.data);
+        //console.log(res.data[0]);
+        var cmp = res.data[0] as Campaign;
+        console.log(cmp);
+        })
+        .catch((err) => {
+        console.log(err);
+        });
+    };
+
+    const fetchCampaignsByBanner = (bannerId: String) => {
+        axios.get(`https://ps-springboot.azurewebsites.net/banner/${bannerId}`).then((res) => {
+        console.log(res);
+=======
+>>>>>>> 7cafb61b8df0d6d510baae9e740be8d0d1f24b83
         setList(res.data);
         setCampaigns(res.data);
         })
@@ -117,6 +144,9 @@ const Dashboard = () => {
         });
     };
 
+    const returnGraph = () => {
+
+    }
     const bannerSelectHandler = (event: SelectChangeEvent) => {
        // setBannerId(event.target.value as string)
         if(event.target.value == "7") {
@@ -323,7 +353,7 @@ const Dashboard = () => {
                     </RevContainer>
                     <GraphContainer> 
                         <h1> Graph </h1>
-                        <Graph> </Graph>
+                        <Graph inStoreRevenue={inStoreCalculation(myCampaigns)} offSiteRevenue={offSiteCalculation(myCampaigns)} onSiteRevenue={onSiteCalculation(myCampaigns)}></Graph>
                     </GraphContainer>
                 </OtherContainer>
                 </Paper>
