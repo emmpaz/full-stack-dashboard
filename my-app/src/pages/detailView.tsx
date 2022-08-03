@@ -2,7 +2,7 @@ import { Box, Paper, Typography, BoxProps, Grid, checkboxClasses, Fab, Button } 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { CampaignContainer, GraphContainer } from '../components/containers';
+import { BigContainer, CampaignContainer, GraphContainer } from '../components/containers';
 import { CampListItem } from '../components/func_camp_list';
 import { Campaign } from '../helper files/types';
 import '../css files/detailedView.css';
@@ -10,6 +10,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import aholdLogo from '../assets/images/transparentAhold.png';
 import { useNavigate } from 'react-router-dom';
 import { OnSiteOptions, WebLocation, TargetAge, TargetRegion, SocialMedia, InStoreOptions, StoreLocation } from '../helper files/channelHelper';
+import testImage from '../assets/images/test.jpg';
 
 const DetailView = () => {
     const { state } = useLocation();
@@ -81,42 +82,41 @@ const DetailView = () => {
                     </Fab>
                 </div>
             </div>
-            <div>
-            <Grid display="flex" justifyContent="center" alignItems="center" container direction="row" sx={{margin: 'auto'}}>
-                <Paper elevation={3} sx={{borderRadius: 5, margin: 2}}>
-                    <Box p={3} sx={{width: '350px'}}>
-                        <Typography variant='h5'>{campaign.currentCamp.campaignName}</Typography>           
-                        <Typography variant='h6'>{campaign.currentCamp.company}</Typography>
-                        <Typography variant='body2'>{campaign.currentCamp.startDate} {' '} to {' '} {campaign.currentCamp.endDate}</Typography>
-                        <Typography variant='body1' color='#00C832 !important'>Budget: {' $'}{campaign.currentCamp.budget}</Typography>
-                    </Box>
-                </Paper>
-                <Paper elevation={3} sx={{borderRadius: 5, margin: 7}}>
-                    <Box p={3} sx={{width: '350px'}}>
-                        <Typography variant='h5'>Preview</Typography>
-                        <Typography variant='body1'>Channel: {campaign.currentCamp.channel}</Typography>
-                        <Typography>{OnSiteOptions(campaign.currentCamp)}</Typography>
-                        <Typography>{SocialMedia(campaign.currentCamp)}</Typography>
-                        <Typography>{WebLocation(campaign.currentCamp)}</Typography>
-                        <Typography>{TargetAge(campaign.currentCamp)}</Typography>
-                        <Typography>{TargetRegion(campaign.currentCamp)}</Typography>
-                        <Typography>{InStoreOptions(campaign.currentCamp)}</Typography>
-                        <Typography>{StoreLocation(campaign.currentCamp)}</Typography>
-                    </Box>
-                </Paper>
-                <Paper elevation={3} sx={{borderRadius: 5}}>
-                    <Box p={3} sx={{width: '350px'}}>
-                        <Typography variant='h5'>{campaign.currentCamp.company}</Typography>
-                    </Box>
-                    <Box p={3}>
-                        <Typography variant='h6'>Ad Revenue: </Typography>
-                        <Typography variant='h4' color='#00C832 !important'>{'$'}{calculateClientRevenue()}</Typography>
-                    </Box>
-                </Paper>
-            </Grid>
+            <BigContainer>
+                <div style={{display:'flex', justifyContent:'center'}}>
+                    <Grid container direction="column" sx={{margin: '10px'}}>
+                        <Paper elevation={3} sx={{borderRadius: 5}}>
+                            <div style={{display: 'grid', justifyItems: 'start', paddingLeft:'20px', paddingTop: '15px', paddingBottom:'20px'}}>
+                                <Typography variant='h2'>{campaign.currentCamp.campaignName}</Typography>
+                                <Typography variant='h6'>{campaign.currentCamp.company}</Typography>
+                                <img src={testImage} className="test-image"/>     
+                                <Typography variant='h5'>Dates:</Typography>
+                                <Typography variant='h6'>{campaign.currentCamp.startDate} to {campaign.currentCamp.endDate}</Typography>
+                                <Typography variant='h5'>Channel(s):</Typography>
+                                <Typography>{campaign.currentCamp.channel}</Typography>
+                                <Typography variant='h5'>Copy:</Typography>
+                                <Typography align='left'>{campaign.currentCamp.copy}</Typography>
+                            </div>
+                        </Paper>
+                    </Grid>
+                    <Grid direction="column" container sx={{margin: '10px'}}>
+                        <Paper elevation={3} sx={{borderRadius: 5}}>
+                            <Box p={3}>
+            
+                                <Typography>{TargetAge(campaign.currentCamp)}</Typography>
+                                <Typography>{TargetRegion(campaign.currentCamp)}</Typography>
+                            </Box>
+                            <Box p={3}>
+                                <Typography variant='h6'>Ad Revenue: </Typography>
+                                <Typography variant='h4' color='#00C832 !important'>{'$'}{calculateClientRevenue()}</Typography>
+                            </Box>
+                        </Paper>
+                    </Grid>
+                </div>
+            </BigContainer>
             <Button variant="contained" color="success" onClick={() => navigate("/updateCampaign", { state: { campaign }})}>Edit Campaign</Button>
             <Button variant="contained" color="error" onClick={deleteCampaign}>Delete Campaign</Button>
-        </div></div>
+        </div>
         
     )
 }

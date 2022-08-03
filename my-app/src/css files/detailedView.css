@@ -6,6 +6,7 @@
 .header{
     width: 100%;
     height:auto;
+    overflow: hidden;
 }
 
 .ahold-logo{
@@ -19,4 +20,11 @@
 .arrow-back{
     width: fit-content;
     float: right;
+}
+
+.test-image{
+    width: 90%;
+    height: auto;
+    border-radius: 20px;
+    margin: 10px;
 }
