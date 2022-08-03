@@ -20,7 +20,9 @@ import { CampaignList } from '../components/campaignList';
 import { end_date_down, end_date_up, spend_down, spend_up } from '../helper files/dashboard_states';
 import '../css files/dashboard.css';
 import Search from '../components/searchbar';
-import Graph from '../components/graph';
+import  Graph from '../components/graph';
+import { offSiteCalculation, inStoreCalculation, onSiteCalculation } from '../components/graphCalculations';
+
 
 
 const get_campaigns = axios.create({
@@ -52,6 +54,9 @@ const Dashboard = () => {
     //campaign lists states
     const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
     const [originalList, setList] = useState<Campaign[]>([]);
+
+    var listForGraph = myCampaigns as Campaign[];
+
     //const [bannerId, setBannerId] = useState('');
     const { state } = useLocation();
     var initBannerId = (state as any).bannerId;
@@ -81,7 +86,6 @@ const Dashboard = () => {
             bannerBudget+=element.budget;
         })
         calculated = true;
-        console.log(bannerBudget);
         budgetTotal = bannerBudget;
         return budgetTotal
         //updateBudget();
@@ -111,9 +115,12 @@ const Dashboard = () => {
 
     const fetchCampaigns = (active_or_not: String, initBannerId : any) => {
         axios.get(`https://ps-springboot.azurewebsites.net/${active_or_not}_campaigns/${initBannerId}`).then((res) => {
-        console.log(res);
+        //console.log(res);
         setList(res.data);
         setCampaigns(res.data);
+        //console.log(res.data[0]);
+        var cmp = res.data[0] as Campaign;
+        console.log(cmp);
         })
         .catch((err) => {
         console.log(err);
@@ -131,6 +138,9 @@ const Dashboard = () => {
         });
     };
 
+    const returnGraph = () => {
+
+    }
     const bannerSelectHandler = (event: SelectChangeEvent) => {
        // setBannerId(event.target.value as string)
         if(event.target.value == "7") {
@@ -291,7 +301,7 @@ const Dashboard = () => {
                     </RevContainer>
                     <GraphContainer> 
                         <h1> Graph </h1>
-                        <Graph> </Graph>
+                        <Graph inStoreRevenue={inStoreCalculation(myCampaigns)} offSiteRevenue={offSiteCalculation(myCampaigns)} onSiteRevenue={onSiteCalculation(myCampaigns)}></Graph>
                     </GraphContainer>
                 </OtherContainer>
             </MidContainer>
