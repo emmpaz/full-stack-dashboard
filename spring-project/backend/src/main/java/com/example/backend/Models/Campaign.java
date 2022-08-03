@@ -136,6 +136,14 @@ public class Campaign {
         this.banner = banner;
     }
 
+    public String getCopy() {
+        return copy;
+    }
+
+    public void setCopy(String copy) {
+        this.copy = copy;
+    }
+
     public String getCompany() {
         return company;
     }

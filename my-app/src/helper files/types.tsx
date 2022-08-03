@@ -18,6 +18,7 @@ export type Campaign = {
     websiteLocation: string;
     instoreOptions: string;
     storeLocation: string;
+    copy: string;
 }
 
 export type User = {

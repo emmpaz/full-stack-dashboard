@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import {BigContainer} from '../components/containers';
 import { TitleContainer } from '../components/containers';
@@ -8,21 +8,29 @@ import { CampaignContainer } from '../components/containers';
 import { OtherContainer } from '../components/containers';
 import { RevContainer } from '../components/containers';
 import { GraphContainer } from '../components/containers';
-import { Paper } from '@mui/material';
+import { Fab, Grid, Paper, Tabs, ThemeProvider, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { Box, InputLabel, MenuItem, FormControl } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Campaign } from '../helper files/types';
-import {Button, IconButton} from "@mui/material";
+import {Button} from "@mui/material";
 import {useIsMount} from '../helper files/mounting';
 import { compare_by_date, compare_by_name, compare_by_budget, compare_by_name_reversed, compare_by_date_reversed, compare_by_budget_reversed} from '../helper files/comparators';
 import { CampListItem } from '../components/func_camp_list';
-import { CampaignList } from '../components/campaignList';
 import { end_date_down, end_date_up, spend_down, spend_up } from '../helper files/dashboard_states';
 import '../css files/dashboard.css';
 import Search from '../components/searchbar';
+<<<<<<< HEAD
 import  Graph from '../components/graph';
 import { offSiteCalculation, inStoreCalculation, onSiteCalculation } from '../components/graphCalculations';
 
+=======
+import Graph from '../components/graph';
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import AddIcon from '@mui/icons-material/Add';
+import JoshTheme from '../css files/allStyle';
+import aholdLogo from '../assets/images/transparentAhold.png';
+>>>>>>> 7cafb61b8df0d6d510baae9e740be8d0d1f24b83
 
 
 const get_campaigns = axios.create({
@@ -60,7 +68,7 @@ const Dashboard = () => {
     //const [bannerId, setBannerId] = useState('');
     const { state } = useLocation();
     var initBannerId = (state as any).bannerId;
-    //const [bannerId, setBannerId] = useState(state);
+    const [bannerId, setBannerId] = useState((state as any).bannerId);
 
     //sorting states
     const [sortName, setName] = useState<String>(sortNameState[2]);
@@ -76,19 +84,13 @@ const Dashboard = () => {
     
     function calculateClientRevenue(tmpBannerId: number): number {
         var bannerBudget = 0;
-        /*myCampaigns.forEach( (element) => {
-            if(element.bannerId == tmpBannerId) {
-                bannerBudget=bannerBudget+element.budget;
-                console.log(element.budget);
-            }
-        })*/
+        
         myCampaigns.forEach( (element) => {
             bannerBudget+=element.budget;
         })
         calculated = true;
         budgetTotal = bannerBudget;
         return budgetTotal
-        //updateBudget();
     };
 
     function updateBudget(): number {
@@ -99,13 +101,13 @@ const Dashboard = () => {
     useEffect(() => {
         if (isMount) {
             //fetchCampaigns("active");
-            fetchCampaigns("active", initBannerId);
+            fetchCampaigns("active", bannerId);
            // let tmpBanner: string = bannerId as string;
             //fetchCampaignsByBanner(tmpBanner);
             console.log('fetching');
             if(!calculated) {
-                console.log(initBannerId);
-                calculateClientRevenue(initBannerId);
+                console.log(bannerId);
+                calculateClientRevenue(bannerId);
             }
             //fetchCampaignsByBanner(initBannerId);
         } else {
@@ -114,7 +116,9 @@ const Dashboard = () => {
   });
 
     const fetchCampaigns = (active_or_not: String, initBannerId : any) => {
+        console.log("fetching... " + initBannerId)
         axios.get(`https://ps-springboot.azurewebsites.net/${active_or_not}_campaigns/${initBannerId}`).then((res) => {
+<<<<<<< HEAD
         //console.log(res);
         setList(res.data);
         setCampaigns(res.data);
@@ -130,6 +134,8 @@ const Dashboard = () => {
     const fetchCampaignsByBanner = (bannerId: String) => {
         axios.get(`https://ps-springboot.azurewebsites.net/banner/${bannerId}`).then((res) => {
         console.log(res);
+=======
+>>>>>>> 7cafb61b8df0d6d510baae9e740be8d0d1f24b83
         setList(res.data);
         setCampaigns(res.data);
         })
@@ -146,15 +152,20 @@ const Dashboard = () => {
         if(event.target.value == "7") {
             navigate("/login");
         }
-        fetchCampaignsByBanner(event.target.value);
+        //reset all parameters
+        setDate(sortDateState[2])
+        setName(sortNameState[2])
+        setSpend(sortSpendState[2])   
+        setActive(true)
+
+        initBannerId = event.target.value;
+        setBannerId(parseInt(event.target.value));
+
+        console.log("selected.... " + initBannerId);
+        fetchCampaigns("active", event.target.value);
         var tmpNum = Number(event.target.value);
-        console.log(tmpNum);
         calculateClientRevenue(tmpNum);
         
-    }
-
-    const bannerSelectOnLoad = (bannerId: String) => {
-        fetchCampaignsByBanner(bannerId);
     }
 
     const archivedCampaignsHandler = () => {
@@ -164,7 +175,7 @@ const Dashboard = () => {
             setSpend(sortSpendState[2])
             
             setActive(!isActive)
-            fetchCampaigns("active", initBannerId)
+            fetchCampaigns("active", bannerId)
         }
         else{
             setDate(sortDateState[2])
@@ -172,7 +183,7 @@ const Dashboard = () => {
             setSpend(sortSpendState[2])
 
             setActive(!isActive)
-            fetchCampaigns("archived", initBannerId)
+            fetchCampaigns("archived", bannerId)
         }
     }
 
@@ -183,7 +194,7 @@ const Dashboard = () => {
             setSpend(sortSpendState[2])
 
             setActive(!isActive)
-            fetchCampaigns("active", initBannerId)
+            fetchCampaigns("active", bannerId)
         }
     }
 
@@ -252,46 +263,87 @@ const Dashboard = () => {
     }
     return(
         <BigContainer>
+            <ThemeProvider theme={JoshTheme}>
             <TitleContainer> 
+            <img className="ahold-logo-dashboard" src={aholdLogo}/>
             <Box sx={{ float: 'right', minWidth: 120 }}>
                 <FormControl style ={{width: '100%'}} variant="standard">
                     <InputLabel id="banner_id">Banner</InputLabel>
                     <Select style ={{width: '100%'}} labelId="banner_id" name="banner" onChange={bannerSelectHandler}>
-                        <MenuItem value="1">Fresh Direct</MenuItem>
-                        <MenuItem value="2">Food Lion</MenuItem>
-                        <MenuItem value="3">Stop and Shop</MenuItem>
-                        <MenuItem value="4">The Giant Company</MenuItem>
-                        <MenuItem value="5">Giant</MenuItem>
-                        <MenuItem value="6">Hannaford</MenuItem>
+                        <MenuItem value={1}>Fresh Direct</MenuItem>
+                        <MenuItem value={2}>Food Lion</MenuItem>
+                        <MenuItem value={3}>Stop and Shop</MenuItem>
+                        <MenuItem value={4}>The Giant Company</MenuItem>
+                        <MenuItem value={5}>Giant</MenuItem>
+                        <MenuItem value={6}>Hannaford</MenuItem>
                         <MenuItem sx={{ color: '#00C832 !important' }} value="7">Logout</MenuItem>
                     </Select>
                 </FormControl>
             </Box>
             </TitleContainer>
             <MidContainer>
-                <CampaignContainer>
-                    <div>
-                        <h1>My Campaigns </h1>
-                        <Search list={myCampaigns}/>
-                        <Button variant={(isActive) ? "contained" : "text"} onClick={activeCampaignsHandler}>Active</Button>
-                        <Button variant={(!isActive) ? "contained" : "text"} onClick={archivedCampaignsHandler}>Archived</Button>
-                        <Button onClick={() => navigate("/createCampaign", { state: { bannerId: initBannerId }})}>Create Campaign</Button>
-                        <Button variant={(sortName === "A-Z" || sortName === "Z-A") ? "contained": "text"} onClick={sortNameHandler} style={{margin: 21}}>{(sortName === "default") ? "A-Z" : sortName}</Button>
-                        <Button variant={(sortDate === end_date_down || sortDate === end_date_up) ? "contained": "text"} onClick={sortEndDateHandler} style={{margin: 21}}>{(sortDate === "default") ? end_date_down : sortDate}</Button>
-                        <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>
-                        <div className='camp-container' style={{display:'grid'}} >
-                            {myCampaigns.map((campaign) => {
-                                return(
-                                    <Box onClick={() => navigate("/detailView", { state: { currentCamp: campaign }})}>
-                                    <CampListItem
-                                        year="2022"
-                                        title={campaign.campaignName.toString()}
-                                        budget={campaign.budget.toString()}
-                                        end={campaign.endDate.toString()} /></Box>
-                            )})}
+                <Paper sx={{width: '100vw', margin: 1}}>
+                    <CampaignContainer>
+                        <div>
+                            <Grid container style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                flexWrap: 'wrap',
+                            }}> 
+                                <Grid item  direction="column" xs={8}>
+                                    <Typography align='left'>
+                                        <h1>My Campaigns </h1>
+                                    </Typography>
+                                </Grid>
+                                <Grid item  direction="column" xs={4}>
+                                    <ToggleButtonGroup>
+                                        <ToggleButton value = "active">Active</ToggleButton>
+                                        <ToggleButton value = "archive">Archive</ToggleButton>
+                                    </ToggleButtonGroup>                                
+                                </Grid>
+                            </Grid>
+                            <Grid container style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                flexWrap: 'wrap',
+                            }}>
+                                <Grid item xs={11}> 
+                                    <Search list={myCampaigns}/>
+                                </Grid>
+                                <Grid item xs={1}> 
+                                    <Button onClick={() => navigate("/createCampaign", { state: { bannerId: initBannerId }})} size="large" color="primary">
+                                        <AddBoxOutlinedIcon fontSize='large'/>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                            {/*
+                            <Tabs
+                            orientation="vertical">
+                                <Button variant={(isActive) ? "contained" : "text"} onClick={activeCampaignsHandler}>Active</Button>
+                                <Button variant={(!isActive) ? "contained" : "text"} onClick={archivedCampaignsHandler}>Archived</Button>
+                            </Tabs>
+                            <Button fullWidth onClick={() => navigate("/createCampaign", { state: { bannerId: initBannerId }})}>
+                                    Create Campaign 
+                                <AddCircleOutlineOutlinedIcon/>
+                            </Button>*/}
+                            <Button variant={(sortName === "A-Z" || sortName === "Z-A") ? "contained": "text"} onClick={sortNameHandler} style={{margin: 21}}>{(sortName === "default") ? "A-Z" : sortName}</Button>
+                            <Button variant={(sortDate === end_date_down || sortDate === end_date_up) ? "contained": "text"} onClick={sortEndDateHandler} style={{margin: 21}}>{(sortDate === "default") ? end_date_down : sortDate}</Button>
+                            <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>
+                            <div className='camp-container' style={{display:'grid'}} >
+                                {myCampaigns.map((campaign) => {
+                                    return(
+                                        <Box onClick={() => navigate("/detailView", { state: { currentCamp: campaign }})}>
+                                        <CampListItem
+                                            year="2022"
+                                            title={campaign.campaignName.toString()}
+                                            budget={campaign.budget.toString()}
+                                            end={campaign.endDate.toString()} /></Box>
+                                )})}
+                            </div>
                         </div>
-                    </div>
-                </CampaignContainer>
+                    </CampaignContainer>
+                </Paper>
+                <Paper sx={{width: '100vw', margin: 1}}>
                 <OtherContainer> 
                     <RevContainer> 
                         <h1> Ad Rev Total </h1>
@@ -304,7 +356,9 @@ const Dashboard = () => {
                         <Graph inStoreRevenue={inStoreCalculation(myCampaigns)} offSiteRevenue={offSiteCalculation(myCampaigns)} onSiteRevenue={onSiteCalculation(myCampaigns)}></Graph>
                     </GraphContainer>
                 </OtherContainer>
+                </Paper>
             </MidContainer>
+            </ThemeProvider>
         </BigContainer>
     );
 }
