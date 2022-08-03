@@ -33,6 +33,9 @@ const defaultCampaign: Campaign = {
 export const CreateCampaignComp = () => {
     const [newCampaign, setNewCampaign] = useState<Campaign>(defaultCampaign);
 
+    const { state } = useLocation();
+    var initBannerId = (state as any).bannerId;
+
     const componentHandler = (name : string, value : string) => {
 
       setNewCampaign((prevState) => ({
@@ -123,7 +126,7 @@ export const CreateCampaignComp = () => {
                 console.log(res.data);
             })
 
-        //navigate("/dashboard", {state: {bannerId: initBannerId}});
+        navigate("/dashboard", {state: {bannerId: initBannerId}});
     }
 
     return (
