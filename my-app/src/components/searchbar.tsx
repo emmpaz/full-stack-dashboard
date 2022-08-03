@@ -2,10 +2,11 @@ import React, {useRef, useState} from 'react';
 import {Campaign} from '../helper files/types.js';
 import { CampListItem } from './func_camp_list';
 import Scroll from './scroll';
-import { Icon, IconButton, TextField } from "@mui/material";
+import { Box, Icon, IconButton, InputAdornment, TextField } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import { SearchListItem } from './searchListItem';
-
+import CloseIcon from '@mui/icons-material/Close';
+import SearchIcon from '@mui/icons-material/Search';
 const CssTextField = styled(TextField)({
     '& label':{
         color:'black',
@@ -73,10 +74,24 @@ const Search = (props : {list : Campaign[]}) => {
         <section style={{zIndex:'1', position:'relative'}}>
             <div>
                 <div style={{width:'100%', height: '100%'}}>
-                <CssTextField value={searchClear} id="filled-basic" label="search" variant="standard" onChange = {handleChange}/>
-                <IconButton disableFocusRipple={true} onClick={clearHandle}>
-                    <Icon fontSize='medium'>x</Icon>
-                </IconButton>
+
+
+
+                <TextField
+                    fullWidth
+                    size='small'
+                    value={searchClear}
+                    onChange = {handleChange}
+                    label="Search"
+                    InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
+                        <SearchIcon />
+                        </InputAdornment>
+                    ),
+                    }}
+                    variant="outlined"
+                />
                 </div>
             </div>
             {searchList()}

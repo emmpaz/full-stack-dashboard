@@ -9,13 +9,16 @@ export const SearchListItem = (props: {
     return(
         <ButtonBase>
             <Paper
+            elevation={2}
             sx={{
-                width:'100%',
-                margin:'3px',
-                opacity: '1'
-            }}>
+                width: '95%',
+                p: '7px',
+                margin: '3.5px',
+                opacity: '90%'
+            }}
+            >
                 <Grid>
-                    <Typography variant="h4">{props.campaignName}</Typography>
+                    <Typography variant="h6">{props.campaignName}</Typography>
                 </Grid>
             </Paper>
         </ButtonBase>

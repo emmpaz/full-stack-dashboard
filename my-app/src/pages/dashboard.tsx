@@ -8,7 +8,7 @@ import { CampaignContainer } from '../components/containers';
 import { OtherContainer } from '../components/containers';
 import { RevContainer } from '../components/containers';
 import { GraphContainer } from '../components/containers';
-import { Paper } from '@mui/material';
+import { Fab, Grid, Paper, Tabs, ThemeProvider, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { Box, InputLabel, MenuItem, FormControl } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Campaign } from '../helper files/types';
@@ -20,6 +20,10 @@ import { end_date_down, end_date_up, spend_down, spend_up } from '../helper file
 import '../css files/dashboard.css';
 import Search from '../components/searchbar';
 import Graph from '../components/graph';
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import AddIcon from '@mui/icons-material/Add';
+import JoshTheme from '../css files/allStyle';
 import aholdLogo from '../assets/images/transparentAhold.png';
 
 
@@ -229,47 +233,87 @@ const Dashboard = () => {
     }
     return(
         <BigContainer>
-            <div className="title-container-dashboard">
-                <img className="ahold-logo-dashboard" src={aholdLogo}/> 
-                <Box className="banner-selection-dashboard">
-                    <FormControl style ={{width: '100%'}} variant="filled">
-                        <InputLabel id="banner_id">Banner</InputLabel>
-                        <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={bannerId} onChange={bannerSelectHandler}>
-                            <MenuItem value={1}>Fresh Direct</MenuItem>
-                            <MenuItem value={2}>Food Lion</MenuItem>
-                            <MenuItem value={3}>Stop and Shop</MenuItem>
-                            <MenuItem value={4}>The Giant Company</MenuItem>
-                            <MenuItem value={5}>Giant</MenuItem>
-                            <MenuItem value={6}>Hannaford</MenuItem>
-                            <MenuItem sx={{ color: '#00C832 !important' }} value={7}>Logout</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Box>
-            </div>
+            <ThemeProvider theme={JoshTheme}>
+            <TitleContainer> 
+            <img className="ahold-logo-dashboard" src={aholdLogo}/>
+            <Box sx={{ float: 'right', minWidth: 120 }}>
+                <FormControl style ={{width: '100%'}} variant="standard">
+                    <InputLabel id="banner_id">Banner</InputLabel>
+                    <Select style ={{width: '100%'}} labelId="banner_id" name="banner" onChange={bannerSelectHandler}>
+                        <MenuItem value={1}>Fresh Direct</MenuItem>
+                        <MenuItem value={2}>Food Lion</MenuItem>
+                        <MenuItem value={3}>Stop and Shop</MenuItem>
+                        <MenuItem value={4}>The Giant Company</MenuItem>
+                        <MenuItem value={5}>Giant</MenuItem>
+                        <MenuItem value={6}>Hannaford</MenuItem>
+                        <MenuItem sx={{ color: '#00C832 !important' }} value="7">Logout</MenuItem>
+                    </Select>
+                </FormControl>
+            </Box>
+            </TitleContainer>
             <MidContainer>
-                <CampaignContainer>
-                    <div>
-                        <h1>My Campaigns </h1>
-                        <Search list={myCampaigns}/>
-                        <Button variant={(isActive) ? "contained" : "text"} onClick={activeCampaignsHandler}>Active</Button>
-                        <Button variant={(!isActive) ? "contained" : "text"} onClick={archivedCampaignsHandler}>Archived</Button>
-                        <Button onClick={() => navigate("/createCampaign", { state: { bannerId: bannerId }})}>Create Campaign</Button>
-                        <Button variant={(sortName === "A-Z" || sortName === "Z-A") ? "contained": "text"} onClick={sortNameHandler} style={{margin: 21}}>{(sortName === "default") ? "A-Z" : sortName}</Button>
-                        <Button variant={(sortDate === end_date_down || sortDate === end_date_up) ? "contained": "text"} onClick={sortEndDateHandler} style={{margin: 21}}>{(sortDate === "default") ? end_date_down : sortDate}</Button>
-                        <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>
-                        <div className='camp-container' style={{display:'grid'}} >
-                            {myCampaigns.map((campaign) => {
-                                return(
-                                    <Box onClick={() => navigate("/detailView", { state: { currentCamp: campaign }})}>
-                                    <CampListItem
-                                        year="2022"
-                                        title={campaign.campaignName.toString()}
-                                        budget={campaign.budget.toString()}
-                                        end={campaign.endDate.toString()} /></Box>
-                            )})}
+                <Paper sx={{width: '100vw', margin: 1}}>
+                    <CampaignContainer>
+                        <div>
+                            <Grid container style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                flexWrap: 'wrap',
+                            }}> 
+                                <Grid item  direction="column" xs={8}>
+                                    <Typography align='left'>
+                                        <h1>My Campaigns </h1>
+                                    </Typography>
+                                </Grid>
+                                <Grid item  direction="column" xs={4}>
+                                    <ToggleButtonGroup>
+                                        <ToggleButton value = "active">Active</ToggleButton>
+                                        <ToggleButton value = "archive">Archive</ToggleButton>
+                                    </ToggleButtonGroup>                                
+                                </Grid>
+                            </Grid>
+                            <Grid container style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                flexWrap: 'wrap',
+                            }}>
+                                <Grid item xs={11}> 
+                                    <Search list={myCampaigns}/>
+                                </Grid>
+                                <Grid item xs={1}> 
+                                    <Button onClick={() => navigate("/createCampaign", { state: { bannerId: initBannerId }})} size="large" color="primary">
+                                        <AddBoxOutlinedIcon fontSize='large'/>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                            {/*
+                            <Tabs
+                            orientation="vertical">
+                                <Button variant={(isActive) ? "contained" : "text"} onClick={activeCampaignsHandler}>Active</Button>
+                                <Button variant={(!isActive) ? "contained" : "text"} onClick={archivedCampaignsHandler}>Archived</Button>
+                            </Tabs>
+                            <Button fullWidth onClick={() => navigate("/createCampaign", { state: { bannerId: initBannerId }})}>
+                                    Create Campaign 
+                                <AddCircleOutlineOutlinedIcon/>
+                            </Button>*/}
+                            <Button variant={(sortName === "A-Z" || sortName === "Z-A") ? "contained": "text"} onClick={sortNameHandler} style={{margin: 21}}>{(sortName === "default") ? "A-Z" : sortName}</Button>
+                            <Button variant={(sortDate === end_date_down || sortDate === end_date_up) ? "contained": "text"} onClick={sortEndDateHandler} style={{margin: 21}}>{(sortDate === "default") ? end_date_down : sortDate}</Button>
+                            <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>
+                            <div className='camp-container' style={{display:'grid'}} >
+                                {myCampaigns.map((campaign) => {
+                                    return(
+                                        <Box onClick={() => navigate("/detailView", { state: { currentCamp: campaign }})}>
+                                        <CampListItem
+                                            year="2022"
+                                            title={campaign.campaignName.toString()}
+                                            budget={campaign.budget.toString()}
+                                            end={campaign.endDate.toString()} /></Box>
+                                )})}
+                            </div>
                         </div>
-                    </div>
-                </CampaignContainer>
+                    </CampaignContainer>
+                </Paper>
+                <Paper sx={{width: '100vw', margin: 1}}>
                 <OtherContainer> 
                     <RevContainer> 
                         <h1> Ad Rev Total </h1>
@@ -282,7 +326,9 @@ const Dashboard = () => {
                         <Graph> </Graph>
                     </GraphContainer>
                 </OtherContainer>
+                </Paper>
             </MidContainer>
+            </ThemeProvider>
         </BigContainer>
     );
 }
