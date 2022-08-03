@@ -13,7 +13,9 @@ export const CampListItem = (props: {
     {
     const navigate = useNavigate();
     return (
-        <ButtonBase >
+        <ButtonBase sx={{
+            width:'100%'
+        }}>
             <Paper
             elevation={2}
             sx={{

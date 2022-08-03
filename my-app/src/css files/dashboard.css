@@ -2,3 +2,21 @@
     overflow-y: scroll;
     height: 70vh;
 }
+
+.title-container-dashboard{
+    overflow: hidden;
+
+}
+
+.ahold-logo-dashboard{
+    height: auto;
+    width: 15%;
+    float: left;
+    margin-top: 20px;
+}
+
+.banner-selection-dashboard{
+    float: right; 
+    min-width: 130px;
+    margin-top: 30px;
+}

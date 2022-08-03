@@ -6,6 +6,7 @@ import { OnsiteOptions } from './OnsiteOptions';
 import { InStoreOptions } from './InStoreOptions';
 import { SocialMedia } from './socialMedia';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { CssTextField, ColorButton } from '../css files/customTextField';
 
 const defaultCampaign: Campaign = {
     managerId: 123,
@@ -26,6 +27,7 @@ const defaultCampaign: Campaign = {
     websiteLocation: '',
     instoreOptions: '',
     storeLocation: '',
+    copy: ''
 }
 
 export const CreateCampaignComp = () => {
@@ -133,9 +135,9 @@ export const CreateCampaignComp = () => {
         noValidate
         autoComplete="off"
       >
-            <TextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" name="campaignName" placeholder="Campaign Name" value={newCampaign.campaignName} onChange={handleInputChange}/><br />
-            <TextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" name="company" placeholder="Client Name" value={newCampaign.company} onChange={handleInputChange}/><br />
-            <FormControl style ={{width: '90%'}} variant="standard">
+            <CssTextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" name="campaignName" placeholder="Campaign Name" value={newCampaign.campaignName} onChange={handleInputChange}/><br />
+            <CssTextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" name="company" placeholder="Client Name" value={newCampaign.company} onChange={handleInputChange}/><br />
+            <FormControl variant="filled" sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}}>
               <InputLabel id="banner_id">Banner</InputLabel>
               <Select style ={{width: '100%'}} id="banner_selection" value={bannerDisplay} name="banner" onChange={handleBannerChange}>
                 <MenuItem value="Fresh Direct">Fresh Direct</MenuItem>
@@ -146,13 +148,13 @@ export const CreateCampaignComp = () => {
                 <MenuItem value="Hannaford">Hannaford</MenuItem>
               </Select>
             </FormControl> <br />
-            <TextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" placeholder="budget" name="budget" value={newCampaign.budget} onChange={handleInputChange}/><br />
+            <CssTextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" placeholder="budget" name="budget" value={newCampaign.budget} onChange={handleInputChange}/><br />
             <InputLabel>Campaign Dates</InputLabel>
             <Input style={{width: '72%'}} type="date" name="startDate" value={newCampaign.startDate} onChange={handleInputChange}></Input>
             <p><small>to</small></p>
             <Input style={{width: '72%'}} type="date" name="endDate" value={newCampaign.endDate} onChange={handleInputChange}></Input><br />
-            <FormControl style ={{width: '90%'}} variant="standard">
-              <InputLabel id="channel_id">Channel</InputLabel>
+            <FormControl sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} variant="filled">
+              <InputLabel sx={{}}id="channel_id">Channel</InputLabel>
               <Select style ={{width: '100%'}} id="channel_selection" value={channelDisplay} name="channel" onChange={handleChannelChange}>
                 <MenuItem value="On-Site">On-Site</MenuItem>
                 <MenuItem value="Off-Site">Off-Site</MenuItem>
@@ -160,7 +162,8 @@ export const CreateCampaignComp = () => {
               </Select>
             </FormControl>
             {channelSelectionOption}
-            <Button type="submit" onClick={handleSubmit}>Submit</Button>
+            <CssTextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" placeholder="description" name="copy" value={newCampaign.copy} onChange={handleInputChange}/>
+            <ColorButton variant="contained" type="submit" onClick={handleSubmit}>Submit</ColorButton>
         </Box>
     )
 }
