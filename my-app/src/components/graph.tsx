@@ -18,9 +18,9 @@ import { Campaign } from "../helper files/types";
   }
 
   const data = [
-    { name: 'On-Site', value: {calculateOnSite}, fill: '#e0d0ff'},
-    { name: 'Off-Site', value: 200, fill: '#beeeed'},
-    { name: 'In-Store', value: 200, fill: '#ffbce3'},
+    { name: 'On-Site', value: {calculateOnSite}, fill: '#EBFAEE'},
+    { name: 'Off-Site', value: 200, fill: '#D5F6DC'},
+    { name: 'In-Store', value: 200, fill: '#036016'},
   ];
   
   const fetchCampaigns = () => {
@@ -111,12 +111,12 @@ import { Campaign } from "../helper files/types";
               activeIndex={this.state.activeIndex}
               activeShape={renderActiveShape}
               data={[
-                { name: 'On-Site', value: this.props.onSiteRevenue, fill: '#e0d0ff'},
-                { name: 'Off-Site', value: this.props.offSiteRevenue, fill: '#beeeed'},
-                { name: 'In-Store', value: this.props.inStoreRevenue, fill: '#ffbce3'},
+                { name: 'On-Site', value: this.props.onSiteRevenue, fill: '#B1EEA8'},
+                { name: 'Off-Site', value: this.props.offSiteRevenue, fill: '#1FD655'},
+                { name: 'In-Store', value: this.props.inStoreRevenue, fill: '#008631'},
               ]}
               cx="50%"
-              cy="20%"
+              cy="25%"
               innerRadius={60}
               outerRadius={80}
               // fill="#86abf9"

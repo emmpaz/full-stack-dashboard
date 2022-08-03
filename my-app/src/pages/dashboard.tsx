@@ -19,8 +19,9 @@ import { CampListItem } from '../components/func_camp_list';
 import { end_date_down, end_date_up, spend_down, spend_up } from '../helper files/dashboard_states';
 import '../css files/dashboard.css';
 import Search from '../components/searchbar';
-import  Graph from '../components/graph';
 import { offSiteCalculation, inStoreCalculation, onSiteCalculation } from '../components/graphCalculations';
+
+import Graph from '../components/graph';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import AddIcon from '@mui/icons-material/Add';
@@ -338,13 +339,13 @@ const Dashboard = () => {
                 <Paper elevation={4} sx={{width: '100vw', margin: 1}}>
                 <OtherContainer> 
                     <RevContainer> 
-                        <h1> Ad Rev Total </h1>
+                        <h1> Ad Revenue </h1>
                         <Paper>
-                           ${budgetTotal}
+                        <Typography variant='h4' color='#00C832 !important'>${budgetTotal}</Typography>
                         </Paper>
                     </RevContainer>
                     <GraphContainer> 
-                        <h1> Graph </h1>
+                        <h1> Revenue Distribution </h1>
                         <Graph inStoreRevenue={inStoreCalculation(myCampaigns)} offSiteRevenue={offSiteCalculation(myCampaigns)} onSiteRevenue={onSiteCalculation(myCampaigns)}></Graph>
                     </GraphContainer>
                 </OtherContainer>
