@@ -339,14 +339,13 @@ const Dashboard = () => {
                 <Paper sx={{width: '100vw', margin: 1}}>
                 <OtherContainer> 
                     <RevContainer> 
-                        <h1> Ad Rev Total </h1>
+                        <h1> Ad Revenue </h1>
                         <Paper>
                         <Typography variant='h4' color='#00C832 !important'>${budgetTotal}</Typography>
-                           {/* ${budgetTotal} */}
                         </Paper>
                     </RevContainer>
                     <GraphContainer> 
-                        <h1> Graph </h1>
+                        <h1> Revenue Distribution </h1>
                         <Graph inStoreRevenue={inStoreCalculation(myCampaigns)} offSiteRevenue={offSiteCalculation(myCampaigns)} onSiteRevenue={onSiteCalculation(myCampaigns)}></Graph>
                     </GraphContainer>
                 </OtherContainer>
