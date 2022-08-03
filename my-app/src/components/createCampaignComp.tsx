@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Box, Button, Input, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
+import { Box, Button, Input, Select, MenuItem, InputLabel, FormControl, TextField } from '@mui/material';
 import { Campaign } from '../helper files/types';
 import { OnsiteOptions } from './OnsiteOptions';
 import { InStoreOptions } from './InStoreOptions';
@@ -29,12 +29,15 @@ const defaultCampaign: Campaign = {
 }
 
 export const CreateCampaignComp = () => {
-    const [newCampaign, setNewCampaign] = useState<Campaign>(defaultCampaign)
+    const [newCampaign, setNewCampaign] = useState<Campaign>(defaultCampaign);
 
-    const componentHandler = (name :any, value : any) => {
-      var campaignTemp = JSON.parse(JSON.stringify(newCampaign));
-      campaignTemp = {...campaignTemp, [name]:value};
-      setNewCampaign(campaignTemp);
+    const componentHandler = (name : string, value : string) => {
+
+      setNewCampaign((prevState) => ({
+        ...prevState,
+        [name]:value
+      }));
+
     }
 
     const navigate = useNavigate();
@@ -42,37 +45,45 @@ export const CreateCampaignComp = () => {
     //handles all inputs (campiagn name, client, budget, start/end date)
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
-        var campaignTemp = JSON.parse(JSON.stringify(newCampaign));
-        campaignTemp = {...campaignTemp, [name]:value};
-        setNewCampaign(campaignTemp);
-        if(e.target.value == "Off-Site"){
-          setchannelSelectionOption(<SocialMedia change={componentHandler}/>);
-        }
-        else if(e.target.value == "On-Site"){
-          setchannelSelectionOption(<OnsiteOptions change={componentHandler}/>);
-        }
-        else if(e.target.value == "In-Store"){
-          setchannelSelectionOption(<InStoreOptions change={componentHandler}/>);
-        }
+        
+        setNewCampaign((prevState) => ({
+          ...prevState,
+          [name]:value
+        }));
+  
       };
 
+
+      /**
+       * add banner to new campaign and display the right banner option selected
+       */
       const [bannerDisplay, setBannerDisplay] = useState<string>("");
       const handleBannerChange = (e: any) => {
-        const { name, value } = e.target;
         setBannerDisplay(e.target.value);
-        var campaignTemp = JSON.parse(JSON.stringify(newCampaign));
-        campaignTemp = {...campaignTemp, [name]:value};
-        setNewCampaign(campaignTemp);
+
+        const { name, value } = e.target;
+        setNewCampaign((prevState) => ({
+          ...prevState,
+          [name]:value,
+          bannerId:getBannerId(value)
+        }));
       }
 
+      /**
+       * add channel to new campaign and display the right channel option selected
+       * and the right options for corresponding channel
+       */
       const [channelSelectionOption, setchannelSelectionOption] = useState<JSX.Element>();
       const [channelDisplay, setChannelDisplay] = useState<string>("");
       const handleChannelChange = (e: any) => {
         setChannelDisplay(e.target.value);
+
         const { name, value } = e.target;
-        var campaignTemp = JSON.parse(JSON.stringify(newCampaign));
-        campaignTemp = {...campaignTemp, [name]:value};
-        setNewCampaign(campaignTemp);
+        setNewCampaign((prevState) => ({
+          ...prevState,
+          [name]:value
+        }));
+
         if(e.target.value == "Off-Site"){
           setchannelSelectionOption(<SocialMedia change={componentHandler}/>);
         }
@@ -103,16 +114,14 @@ export const CreateCampaignComp = () => {
 
     const handleSubmit = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
-        var campaignTemp = JSON.parse(JSON.stringify(newCampaign));
-        campaignTemp = {...campaignTemp, ['bannerId']:getBannerId(campaignTemp.banner)};
-        setNewCampaign(campaignTemp);
+
         axios.post('https://ps-springboot.azurewebsites.net/campaign', newCampaign)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
             })
 
-        navigate("/dashboard", {state: {bannerId: initBannerId}});
+        //navigate("/dashboard", {state: {bannerId: initBannerId}});
     }
 
     return (
@@ -124,34 +133,32 @@ export const CreateCampaignComp = () => {
         noValidate
         autoComplete="off"
       >
-            <Input style ={{width: '100%'}} type="text" name="campaignName" placeholder="Campaign Name" value={newCampaign.campaignName} onChange={handleInputChange}></Input><br />
-            <Input style ={{width: '100%'}} type="text" name="company" placeholder="Client Name" value={newCampaign.company} onChange={handleInputChange}></Input><br />
-            <form style ={{width: '100%'}}>
+            <TextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" name="campaignName" placeholder="Campaign Name" value={newCampaign.campaignName} onChange={handleInputChange}/><br />
+            <TextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" name="company" placeholder="Client Name" value={newCampaign.company} onChange={handleInputChange}/><br />
+            <FormControl style ={{width: '90%'}} variant="standard">
               <InputLabel id="banner_id">Banner</InputLabel>
-              <select style ={{width: '100%'}} id="banner_selection" value={bannerDisplay} name="banner" onChange={handleBannerChange}>
-                <option value="none"></option>
-                <option value="Fresh Direct">Fresh Direct</option>
-                <option value="Food Lion">Food Lion</option>
-                <option value="Stop and Shop">Stop and Shop</option>
-                <option value="The Giant Company">The Giant Company</option>
-                <option value="Giant">Giant</option>
-                <option value="Hannaford">Hannaford</option>
-              </select>
-            </form> <br />
-            <Input style ={{width: '100%'}} type="number" placeholder="budget" name="budget" value={newCampaign.budget} onChange={handleInputChange}></Input><br />
+              <Select style ={{width: '100%'}} id="banner_selection" value={bannerDisplay} name="banner" onChange={handleBannerChange}>
+                <MenuItem value="Fresh Direct">Fresh Direct</MenuItem>
+                <MenuItem value="Food Lion">Food Lion</MenuItem>
+                <MenuItem value="Stop and Shop">Stop and Shop</MenuItem>
+                <MenuItem value="The Giant Company">The Giant Company</MenuItem>
+                <MenuItem value="Giant">Giant</MenuItem>
+                <MenuItem value="Hannaford">Hannaford</MenuItem>
+              </Select>
+            </FormControl> <br />
+            <TextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" placeholder="budget" name="budget" value={newCampaign.budget} onChange={handleInputChange}/><br />
             <InputLabel>Campaign Dates</InputLabel>
             <Input style={{width: '72%'}} type="date" name="startDate" value={newCampaign.startDate} onChange={handleInputChange}></Input>
             <p><small>to</small></p>
             <Input style={{width: '72%'}} type="date" name="endDate" value={newCampaign.endDate} onChange={handleInputChange}></Input><br />
-            <form style ={{width: '100%'}}>
+            <FormControl style ={{width: '90%'}} variant="standard">
               <InputLabel id="channel_id">Channel</InputLabel>
-              <select style ={{width: '100%'}} id="channel_selection" value={channelDisplay} name="channel" onChange={handleChannelChange}>
-                <option value="none"></option>
-                <option value="On-Site">On-Site</option>
-                <option value="Off-Site">Off-Site</option>
-                <option value="In-Store">In-Store</option>
-              </select>
-            </form>
+              <Select style ={{width: '100%'}} id="channel_selection" value={channelDisplay} name="channel" onChange={handleChannelChange}>
+                <MenuItem value="On-Site">On-Site</MenuItem>
+                <MenuItem value="Off-Site">Off-Site</MenuItem>
+                <MenuItem value="In-Store">In-Store</MenuItem>
+              </Select>
+            </FormControl>
             {channelSelectionOption}
             <Button type="submit" onClick={handleSubmit}>Submit</Button>
         </Box>

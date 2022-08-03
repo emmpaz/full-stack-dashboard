@@ -15,6 +15,7 @@ import DetailView from './pages/detailView';
 import axios from 'axios';
 import { DashTwo } from './pages/dashboard_2';
 import UploadModule from './components/upload_module';
+import UpdateCampaign from './pages/updateCampaign';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path="/createCampaign" element = {<CreateCampaign />}/>
               <Route path="/detailView" element = {<DetailView />}/>
               <Route path="/dashboard_2" element= {<DashTwo/>}/>
+              <Route path="/updateCampaign" element = {<UpdateCampaign />}/>
             </Routes>
           </Router>
       </header>

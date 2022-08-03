@@ -12,7 +12,6 @@ public interface ICampaignRepo extends JpaRepository<Campaign, Long> {
     @Query(value = "Select * from [dbo].[campaign] c where c.is_active = 1 and c.banner_id = ?1", nativeQuery = true)
     public List<Campaign> searchCampaignByIsActive(String bannerId);
 
-
     @Query(value = "Select * from [dbo].[campaign] c where c.is_active = 0 and c.banner_id= ?1", nativeQuery = true)
     public List<Campaign> searchCampaignByIsActiveNot(String bannerId);
 

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Campaign } from '../helper files/types';
 
 
-export const OnsiteOptions = (props:{ change : (name:any, value:any) => void}) => {
+export const OnsiteOptions = (props:{ change : (name: string, value: string) => void}) => {
     const [onsiteOptions, setOnsiteOptions] = useState<String>("");
 
     const handleOnsiteChange = (e: any) => {
@@ -32,6 +32,7 @@ export const OnsiteOptions = (props:{ change : (name:any, value:any) => void}) =
     const [region, setRegion] = useState<String>("");
     const handleRegionChange = (e : any) => {
         setRegion(e.target.value);
+
         const {name , value} = e.target;
         props.change(name, value);
     }
