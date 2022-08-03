@@ -341,7 +341,8 @@ const Dashboard = () => {
                     <RevContainer> 
                         <h1> Ad Rev Total </h1>
                         <Paper>
-                           ${budgetTotal}
+                        <Typography variant='h4' color='#00C832 !important'>${budgetTotal}</Typography>
+                           {/* ${budgetTotal} */}
                         </Paper>
                     </RevContainer>
                     <GraphContainer> 
