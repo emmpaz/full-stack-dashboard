@@ -34,15 +34,6 @@ const DetailView = () => {
     }
 
 
-    function setChannelInfo(): string {
-        var currentChannel = campaign.currentCamp.channel;
-        if(currentChannel == "On-Site") {
-
-        };
-        
-        return " ";
-    } 
-
     const fetchCampaigns = () => {
         axios.get('https://ps-springboot.azurewebsites.net/campaign').then((res) => {
         //console.log(res);
@@ -123,7 +114,7 @@ const DetailView = () => {
                     </Box>
                 </Paper>
             </Grid>
-            <Button variant="contained" color="success">Edit Campaign</Button>
+            <Button variant="contained" color="success" onClick={() => navigate("/updateCampaign", { state: { campaign }})}>Edit Campaign</Button>
             <Button variant="contained" color="error" onClick={deleteCampaign}>Delete Campaign</Button>
         </div></div>
         

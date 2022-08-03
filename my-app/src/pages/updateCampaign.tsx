@@ -1,34 +1,47 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { Campaign } from '../helper files/types';
 import { CreateCampaignComp } from '../components/createCampaignComp';
+import { Box, FormControl, Input, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 
 const UpdateCampaign = () => {
     const navigate = useNavigate();
-    const formData = {
-        managerId: 123,
-        banner: '',
-        company: '',
-        channel: '',
-        budget: 10000.00,
-        campaignName: '',
-        startDate: 2022-12-12,
-        endDate: 2023-1-12,
-        isActive: false,
-    }
+
+    const { state } = useLocation();
+    const campaign = state as any;
+    const currentCampaign = campaign.currentCamp.currentCamp;
+    const [newCampaign, setNewCampaign] = useState<Campaign>(campaign);
+
+    console.log(campaign.currentCamp.currentCamp);
+
+    console.log(campaign.currentCamp.currentCamp.campaignName);
+    
+
+
+    const handleInputChange = (e: any) => {
+        const { name, value } = e.target;
+        
+        setNewCampaign((prevState) => ({
+          ...prevState,
+          [name]:value
+        }));
+      };
 
     const handleSubmit = () => {
         const axios = require('axios')
-        axios.post('https://ps-springboot.azurewebsites.net/campaign', formData)
+        axios.post('https://ps-springboot.azurewebsites.net/campaign', newCampaign)
     }
 
     return(
-        <div>
-            <h1>Create New Campaign</h1>
-            <CreateCampaignComp />
-        </div>
-    );
+            <div>
+                <h1>Update Campaign</h1>
+                <Box>
+                    <TextField label="Campaign Name" type="text" value={currentCampaign.campaignName}></TextField><br/>
+                    <TextField label="Client Name" type="text" value={currentCampaign.company}></TextField>
+                </Box>
+            </div>
+    )
 
 }
 export default UpdateCampaign;
