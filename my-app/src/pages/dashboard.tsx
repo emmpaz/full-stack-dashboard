@@ -131,11 +131,11 @@ const Dashboard = () => {
         });
         
         console.log(activeUpdated);
-
+        /*
         if(activeUpdated == false) {
             updateActivity(active_or_not, initBannerId);
             setActiveUpdated(true);
-        }
+        }*/
 
     };
 

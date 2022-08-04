@@ -126,7 +126,7 @@ export const CreateCampaignComp = () => {
     const handleSubmit = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
 
-        newCampaign.isActive = activeHandler(newCampaign.endDate);
+        //newCampaign.isActive = activeHandler(newCampaign.endDate);
         console.log(newCampaign.endDate);
         console.log(newCampaign.isActive);
 
