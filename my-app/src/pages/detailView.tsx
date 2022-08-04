@@ -19,7 +19,7 @@ const DetailView = () => {
     const { state } = useLocation();
     const campaign = state as any;
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
-    const [filteredcampaigns, setCampaignss] = useState<Campaign[]>([]);
+    const [filteredCampaigns, setFilteredCampaigns] = useState<Campaign[]>([]);
     const navigate = useNavigate();
 
     const [channelSelectionOption, setchannelSelectionOption] = useState<JSX.Element>();
@@ -27,9 +27,8 @@ const DetailView = () => {
     var clientAdRev = 0;
     var calculated = false;
     var initBannerId = campaign.currentCamp.bannerId;
-    var currentCompany = filteredcampaigns;
 
-    function sortCampaignes(): Campaign[] {
+   /* function sortCampaignes(): Campaign[] {
         filteredcampaigns.forEach( (element) => {
             if(element.company == campaign.currentCamp.company) {
                 // this.setState((filteredcampaigns: any)=>({
@@ -42,6 +41,16 @@ const DetailView = () => {
         })
         return currentCompany;
 
+    }*/
+
+    function sortedCampaigns(): Campaign[] {
+        let filteredCamps: Campaign[] = [];
+        campaigns.forEach( (element) => {
+            if(element.company == campaign.currentCamp.company) {
+                filteredCamps.push(element);
+            }
+        })
+        return filteredCamps;
     }
 
     function calculateClientRevenue(): number {
@@ -139,7 +148,7 @@ const DetailView = () => {
                             <Box p={3}>
                                 <Typography variant='h6'>Ad Revenue: </Typography>
                                 <Typography variant='h4' color='#00C832 !important'>{'$'}{calculateClientRevenue()}</Typography>
-                                <Graph inStoreRevenue={inStoreCalculation(currentCompany)} offSiteRevenue={offSiteCalculation(currentCompany)} onSiteRevenue={onSiteCalculation(currentCompany)}></Graph>
+                                <Graph inStoreRevenue={inStoreCalculation(sortedCampaigns())} offSiteRevenue={offSiteCalculation(sortedCampaigns())} onSiteRevenue={onSiteCalculation(sortedCampaigns())}></Graph>
                             </Box>
                         </Paper>
                     </Grid>
