@@ -26,7 +26,7 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import JoshTheme from '../css files/allStyle';
-import aholdLogo from '../assets/images/transparentAhold.png';
+import logo from '../assets/images/ourLogo.png';
 import React from 'react';
 
 
@@ -129,37 +129,35 @@ const Dashboard = () => {
         .catch((err) => {
         console.log(err);
         });
-        
-        console.log(activeUpdated);
-        /*
-        if(activeUpdated == false) {
-            updateActivity(active_or_not, initBannerId);
-            setActiveUpdated(true);
-        }*/
+
+        // if(activeUpdated == false) {
+        //     updateActivity(active_or_not, initBannerId);
+        //     setActiveUpdated(true);
+        // }
 
     };
 
-    const updateActivity = (active_or_not: String, banner: any) => {
-        var today = new Date();
-        var change = false;
-        console.log(myCampaigns);
-        myCampaigns.map((campaign) => {
-            if(campaign.endDate<today && campaign.isActive==true) {
-                campaign.isActive = false;
-                change = true;
+    // const updateActivity = (active_or_not: String, banner: any) => {
+    //     var today = new Date();
+    //     var change = false;
+    //     console.log(myCampaigns);
+    //     myCampaigns.map((campaign) => {
+    //         if(campaign.endDate<today && campaign.isActive==true) {
+    //             campaign.isActive = false;
+    //             change = true;
                 
-                axios.put('https://ps-springboot.azurewebsites.net/campaign', campaign)
-                    .then((res) => {
-                        setList(res.data);
-                        setCampaigns(res.data);
-                    })
-            }
-        });
+    //             axios.put('https://ps-springboot.azurewebsites.net/campaign', campaign)
+    //                 .then((res) => {
+    //                     setList(res.data);
+    //                     setCampaigns(res.data);
+    //                 })
+    //         }
+    //     });
         
-        if(change) {
-            fetchCampaigns(active_or_not, banner);
-        }
-    }
+    //     if(change) {
+    //         fetchCampaigns(active_or_not, banner);
+    //     }
+    // }
 
    /* const fetchCampaignsByBanner = (bannerId: String) => {
         axios.get(`https://ps-springboot.azurewebsites.net/banner/${bannerId}`).then((res) => {
@@ -291,7 +289,7 @@ const Dashboard = () => {
             <ThemeProvider theme={JoshTheme}>
                 <Grid container sx={{padding: '0 25px 0 25px'}}>
                     <Grid item direction="column" xs={6}>
-                        <img style ={{position:'relative',width: '25%', left: '25px', paddingBottom: '10px'}} className="ahold-logo-dashboard" src={aholdLogo}/>
+                        <img style ={{position:'relative',width: '25%', left: '25px', paddingBottom: '10px'}} className="ahold-logo-dashboard" src={logo}/>
                     </Grid>
                     <Grid item direction="column" xs={6}>
                         <FormControl fullWidth style ={{width: '95%', right: '12px', top: '50px'}} variant="standard">

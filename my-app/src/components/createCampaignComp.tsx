@@ -36,6 +36,7 @@ export const CreateCampaignComp = () => {
     
     const { state } = useLocation();
     var initBannerId = (state as any).bannerId;
+    
 
     const componentHandler = (name : string, value : string) => {
 
@@ -120,13 +121,15 @@ export const CreateCampaignComp = () => {
 
     const activeHandler = (tmpEnd: Date) => {
       var today = new Date();
-      return (today>tmpEnd);
+
+      return (!(today>tmpEnd));
     }
 
     const handleSubmit = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
 
-        //newCampaign.isActive = activeHandler(newCampaign.endDate);
+        newCampaign.isActive = activeHandler(newCampaign.endDate);
+
         console.log(newCampaign.endDate);
         console.log(newCampaign.isActive);
 
