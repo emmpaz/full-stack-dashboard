@@ -11,7 +11,7 @@
 
 .ahold-logo{
     width: auto;
-    height: 100px;
+    height: 6ch;
     float: left;
     margin-top: 20px;
     margin-left: 20px;
@@ -26,5 +26,5 @@
     width: 90%;
     height: auto;
     border-radius: 20px;
-    margin: 10px;
+    margin: 10px 10px 25px 10px;
 }

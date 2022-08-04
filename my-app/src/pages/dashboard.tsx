@@ -8,7 +8,7 @@ import { CampaignContainer } from '../components/containers';
 import { OtherContainer } from '../components/containers';
 import { RevContainer } from '../components/containers';
 import { GraphContainer } from '../components/containers';
-import { Fab, Grid, Paper, Tabs, ThemeProvider, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { Container, Fab, Grid, Paper, Stack, Tabs, ThemeProvider, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { Box, InputLabel, MenuItem, FormControl } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Campaign } from '../helper files/types';
@@ -27,6 +27,7 @@ import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import JoshTheme from '../css files/allStyle';
 import aholdLogo from '../assets/images/transparentAhold.png';
+import React from 'react';
 
 
 const get_campaigns = axios.create({
@@ -77,7 +78,7 @@ const Dashboard = () => {
     const [sortSpend, setSpend] = useState<String>(sortSpendState[2]);
 
     //active and archived states
-    const [isActive, setActive] = useState<Boolean>(true);
+    const [isActive, setActive] = useState<boolean>(true);
 
    // var budgetTotal = 0.00;
     var budgetTotal = calculateClientRevenue(initBannerId);
@@ -286,25 +287,30 @@ const Dashboard = () => {
         }
     }
     return(
-        <BigContainer>
+        <Container maxWidth="xl" sx={{padding:3}}>
             <ThemeProvider theme={JoshTheme}>
-            <TitleContainer> 
-            <img className="ahold-logo-dashboard" src={aholdLogo}/>
-            <Box sx={{ float: 'right', minWidth: 120 }}>
-                <FormControl style ={{width: '100%'}} variant="standard">
-                    <InputLabel id="banner_id">Banner</InputLabel>
-                    <Select style ={{width: '100%'}} labelId="banner_id" name="banner" onChange={bannerSelectHandler}>
-                        <MenuItem value={1}>Fresh Direct</MenuItem>
-                        <MenuItem value={2}>Food Lion</MenuItem>
-                        <MenuItem value={3}>Stop and Shop</MenuItem>
-                        <MenuItem value={4}>The Giant Company</MenuItem>
-                        <MenuItem value={5}>Giant</MenuItem>
-                        <MenuItem value={6}>Hannaford</MenuItem>
-                        <MenuItem sx={{ color: '#00C832 !important' }} value="7">Logout</MenuItem>
-                    </Select>
-                </FormControl>
-            </Box>
-            </TitleContainer>
+                <Grid container sx={{padding: '0 25px 0 25px'}}>
+                    <Grid item direction="column" xs={6}>
+                        <img style ={{position:'relative',width: '25%', left: '25px', paddingBottom: '10px'}} className="ahold-logo-dashboard" src={aholdLogo}/>
+                    </Grid>
+                    <Grid item direction="column" xs={6}>
+                        <FormControl fullWidth style ={{width: '95%', right: '12px', top: '50px'}} variant="standard">
+                            <InputLabel id="banner_id">Banner</InputLabel>
+                            <Select style ={{width: '100%'}} labelId="banner_id" name="banner"value={bannerId} onChange={bannerSelectHandler}>
+                                <MenuItem value={1}>Fresh Direct</MenuItem>
+                                <MenuItem value={2}>Food Lion</MenuItem>
+                                <MenuItem value={3}>Stop and Shop</MenuItem>
+                                <MenuItem value={4}>The Giant Company</MenuItem>
+                                <MenuItem value={5}>Giant</MenuItem>
+                                <MenuItem value={6}>Hannaford</MenuItem>
+                                <MenuItem sx={{ color: '#00C832 !important' }} value="7">Logout</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                </Grid>
+
+
+            
             <MidContainer>
                 <Paper elevation={4} sx={{width: '100vw', margin: 1}}>
                     <CampaignContainer>
@@ -321,8 +327,8 @@ const Dashboard = () => {
                                 </Grid>
                                 <Grid item  direction="column" xs={4}>
                                     <ToggleButtonGroup>
-                                        <ToggleButton value = "active" onClick={activeCampaignsHandler}>Active</ToggleButton>
-                                        <ToggleButton value = "archive" onClick={archivedCampaignsHandler}>Archive</ToggleButton>
+                                        <ToggleButton selected={isActive} value = "active" onClick={activeCampaignsHandler}>Active</ToggleButton>
+                                        <ToggleButton selected = {!isActive} value = "archive" onClick={archivedCampaignsHandler}>Archive</ToggleButton>
                                     </ToggleButtonGroup>                                
                                 </Grid>
                             </Grid>
@@ -340,16 +346,6 @@ const Dashboard = () => {
                                     </Button>
                                 </Grid>
                             </Grid>
-                            {/*
-                            <Tabs
-                            orientation="vertical">
-                                <Button variant={(isActive) ? "contained" : "text"} onClick={activeCampaignsHandler}>Active</Button>
-                                <Button variant={(!isActive) ? "contained" : "text"} onClick={archivedCampaignsHandler}>Archived</Button>
-                            </Tabs>
-                            <Button fullWidth onClick={() => navigate("/createCampaign", { state: { bannerId: initBannerId }})}>
-                                    Create Campaign 
-                                <AddCircleOutlineOutlinedIcon/>
-                            </Button>*/}
                             <Button variant={(sortName === "A-Z" || sortName === "Z-A") ? "contained": "text"} onClick={sortNameHandler} style={{margin: 21}}>{(sortName === "default") ? "A-Z" : sortName}</Button>
                             <Button variant={(sortDate === end_date_down || sortDate === end_date_up) ? "contained": "text"} onClick={sortEndDateHandler} style={{margin: 21}}>{(sortDate === "default") ? end_date_down : sortDate}</Button>
                             <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>
@@ -367,23 +363,25 @@ const Dashboard = () => {
                         </div>
                     </CampaignContainer>
                 </Paper>
-                <Paper elevation={4} sx={{width: '100vw', margin: 1}}>
-                <OtherContainer> 
-                    <RevContainer> 
-                        <h1> Ad Revenue </h1>
-                        <Paper>
-                        <Typography variant='h4' color='#00C832 !important'>${budgetTotal}</Typography>
+                <Paper sx={{width: '100vw', margin: 1}}>
+                <OtherContainer>  
+                        <Typography variant='h5'>
+                            Ad Revenue 
+                        </Typography>
+                        <Paper sx={{margin: 1}}>
+                        <Typography variant='h5' color='#00C832'>
+                        ${budgetTotal}
+                        </Typography>
                         </Paper>
-                    </RevContainer>
                     <GraphContainer> 
-                        <h1> Revenue Distribution </h1>
+                        <h5 style={{textAlign: 'left'}}> Revenue Distribution </h5>
                         <Graph inStoreRevenue={inStoreCalculation(myCampaigns)} offSiteRevenue={offSiteCalculation(myCampaigns)} onSiteRevenue={onSiteCalculation(myCampaigns)}></Graph>
                     </GraphContainer>
                 </OtherContainer>
                 </Paper>
             </MidContainer>
             </ThemeProvider>
-        </BigContainer>
+        </Container>
     );
 }
 
