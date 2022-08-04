@@ -8,7 +8,7 @@ import { CampaignContainer } from '../components/containers';
 import { OtherContainer } from '../components/containers';
 import { RevContainer } from '../components/containers';
 import { GraphContainer } from '../components/containers';
-import { Fab, Grid, Paper, Tabs, ThemeProvider, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { Container, Fab, Grid, Paper, Stack, Tabs, ThemeProvider, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { Box, InputLabel, MenuItem, FormControl } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Campaign } from '../helper files/types';
@@ -232,25 +232,30 @@ const Dashboard = () => {
         }
     }
     return(
-        <BigContainer>
+        <Container maxWidth="xl" sx={{padding:3}}>
             <ThemeProvider theme={JoshTheme}>
-            <TitleContainer> 
-            <img className="ahold-logo-dashboard" src={aholdLogo}/>
-            <Box sx={{ float: 'right', minWidth: 120 }}>
-                <FormControl style ={{width: '100%'}} variant="standard">
-                    <InputLabel id="banner_id">Banner</InputLabel>
-                    <Select style ={{width: '100%'}} labelId="banner_id" name="banner" onChange={bannerSelectHandler}>
-                        <MenuItem value={1}>Fresh Direct</MenuItem>
-                        <MenuItem value={2}>Food Lion</MenuItem>
-                        <MenuItem value={3}>Stop and Shop</MenuItem>
-                        <MenuItem value={4}>The Giant Company</MenuItem>
-                        <MenuItem value={5}>Giant</MenuItem>
-                        <MenuItem value={6}>Hannaford</MenuItem>
-                        <MenuItem sx={{ color: '#00C832 !important' }} value="7">Logout</MenuItem>
-                    </Select>
-                </FormControl>
-            </Box>
-            </TitleContainer>
+                <Grid container >
+                    <Grid item direction="column" xs={6}>
+                        <img style ={{position:'relative',width: '25%', left: '25px', paddingBottom: '10px'}} className="ahold-logo-dashboard" src={aholdLogo}/>
+                    </Grid>
+                    <Grid item direction="column" xs={6}>
+                        <FormControl fullWidth style ={{width: '95%', right: '12px', top: '50px'}} variant="standard">
+                            <InputLabel id="banner_id">Banner</InputLabel>
+                            <Select style ={{width: '100%'}} labelId="banner_id" name="banner" onChange={bannerSelectHandler}>
+                                <MenuItem value={1}>Fresh Direct</MenuItem>
+                                <MenuItem value={2}>Food Lion</MenuItem>
+                                <MenuItem value={3}>Stop and Shop</MenuItem>
+                                <MenuItem value={4}>The Giant Company</MenuItem>
+                                <MenuItem value={5}>Giant</MenuItem>
+                                <MenuItem value={6}>Hannaford</MenuItem>
+                                <MenuItem sx={{ color: '#00C832 !important' }} value="7">Logout</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                </Grid>
+
+
+            
             <MidContainer>
                 <Paper sx={{width: '100vw', margin: 1}}>
                     <CampaignContainer>
@@ -314,22 +319,22 @@ const Dashboard = () => {
                     </CampaignContainer>
                 </Paper>
                 <Paper sx={{width: '100vw', margin: 1}}>
-                <OtherContainer> 
-                    <RevContainer> 
-                        <h1> Ad Rev Total </h1>
-                        <Paper>
+                <OtherContainer>  
+                        <Typography variant='h5'>
+                            Ad Rev Total
+                        </Typography>
+                        <Paper sx={{margin: 1}}>
                            ${budgetTotal}
                         </Paper>
-                    </RevContainer>
                     <GraphContainer> 
-                        <h1> Graph </h1>
+                        <h5 style={{textAlign: 'left'}}> Graph </h5>
                         <Graph> </Graph>
                     </GraphContainer>
                 </OtherContainer>
                 </Paper>
             </MidContainer>
             </ThemeProvider>
-        </BigContainer>
+        </Container>
     );
 }
 
