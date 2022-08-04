@@ -33,7 +33,7 @@ const defaultCampaign: Campaign = {
 
 export const CreateCampaignComp = () => {
     const [newCampaign, setNewCampaign] = useState<Campaign>(defaultCampaign);
-
+    
     const { state } = useLocation();
     var initBannerId = (state as any).bannerId;
 
@@ -118,8 +118,17 @@ export const CreateCampaignComp = () => {
         } else {return 0;};
       }
 
+    const activeHandler = (tmpEnd: Date) => {
+      var today = new Date();
+      return (today>tmpEnd);
+    }
+
     const handleSubmit = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
+
+        newCampaign.isActive = activeHandler(newCampaign.endDate);
+        console.log(newCampaign.endDate);
+        console.log(newCampaign.isActive);
 
         axios.post('https://ps-springboot.azurewebsites.net/campaign', newCampaign)
             .then(res => {

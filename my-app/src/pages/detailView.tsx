@@ -52,7 +52,7 @@ const DetailView = () => {
     const deleteCampaign = () => {
         var id = campaign.currentCamp.campaignId;
         
-        axios.delete(`http://localhost:8080/campaign/${id}`).then((res) => {
+        axios.delete(`https://ps-springboot.azurewebsites.net/campaign/${id}`).then((res) => {
             setCampaigns(res.data);
         })
         .catch((err) => {
