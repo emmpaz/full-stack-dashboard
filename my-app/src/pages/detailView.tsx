@@ -126,7 +126,7 @@ const DetailView = () => {
                 </div>
             </ThemeProvider>
             </BigContainer>
-            <Button variant="contained" color="success" onClick={() => navigate("/updateCampaign", { state: { campaign }})}>Edit Campaign</Button>
+            <Button variant="contained" color="success" onClick={() => navigate("/updateCampaign", {state: {currentCampaign : campaign.currentCamp}})}>Edit Campaign</Button>
             <Button variant="contained" color="error" onClick={deleteCampaign}>Delete Campaign</Button>
         </div>
         

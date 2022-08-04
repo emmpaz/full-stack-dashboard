@@ -129,37 +129,35 @@ const Dashboard = () => {
         .catch((err) => {
         console.log(err);
         });
-        
-        console.log(activeUpdated);
 
-        if(activeUpdated == false) {
-            updateActivity(active_or_not, initBannerId);
-            setActiveUpdated(true);
-        }
+        // if(activeUpdated == false) {
+        //     updateActivity(active_or_not, initBannerId);
+        //     setActiveUpdated(true);
+        // }
 
     };
 
-    const updateActivity = (active_or_not: String, banner: any) => {
-        var today = new Date();
-        var change = false;
-        console.log(myCampaigns);
-        myCampaigns.map((campaign) => {
-            if(campaign.endDate<today && campaign.isActive==true) {
-                campaign.isActive = false;
-                change = true;
+    // const updateActivity = (active_or_not: String, banner: any) => {
+    //     var today = new Date();
+    //     var change = false;
+    //     console.log(myCampaigns);
+    //     myCampaigns.map((campaign) => {
+    //         if(campaign.endDate<today && campaign.isActive==true) {
+    //             campaign.isActive = false;
+    //             change = true;
                 
-                axios.put('https://ps-springboot.azurewebsites.net/campaign', campaign)
-                    .then((res) => {
-                        setList(res.data);
-                        setCampaigns(res.data);
-                    })
-            }
-        });
+    //             axios.put('https://ps-springboot.azurewebsites.net/campaign', campaign)
+    //                 .then((res) => {
+    //                     setList(res.data);
+    //                     setCampaigns(res.data);
+    //                 })
+    //         }
+    //     });
         
-        if(change) {
-            fetchCampaigns(active_or_not, banner);
-        }
-    }
+    //     if(change) {
+    //         fetchCampaigns(active_or_not, banner);
+    //     }
+    // }
 
    /* const fetchCampaignsByBanner = (bannerId: String) => {
         axios.get(`https://ps-springboot.azurewebsites.net/banner/${bannerId}`).then((res) => {
