@@ -7,7 +7,7 @@ import { CampListItem } from '../components/func_camp_list';
 import { Campaign } from '../helper files/types';
 import '../css files/detailedView.css';
 import CloseIcon from '@mui/icons-material/Close';
-import aholdLogo from '../assets/images/transparentAhold.png';
+import logo from '../assets/images/ourLogo.png';
 import { useNavigate } from 'react-router-dom';
 import { OnSiteOptions, WebLocation, TargetAge, TargetRegion, SocialMedia, InStoreOptions, StoreLocation } from '../helper files/channelHelper';
 import testImage from '../assets/images/test.jpg';
@@ -72,7 +72,7 @@ const DetailView = () => {
     const deleteCampaign = () => {
         var id = campaign.currentCamp.campaignId;
         
-        axios.delete(`http://localhost:8080/campaign/${id}`).then((res) => {
+        axios.delete(`https://ps-springboot.azurewebsites.net/campaign/${id}`).then((res) => {
             setCampaigns(res.data);
         })
         .catch((err) => {
@@ -92,7 +92,7 @@ const DetailView = () => {
     return(
         <div className="detailedView-background">
             <div className="header">
-                <img className="ahold-logo" src={aholdLogo}/>
+                <img className="ahold-logo" src={logo}/>
                 <div className="arrow-back">
                     <Fab style={{
                         marginRight: '30px',
@@ -146,7 +146,7 @@ const DetailView = () => {
                 </div>
             </ThemeProvider>
             </BigContainer>
-            <Button variant="contained" color="success" onClick={() => navigate("/updateCampaign", { state: { campaign }})}>Edit Campaign</Button>
+            <Button variant="contained" color="success" onClick={() => navigate("/updateCampaign", {state: {currentCampaign : campaign.currentCamp}})}>Edit Campaign</Button>
             <Button variant="contained" color="error" onClick={deleteCampaign}>Delete Campaign</Button>
         </div>
         

@@ -26,7 +26,7 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import JoshTheme from '../css files/allStyle';
-import aholdLogo from '../assets/images/transparentAhold.png';
+import logo from '../assets/images/ourLogo.png';
 import React from 'react';
 
 
@@ -56,9 +56,14 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const isMount = useIsMount();
 
+    const activityUpdated = false;
+
     //campaign lists states
     const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
     const [originalList, setList] = useState<Campaign[]>([]);
+
+    const [activeUpdated, setActiveUpdated] = useState(false);
+
 
     var listForGraph = myCampaigns as Campaign[];
 
@@ -73,7 +78,7 @@ const Dashboard = () => {
     const [sortSpend, setSpend] = useState<String>(sortSpendState[2]);
 
     //active and archived states
-    const [isActive, setActive] = useState<Boolean>(true);
+    const [isActive, setActive] = useState<boolean>(true);
 
    // var budgetTotal = 0.00;
     var budgetTotal = calculateClientRevenue(initBannerId);
@@ -114,20 +119,47 @@ const Dashboard = () => {
 
     const fetchCampaigns = (active_or_not: String, initBannerId : any) => {
         console.log("fetching... " + initBannerId)
+
         axios.get(`https://ps-springboot.azurewebsites.net/${active_or_not}_campaigns/${initBannerId}`).then((res) => {
         //console.log(res);
+        
         setList(res.data);
         setCampaigns(res.data);
-        //console.log(res.data[0]);
-        var cmp = res.data[0] as Campaign;
-        console.log(cmp);
         })
         .catch((err) => {
         console.log(err);
         });
+
+        // if(activeUpdated == false) {
+        //     updateActivity(active_or_not, initBannerId);
+        //     setActiveUpdated(true);
+        // }
+
     };
 
-    const fetchCampaignsByBanner = (bannerId: String) => {
+    // const updateActivity = (active_or_not: String, banner: any) => {
+    //     var today = new Date();
+    //     var change = false;
+    //     console.log(myCampaigns);
+    //     myCampaigns.map((campaign) => {
+    //         if(campaign.endDate<today && campaign.isActive==true) {
+    //             campaign.isActive = false;
+    //             change = true;
+                
+    //             axios.put('https://ps-springboot.azurewebsites.net/campaign', campaign)
+    //                 .then((res) => {
+    //                     setList(res.data);
+    //                     setCampaigns(res.data);
+    //                 })
+    //         }
+    //     });
+        
+    //     if(change) {
+    //         fetchCampaigns(active_or_not, banner);
+    //     }
+    // }
+
+   /* const fetchCampaignsByBanner = (bannerId: String) => {
         axios.get(`https://ps-springboot.azurewebsites.net/banner/${bannerId}`).then((res) => {
         console.log(res);
         setList(res.data);
@@ -137,10 +169,7 @@ const Dashboard = () => {
         console.log(err);
         });
     };
-
-    const returnGraph = () => {
-
-    }
+*/
     const bannerSelectHandler = (event: SelectChangeEvent) => {
        // setBannerId(event.target.value as string)
         if(event.target.value == "7") {
@@ -258,9 +287,9 @@ const Dashboard = () => {
     return(
         <Container maxWidth="xl" sx={{padding:3}}>
             <ThemeProvider theme={JoshTheme}>
-                <Grid container >
+                <Grid container sx={{padding: '0 25px 0 25px'}}>
                     <Grid item direction="column" xs={6}>
-                        <img style ={{position:'relative',width: '25%', left: '25px', paddingBottom: '10px'}} className="ahold-logo-dashboard" src={aholdLogo}/>
+                        <img style ={{position:'relative',width: '25%', left: '25px', paddingBottom: '10px'}} className="ahold-logo-dashboard" src={logo}/>
                     </Grid>
                     <Grid item direction="column" xs={6}>
                         <FormControl fullWidth style ={{width: '95%', right: '12px', top: '50px'}} variant="standard">
@@ -296,8 +325,8 @@ const Dashboard = () => {
                                 </Grid>
                                 <Grid item  direction="column" xs={4}>
                                     <ToggleButtonGroup>
-                                        <ToggleButton value = "active" onClick={activeCampaignsHandler}>Active</ToggleButton>
-                                        <ToggleButton value = "archive" onClick={archivedCampaignsHandler}>Archive</ToggleButton>
+                                        <ToggleButton selected={isActive} value = "active" onClick={activeCampaignsHandler}>Active</ToggleButton>
+                                        <ToggleButton selected = {!isActive} value = "archive" onClick={archivedCampaignsHandler}>Archive</ToggleButton>
                                     </ToggleButtonGroup>                                
                                 </Grid>
                             </Grid>
@@ -315,16 +344,6 @@ const Dashboard = () => {
                                     </Button>
                                 </Grid>
                             </Grid>
-                            {/*
-                            <Tabs
-                            orientation="vertical">
-                                <Button variant={(isActive) ? "contained" : "text"} onClick={activeCampaignsHandler}>Active</Button>
-                                <Button variant={(!isActive) ? "contained" : "text"} onClick={archivedCampaignsHandler}>Archived</Button>
-                            </Tabs>
-                            <Button fullWidth onClick={() => navigate("/createCampaign", { state: { bannerId: initBannerId }})}>
-                                    Create Campaign 
-                                <AddCircleOutlineOutlinedIcon/>
-                            </Button>*/}
                             <Button variant={(sortName === "A-Z" || sortName === "Z-A") ? "contained": "text"} onClick={sortNameHandler} style={{margin: 21}}>{(sortName === "default") ? "A-Z" : sortName}</Button>
                             <Button variant={(sortDate === end_date_down || sortDate === end_date_up) ? "contained": "text"} onClick={sortEndDateHandler} style={{margin: 21}}>{(sortDate === "default") ? end_date_down : sortDate}</Button>
                             <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>

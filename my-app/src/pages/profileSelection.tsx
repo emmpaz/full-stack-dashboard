@@ -28,7 +28,7 @@ export const Homepage = () => {
           margin: '30px 60px 0 0',
         }}>
           <Button sx={{ 
-            color: 'white !important',
+            color: 'black !important',
             margin: 'top 50px',
             fontFamily: "PoppinsLight",
             fontSize: '25px'
@@ -43,6 +43,7 @@ export const Homepage = () => {
               sx={{
                 height:'75%',
                 width:'75%',
+                filter: 'drop-shadow(0 0 0.2rem black)',
                 marginBottom: '25px',
                 transition: "all .2s ease-in-out",
                 "&:hover":{
@@ -59,6 +60,7 @@ export const Homepage = () => {
               sx={{
                 height:'75%',
                 width:'75%',
+                filter: 'drop-shadow(0 0 0.2rem black)',
                 marginBottom: '25px',
                 transition: "all .2s ease-in-out",
                 "&:hover":{
@@ -75,6 +77,7 @@ export const Homepage = () => {
               sx={{
                 height:'75%',
                 width:'75%',
+                filter: 'drop-shadow(0 0 0.2rem black)',
                 marginBottom: '25px',
                 transition: "all .2s ease-in-out",
                 "&:hover":{
@@ -91,6 +94,7 @@ export const Homepage = () => {
               sx={{
                 height:'75%',
                 width:'75%',
+                filter: 'drop-shadow(0 0 0.2rem black)',
                 marginBottom: '25px',
                 transition: "all .2s ease-in-out",
                 "&:hover":{
@@ -107,6 +111,7 @@ export const Homepage = () => {
               sx={{
                 height:'75%',
                 width:'75%',
+                filter: 'drop-shadow(0 0 0.2rem black)',
                 marginBottom: '25px',
                 transition: "all .2s ease-in-out",
                 "&:hover":{
@@ -123,6 +128,7 @@ export const Homepage = () => {
               sx={{
                 height:'75%',
                 width:'75%',
+                filter: 'drop-shadow(0 0 0.2rem black)',
                 marginBottom: '25px',
                 transition: "all .2s ease-in-out",
                 "&:hover":{
@@ -192,7 +198,7 @@ export const SlayAvatar = (props: AvatarStyles) => {
         <Typography variant="h1" sx={{
           fontSize: 20,
           fontFamily: "PoppinsLight",
-          color: "white",
+          color: "black",
           margin: 'auto',
           }}>{text}</Typography>
       </Box>

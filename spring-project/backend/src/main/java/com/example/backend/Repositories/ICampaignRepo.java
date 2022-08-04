@@ -9,10 +9,14 @@ import java.util.List;
 public interface ICampaignRepo extends JpaRepository<Campaign, Long> {
 
 
-    @Query(value = "Select * from [dbo].[campaign] c where c.is_active = 1 and c.banner_id = ?1", nativeQuery = true)
+    @Query(value = "Select * from [dbo].[campaign] c " +
+            "where c.is_active = 1 and c.banner_id = ?1 " +
+            "ORDER BY c.campaign_id DESC", nativeQuery = true)
     public List<Campaign> searchCampaignByIsActive(String bannerId);
 
-    @Query(value = "Select * from [dbo].[campaign] c where c.is_active = 0 and c.banner_id= ?1", nativeQuery = true)
+    @Query(value = "Select * from [dbo].[campaign] c " +
+            "where c.is_active = 0 and c.banner_id = ?1 " +
+            "ORDER BY c.campaign_id ASC", nativeQuery = true)
     public List<Campaign> searchCampaignByIsActiveNot(String bannerId);
 
     @Query(value = "Select * from [dbo].[campaign] where campaign.banner_id = 1", nativeQuery = true)
