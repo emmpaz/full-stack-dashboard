@@ -73,7 +73,7 @@ const Dashboard = () => {
     const [sortSpend, setSpend] = useState<String>(sortSpendState[2]);
 
     //active and archived states
-    const [isActive, setActive] = useState<Boolean>(true);
+    const [isActive, setActive] = useState<boolean>(true);
 
    // var budgetTotal = 0.00;
     var budgetTotal = calculateClientRevenue(initBannerId);
@@ -258,7 +258,7 @@ const Dashboard = () => {
     return(
         <Container maxWidth="xl" sx={{padding:3}}>
             <ThemeProvider theme={JoshTheme}>
-                <Grid container >
+                <Grid container sx={{padding: '0 25px 0 25px'}}>
                     <Grid item direction="column" xs={6}>
                         <img style ={{position:'relative',width: '25%', left: '25px', paddingBottom: '10px'}} className="ahold-logo-dashboard" src={aholdLogo}/>
                     </Grid>
@@ -296,8 +296,8 @@ const Dashboard = () => {
                                 </Grid>
                                 <Grid item  direction="column" xs={4}>
                                     <ToggleButtonGroup>
-                                        <ToggleButton value = "active" onClick={activeCampaignsHandler}>Active</ToggleButton>
-                                        <ToggleButton value = "archive" onClick={archivedCampaignsHandler}>Archive</ToggleButton>
+                                        <ToggleButton selected={isActive} value = "active" onClick={activeCampaignsHandler}>Active</ToggleButton>
+                                        <ToggleButton selected = {!isActive} value = "archive" onClick={archivedCampaignsHandler}>Archive</ToggleButton>
                                     </ToggleButtonGroup>                                
                                 </Grid>
                             </Grid>
@@ -315,16 +315,6 @@ const Dashboard = () => {
                                     </Button>
                                 </Grid>
                             </Grid>
-                            {/*
-                            <Tabs
-                            orientation="vertical">
-                                <Button variant={(isActive) ? "contained" : "text"} onClick={activeCampaignsHandler}>Active</Button>
-                                <Button variant={(!isActive) ? "contained" : "text"} onClick={archivedCampaignsHandler}>Archived</Button>
-                            </Tabs>
-                            <Button fullWidth onClick={() => navigate("/createCampaign", { state: { bannerId: initBannerId }})}>
-                                    Create Campaign 
-                                <AddCircleOutlineOutlinedIcon/>
-                            </Button>*/}
                             <Button variant={(sortName === "A-Z" || sortName === "Z-A") ? "contained": "text"} onClick={sortNameHandler} style={{margin: 21}}>{(sortName === "default") ? "A-Z" : sortName}</Button>
                             <Button variant={(sortDate === end_date_down || sortDate === end_date_up) ? "contained": "text"} onClick={sortEndDateHandler} style={{margin: 21}}>{(sortDate === "default") ? end_date_down : sortDate}</Button>
                             <Button variant={(sortSpend === spend_down || sortSpend === spend_up) ? "contained": "text"} onClick={sortBudgetHandler} style={{margin: 21}}>{(sortSpend === "default") ? spend_down : sortSpend}</Button>
