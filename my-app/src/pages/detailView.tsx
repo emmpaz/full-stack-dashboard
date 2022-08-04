@@ -12,11 +12,14 @@ import { useNavigate } from 'react-router-dom';
 import { OnSiteOptions, WebLocation, TargetAge, TargetRegion, SocialMedia, InStoreOptions, StoreLocation } from '../helper files/channelHelper';
 import testImage from '../assets/images/test.jpg';
 import JoshTheme from '../css files/allStyle';
+import Graph from '../components/graph';
+import { inStoreCalculation, offSiteCalculation, onSiteCalculation } from '../components/graphCalculations';
 
 const DetailView = () => {
     const { state } = useLocation();
     const campaign = state as any;
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+    const [filteredcampaigns, setCampaignss] = useState<Campaign[]>([]);
     const navigate = useNavigate();
 
     const [channelSelectionOption, setchannelSelectionOption] = useState<JSX.Element>();
@@ -24,6 +27,22 @@ const DetailView = () => {
     var clientAdRev = 0;
     var calculated = false;
     var initBannerId = campaign.currentCamp.bannerId;
+    var currentCompany = filteredcampaigns;
+
+    function sortCampaignes(): Campaign[] {
+        filteredcampaigns.forEach( (element) => {
+            if(element.company == campaign.currentCamp.company) {
+                // this.setState((filteredcampaigns: any)=>({
+                //     currentCompany: [...filteredcampaigns, element.company]
+                // }));
+                setCampaignss(currentCompany => [...currentCompany, campaign.currentCamp.company]);
+                // currentCompany.push(campaign.currentCamp.company);
+                // setCampaignss(currentCompany);
+            }
+        })
+        return currentCompany;
+
+    }
 
     function calculateClientRevenue(): number {
         campaigns.forEach( (element) => {
@@ -120,6 +139,7 @@ const DetailView = () => {
                             <Box p={3}>
                                 <Typography variant='h6'>Ad Revenue: </Typography>
                                 <Typography variant='h4' color='#00C832 !important'>{'$'}{calculateClientRevenue()}</Typography>
+                                <Graph inStoreRevenue={inStoreCalculation(currentCompany)} offSiteRevenue={offSiteCalculation(currentCompany)} onSiteRevenue={onSiteCalculation(currentCompany)}></Graph>
                             </Box>
                         </Paper>
                     </Grid>
