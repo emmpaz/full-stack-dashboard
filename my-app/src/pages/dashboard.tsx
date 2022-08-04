@@ -262,7 +262,7 @@ const Dashboard = () => {
             <Box sx={{ float: 'right', minWidth: 120 }}>
                 <FormControl style ={{width: '100%'}} variant="standard">
                     <InputLabel id="banner_id">Banner</InputLabel>
-                    <Select style ={{width: '100%'}} labelId="banner_id" name="banner" onChange={bannerSelectHandler}>
+                    <Select style ={{width: '100%'}} labelId="banner_id" name="banner" value={bannerId} onChange={bannerSelectHandler}>
                         <MenuItem value={1}>Fresh Direct</MenuItem>
                         <MenuItem value={2}>Food Lion</MenuItem>
                         <MenuItem value={3}>Stop and Shop</MenuItem>

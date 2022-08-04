@@ -1,4 +1,4 @@
-import { Box, Paper, Typography, BoxProps, Grid, checkboxClasses, Fab, Button } from '@mui/material';
+import { Box, Paper, Typography, BoxProps, Grid, checkboxClasses, Fab, Button, ThemeProvider } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -11,6 +11,7 @@ import aholdLogo from '../assets/images/transparentAhold.png';
 import { useNavigate } from 'react-router-dom';
 import { OnSiteOptions, WebLocation, TargetAge, TargetRegion, SocialMedia, InStoreOptions, StoreLocation } from '../helper files/channelHelper';
 import testImage from '../assets/images/test.jpg';
+import JoshTheme from '../css files/allStyle';
 
 const DetailView = () => {
     const { state } = useLocation();
@@ -83,6 +84,7 @@ const DetailView = () => {
                 </div>
             </div>
             <BigContainer>
+            <ThemeProvider theme={JoshTheme}>
                 <div style={{display:'flex', justifyContent:'center'}}>
                     <Grid container direction="column" sx={{margin: '10px'}}>
                         <Paper elevation={3} sx={{borderRadius: 5}}>
@@ -91,9 +93,9 @@ const DetailView = () => {
                                 <Typography variant='h6'>{campaign.currentCamp.company}</Typography>
                                 <img src={testImage} className="test-image"/>     
                                 <Typography variant='h5'>Dates:</Typography>
-                                <Typography variant='h6'>{campaign.currentCamp.startDate} to {campaign.currentCamp.endDate}</Typography>
+                                <Typography variant='h6' sx={{marginBottom: '15px'}}>{campaign.currentCamp.startDate} to {campaign.currentCamp.endDate}</Typography>
                                 <Typography variant='h5'>Channel(s):</Typography>
-                                <Typography>{campaign.currentCamp.channel}</Typography>
+                                <Typography sx={{marginBottom: '15px'}}>{campaign.currentCamp.channel}</Typography>
                                 <Typography variant='h5'>Copy:</Typography>
                                 <Typography align='left'>{campaign.currentCamp.copy}</Typography>
                             </div>
@@ -101,6 +103,15 @@ const DetailView = () => {
                     </Grid>
                     <Grid direction="column" container sx={{margin: '10px'}}>
                         <Paper elevation={3} sx={{borderRadius: 5}}>
+                            <div style={{display: 'grid', justifyItems: 'start', paddingLeft:'20px', paddingTop: '15px', paddingBottom:'20px'}}>
+                                <Typography variant='h2'>Campaign Info</Typography>
+                                <Typography variant='h5' sx={{margin:'15px 0 10px 0'}}>Budget:</Typography>
+                                <Typography >${campaign.currentCamp.budget}</Typography>
+                                <Typography variant='h5' sx={{margin:'15px 0 10px 0'}}>Demographics:</Typography>
+                                <Typography sx={{margin:'0 0 15px 0'}}>{campaign.currentCamp.targetRegion}, {campaign.currentCamp.targetAge}</Typography>
+                            </div>
+                        </Paper>
+                        <Paper elevation={3} sx={{borderRadius: 5, marginTop: '15px'}}>
                             <Box p={3}>
             
                                 <Typography>{TargetAge(campaign.currentCamp)}</Typography>
@@ -113,6 +124,7 @@ const DetailView = () => {
                         </Paper>
                     </Grid>
                 </div>
+            </ThemeProvider>
             </BigContainer>
             <Button variant="contained" color="success" onClick={() => navigate("/updateCampaign", { state: { campaign }})}>Edit Campaign</Button>
             <Button variant="contained" color="error" onClick={deleteCampaign}>Delete Campaign</Button>
