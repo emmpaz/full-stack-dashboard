@@ -25,8 +25,7 @@ function App() {
         <Router>
             <Routes>
               <Route path="/upload" element = {<UploadModule />}/>
-              <Route path="/" element = {<DashTwo />}/>
-              <Route path="/swap" element = {<Homepage />}/>
+              <Route path="/" element = {<Homepage />}/>
               <Route path="/createAcc" element = {<CreateAccount />}/>
               <Route path="/login" element = {<Login />}/>
               <Route path="/dashboard" element = {<Dashboard />}/>
