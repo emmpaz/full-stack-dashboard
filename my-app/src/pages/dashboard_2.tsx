@@ -3,7 +3,7 @@ import { Box } from '@mui/system'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CampListItem } from '../components/func_camp_list'
-import Graph from '../components/graph'
+//import Graph from '../components/graph'
 export const DashTwo = () => {
   const navigate = useNavigate();
   return (
@@ -40,7 +40,7 @@ export const DashTwo = () => {
           <br/>
           <Paper>
           <Box padding={1}>
-                <Graph/>
+                
           </Box>
           </Paper>
         </Grid>

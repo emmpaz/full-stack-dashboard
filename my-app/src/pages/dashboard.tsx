@@ -19,12 +19,15 @@ import { CampListItem } from '../components/func_camp_list';
 import { end_date_down, end_date_up, spend_down, spend_up } from '../helper files/dashboard_states';
 import '../css files/dashboard.css';
 import Search from '../components/searchbar';
+import { offSiteCalculation, inStoreCalculation, onSiteCalculation } from '../components/graphCalculations';
+
 import Graph from '../components/graph';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import JoshTheme from '../css files/allStyle';
 import aholdLogo from '../assets/images/transparentAhold.png';
+import React from 'react';
 
 
 const get_campaigns = axios.create({
@@ -56,6 +59,9 @@ const Dashboard = () => {
     //campaign lists states
     const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
     const [originalList, setList] = useState<Campaign[]>([]);
+
+    var listForGraph = myCampaigns as Campaign[];
+
     //const [bannerId, setBannerId] = useState('');
     const { state } = useLocation();
     var initBannerId = (state as any).bannerId;
@@ -109,6 +115,21 @@ const Dashboard = () => {
     const fetchCampaigns = (active_or_not: String, initBannerId : any) => {
         console.log("fetching... " + initBannerId)
         axios.get(`https://ps-springboot.azurewebsites.net/${active_or_not}_campaigns/${initBannerId}`).then((res) => {
+        //console.log(res);
+        setList(res.data);
+        setCampaigns(res.data);
+        //console.log(res.data[0]);
+        var cmp = res.data[0] as Campaign;
+        console.log(cmp);
+        })
+        .catch((err) => {
+        console.log(err);
+        });
+    };
+
+    const fetchCampaignsByBanner = (bannerId: String) => {
+        axios.get(`https://ps-springboot.azurewebsites.net/banner/${bannerId}`).then((res) => {
+        console.log(res);
         setList(res.data);
         setCampaigns(res.data);
         })
@@ -117,6 +138,9 @@ const Dashboard = () => {
         });
     };
 
+    const returnGraph = () => {
+
+    }
     const bannerSelectHandler = (event: SelectChangeEvent) => {
        // setBannerId(event.target.value as string)
         if(event.target.value == "7") {
@@ -257,7 +281,7 @@ const Dashboard = () => {
 
             
             <MidContainer>
-                <Paper sx={{width: '100vw', margin: 1}}>
+                <Paper elevation={4} sx={{width: '100vw', margin: 1}}>
                     <CampaignContainer>
                         <div>
                             <Grid container style={{
@@ -272,8 +296,8 @@ const Dashboard = () => {
                                 </Grid>
                                 <Grid item  direction="column" xs={4}>
                                     <ToggleButtonGroup>
-                                        <ToggleButton value = "active">Active</ToggleButton>
-                                        <ToggleButton value = "archive">Archive</ToggleButton>
+                                        <ToggleButton value = "active" onClick={activeCampaignsHandler}>Active</ToggleButton>
+                                        <ToggleButton value = "archive" onClick={archivedCampaignsHandler}>Archive</ToggleButton>
                                     </ToggleButtonGroup>                                
                                 </Grid>
                             </Grid>
@@ -328,7 +352,8 @@ const Dashboard = () => {
                         </Paper>
                     <GraphContainer> 
                         <h5 style={{textAlign: 'left'}}> Graph </h5>
-                        <Graph> </Graph>
+                        <h1> Revenue Distribution </h1>
+                        <Graph inStoreRevenue={inStoreCalculation(myCampaigns)} offSiteRevenue={offSiteCalculation(myCampaigns)} onSiteRevenue={onSiteCalculation(myCampaigns)}></Graph>
                     </GraphContainer>
                 </OtherContainer>
                 </Paper>
