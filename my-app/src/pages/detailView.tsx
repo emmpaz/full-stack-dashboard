@@ -166,11 +166,6 @@ const DetailView = () => {
                                 <Typography align='left'>{campaign.currentCamp.copy}</Typography>
                             </div>
                         </Paper>
-                        <Paper elevation={3} sx={{borderRadius: 5, marginTop:'15px'}}>
-                            <div style={{display: 'grid', justifyItems: 'start', paddingLeft:'20px', paddingTop: '15px', paddingBottom:'20px'}}>
-                                <Typography variant='h2'>Campaign Images</Typography>
-                            </div>
-                        </Paper>
                     </Grid>
                     <Grid direction="column" container sx={{margin: '10px'}}>
                         <Paper elevation={3} sx={{borderRadius: 5}}>
