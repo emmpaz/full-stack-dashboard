@@ -50,7 +50,7 @@ const DetailView = () => {
     function sortedCampaigns(): Campaign[] {
         let filteredCamps: Campaign[] = [];
         campaigns.forEach( (element) => {
-            if(element.company == campaign.currentCamp.company) {
+            if(element.company == campaign.currentCamp.company && element.banner == campaign.currentCamp.banner) {
                 filteredCamps.push(element);
             }
         })
@@ -59,7 +59,7 @@ const DetailView = () => {
 
     function calculateClientRevenue(): number {
         campaigns.forEach( (element) => {
-            if(element.company == campaign.currentCamp.company) {
+            if(element.company == campaign.currentCamp.company && element.banner == campaign.currentCamp.banner) {
                 clientAdRev = clientAdRev + element.budget;
             }
         })
@@ -80,6 +80,10 @@ const DetailView = () => {
             calculateClientRevenue();
         }*/
     };
+
+    const getImageUrls = () => {
+        
+    }
 
 
     const deleteCampaign = () => {
@@ -152,6 +156,11 @@ const DetailView = () => {
                                 <Typography align='left'>{campaign.currentCamp.copy}</Typography>
                             </div>
                         </Paper>
+                        <Paper elevation={3} sx={{borderRadius: 5, marginTop:'15px'}}>
+                            <div style={{display: 'grid', justifyItems: 'start', paddingLeft:'20px', paddingTop: '15px', paddingBottom:'20px'}}>
+                                <Typography variant='h2'>Campaign Images</Typography>
+                            </div>
+                        </Paper>
                     </Grid>
                     <Grid direction="column" container sx={{margin: '10px'}}>
                         <Paper elevation={3} sx={{borderRadius: 5}}>
@@ -177,10 +186,13 @@ const DetailView = () => {
                         </Paper>
                     </Grid>
                 </div>
-                
-                <br/>
-                    <br/>
-                    <br/>
+
+                <ButtonGroup disableElevation variant="contained" sx={{margin:'30px 0 30px 0'}}>
+                    <Button variant="outlined" color="success" onClick={() => navigate("/updateCampaign", {state: {currentCampaign : campaign.currentCamp}})}>Edit Campaign</Button>
+                    <Button variant="outlined" color="error" onClick={deleteCampaign}>Delete Campaign</Button>
+                </ButtonGroup>
+            
+
             </ThemeProvider>
             </BigContainer>
         </div>

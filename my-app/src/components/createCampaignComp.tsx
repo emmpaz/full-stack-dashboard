@@ -166,7 +166,7 @@ export const CreateCampaignComp = () => {
                 <MenuItem value="Hannaford">Hannaford</MenuItem>
               </Select>
             </FormControl> <br />
-            <CssTextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" placeholder="budget" name="budget" value={newCampaign.budget} onChange={handleInputChange}/><br />
+            <CssTextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" placeholder="$" name="budget" value={newCampaign.budget} onChange={handleInputChange}/><br />
             <InputLabel>Campaign Dates</InputLabel>
             <Input style={{width: '72%'}} type="date" name="startDate" value={newCampaign.startDate} onChange={handleInputChange}></Input>
             <p><small>to</small></p>

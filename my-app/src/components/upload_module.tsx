@@ -3,7 +3,6 @@ import { Box, Button, Fab, Input, Paper, ThemeProvider, Typography } from '@mui/
 import React, { useState } from 'react';
 import uploadFileToBlob, { isStorageConfigured, setContainer} from '../azure-storge-blob';
 import Path from 'path';
-import AliceCarousel from 'react-alice-carousel';
 import Carousel from 'react-material-ui-carousel';
 import { Campaign } from '../helper files/types';
 import JoshTheme from '../css files/allStyle';
