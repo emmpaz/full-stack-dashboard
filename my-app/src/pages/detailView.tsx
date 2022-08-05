@@ -186,13 +186,6 @@ const DetailView = () => {
                         </Paper>
                     </Grid>
                 </div>
-
-                <ButtonGroup disableElevation variant="contained" sx={{margin:'30px 0 30px 0'}}>
-                    <Button variant="outlined" color="success" onClick={() => navigate("/updateCampaign", {state: {currentCampaign : campaign.currentCamp}})}>Edit Campaign</Button>
-                    <Button variant="outlined" color="error" onClick={deleteCampaign}>Delete Campaign</Button>
-                </ButtonGroup>
-            
-
             </ThemeProvider>
             </BigContainer>
         </div>
