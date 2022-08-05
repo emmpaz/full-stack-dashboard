@@ -35,7 +35,7 @@ export const CreateAccountComp = () => {
                 console.log(res.data);
             })
 
-            navigate("/login");
+            navigate("/");
     }
 
     return (

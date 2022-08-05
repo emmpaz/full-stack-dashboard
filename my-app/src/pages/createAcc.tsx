@@ -5,7 +5,9 @@ import CreateAccountComp from "../components/createAccountComp";
 import Header from '../components/header';
 import { TitleContainer } from '../components/containers';
 import '../css files/createAcc.css';
-
+import { ThemeProvider } from "@emotion/react";
+import JoshTheme from "../css files/allStyle";
+import logo from '../assets/images/ourLogo.png';
 const CreateAccount = () => {
     const navigate = useNavigate();
     const formData = {
@@ -22,14 +24,16 @@ const CreateAccount = () => {
     }
 
     return(
-        <div>
-             <Header></Header>
-            <div>
-                <div>
-                    <h1>Create New Account</h1>
-                        <CreateAccountComp />
-                </div>
+        <div className="login-background">
+            <div className="header-login">
+                <img className="ahold-logo-login" src={logo}/>
             </div>
+                <div>
+                    <ThemeProvider theme={JoshTheme}>
+                    <h1 style={{fontFamily:'PoppinsLight', color:'black'}}>Create New Account</h1>
+                        <CreateAccountComp />
+                    </ThemeProvider>
+                </div>
         </div>
     );
 };
