@@ -48,7 +48,7 @@ const DetailView = () => {
     function sortedCampaigns(): Campaign[] {
         let filteredCamps: Campaign[] = [];
         campaigns.forEach( (element) => {
-            if(element.company == campaign.currentCamp.company) {
+            if(element.company == campaign.currentCamp.company && element.banner == campaign.currentCamp.banner) {
                 filteredCamps.push(element);
             }
         })
@@ -57,7 +57,7 @@ const DetailView = () => {
 
     function calculateClientRevenue(): number {
         campaigns.forEach( (element) => {
-            if(element.company == campaign.currentCamp.company) {
+            if(element.company == campaign.currentCamp.company && element.banner == campaign.currentCamp.banner) {
                 clientAdRev = clientAdRev + element.budget;
             }
         })
