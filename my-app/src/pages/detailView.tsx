@@ -79,6 +79,10 @@ const DetailView = () => {
         }*/
     };
 
+    const getImageUrls = () => {
+        
+    }
+
 
     const deleteCampaign = () => {
         var id = campaign.currentCamp.campaignId;
@@ -130,6 +134,11 @@ const DetailView = () => {
                                 <Typography align='left'>{campaign.currentCamp.copy}</Typography>
                             </div>
                         </Paper>
+                        <Paper elevation={3} sx={{borderRadius: 5, marginTop:'15px'}}>
+                            <div style={{display: 'grid', justifyItems: 'start', paddingLeft:'20px', paddingTop: '15px', paddingBottom:'20px'}}>
+                                <Typography variant='h2'>Campaign Images</Typography>
+                            </div>
+                        </Paper>
                     </Grid>
                     <Grid direction="column" container sx={{margin: '10px'}}>
                         <Paper elevation={3} sx={{borderRadius: 5}}>
@@ -155,7 +164,7 @@ const DetailView = () => {
                         </Paper>
                     </Grid>
                 </div>
-                <ButtonGroup disableElevation variant="contained">
+                <ButtonGroup disableElevation variant="contained" sx={{margin:'30px 0 30px 0'}}>
                     <Button variant="outlined" color="success" onClick={() => navigate("/updateCampaign", {state: {currentCampaign : campaign.currentCamp}})}>Edit Campaign</Button>
                     <Button variant="outlined" color="error" onClick={deleteCampaign}>Delete Campaign</Button>
                 </ButtonGroup>

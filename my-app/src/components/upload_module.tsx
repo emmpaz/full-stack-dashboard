@@ -3,7 +3,6 @@ import { Button, Input, Paper } from '@mui/material';
 import React, { useState } from 'react';
 import uploadFileToBlob, { isStorageConfigured } from '../azure-storge-blob';
 import Path from 'path';
-import AliceCarousel from 'react-alice-carousel';
 import Carousel from 'react-material-ui-carousel';
 import { Campaign } from '../helper files/types';
 const storageConfigured = isStorageConfigured();

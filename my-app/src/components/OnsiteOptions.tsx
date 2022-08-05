@@ -47,10 +47,10 @@ export const OnsiteOptions = (props:{ change : (name: string, value: string) => 
         autoComplete="off">
        
         <FormControl style ={{width: '100%'}} variant="standard">
-              <InputLabel id="onsite_id">Onsite Options</InputLabel>
+              <InputLabel id="onsite_id">On-Site Options</InputLabel>
               <Select style ={{width: '100%'}} labelId="onsite_id" name="onsiteOptions" value={onsiteOptions} onChange={handleOnsiteChange}>
               <MenuItem value="Sponsored Product">Sponsored Product</MenuItem>
-                <MenuItem value="On-Site Creative">On-Site creative</MenuItem>
+                <MenuItem value="On-Site Creative">On-Site Creative</MenuItem>
               </Select>
             </FormControl>
 
