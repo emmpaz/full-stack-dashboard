@@ -362,9 +362,10 @@ const Dashboard = () => {
                 </Paper>
                 <Paper sx={{width: '100vw', margin: 1}}>
                 <OtherContainer>  
-                        <Typography variant='h5'>
-                            Ad Spend 
-                        </Typography>
+                <GraphContainer>
+                        
+                        <h5 style={{textAlign: 'left'}}>Ad Spend</h5> 
+                </GraphContainer>
                         <Paper sx={{margin: 1}}>
                         <Typography variant='h5' color='#00C832'>
                         ${budgetTotal}

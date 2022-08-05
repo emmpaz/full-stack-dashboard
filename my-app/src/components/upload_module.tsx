@@ -152,7 +152,7 @@ const UploadModule = () => {
       {!storageConfigured && <div>Storage is not configured.</div>}
     <br></br>
     <ThemeProvider theme={JoshTheme}>
-      <Button fullWidth size="large" variant="outlined">Submit Campaign</Button>
+      <Button fullWidth size="large" variant="outlined" onClick={() => navigate("/dashboard", {state: {bannerId: 1}})}>Submit Campaign</Button>
     </ThemeProvider>
     </Paper>
     </>

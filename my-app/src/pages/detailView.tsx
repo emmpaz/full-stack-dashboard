@@ -183,6 +183,7 @@ const DetailView = () => {
                                 <Typography>{TargetRegion(campaign.currentCamp)}</Typography>
                             </Box>
                             <Box p={3}>
+                                <br/>
                                 <Typography variant='h6'>Ad Revenue: </Typography>
                                 <Typography variant='h4' color='#00C832 !important'>{'$'}{calculateClientRevenue()}</Typography>
                                 <Graph inStoreRevenue={inStoreCalculation(sortedCampaigns())} offSiteRevenue={offSiteCalculation(sortedCampaigns())} onSiteRevenue={onSiteCalculation(sortedCampaigns())}></Graph>
