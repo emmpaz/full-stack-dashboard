@@ -173,7 +173,7 @@ const Dashboard = () => {
     const bannerSelectHandler = (event: SelectChangeEvent) => {
        // setBannerId(event.target.value as string)
         if(event.target.value == "7") {
-            navigate("/login");
+            navigate("/");
         }
         //reset all parameters
         setDate(sortDateState[2])
