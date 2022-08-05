@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { CssTextField, ColorButton } from '../css files/customTextField';
 import CloseIcon from '@mui/icons-material/Close';
 import UploadModule from './upload_module';
+import {UploadPage} from '../pages/uploadMedia';
 
 const defaultCampaign: Campaign = {
     managerId: 123,
@@ -140,7 +141,7 @@ export const CreateCampaignComp = () => {
                 console.log(res.data);
             })
 
-        navigate("/upload", {state: {bannerId: initBannerId}});
+        navigate("/upload", {state: {currentCamp: newCampaign}});
     }
 
     return (
@@ -165,7 +166,7 @@ export const CreateCampaignComp = () => {
                 <MenuItem value="Hannaford">Hannaford</MenuItem>
               </Select>
             </FormControl> <br />
-            <CssTextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" placeholder="budget" name="budget" value={newCampaign.budget} onChange={handleInputChange}/><br />
+            <CssTextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" placeholder="$" name="budget" value={newCampaign.budget} onChange={handleInputChange}/><br />
             <InputLabel>Campaign Dates</InputLabel>
             <Input style={{width: '72%'}} type="date" name="startDate" value={newCampaign.startDate} onChange={handleInputChange}></Input>
             <p><small>to</small></p>
@@ -179,7 +180,7 @@ export const CreateCampaignComp = () => {
               </Select>
             </FormControl>
             {channelSelectionOption}
-            <CssTextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" placeholder="Copy" name="copy" value={newCampaign.copy} onChange={handleInputChange}/>
+            <CssTextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" placeholder="description" name="copy" value={newCampaign.copy} onChange={handleInputChange}/>
             <ColorButton variant="contained" type="submit" onClick={handleSubmit}>Submit</ColorButton>
         </Box>
     )

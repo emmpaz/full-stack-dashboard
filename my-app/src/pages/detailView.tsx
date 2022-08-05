@@ -1,4 +1,4 @@
-import { Box, Paper, Typography, BoxProps, Grid, checkboxClasses, Fab, Button, ThemeProvider, ButtonGroup } from '@mui/material';
+import { Box, Paper, Typography, BoxProps, Grid, checkboxClasses, Fab, Button, ThemeProvider, ButtonGroup, Tooltip } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -16,6 +16,8 @@ import Graph from '../components/graph';
 import { inStoreCalculation, offSiteCalculation, onSiteCalculation } from '../components/graphCalculations';
 import { red } from '@mui/material/colors';
 import { green } from '@mui/material/colors';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 const DetailView = () => {
     const { state } = useLocation();
@@ -48,7 +50,7 @@ const DetailView = () => {
     function sortedCampaigns(): Campaign[] {
         let filteredCamps: Campaign[] = [];
         campaigns.forEach( (element) => {
-            if(element.company == campaign.currentCamp.company) {
+            if(element.company == campaign.currentCamp.company && element.banner == campaign.currentCamp.banner) {
                 filteredCamps.push(element);
             }
         })
@@ -57,7 +59,7 @@ const DetailView = () => {
 
     function calculateClientRevenue(): number {
         campaigns.forEach( (element) => {
-            if(element.company == campaign.currentCamp.company) {
+            if(element.company == campaign.currentCamp.company && element.banner == campaign.currentCamp.banner) {
                 clientAdRev = clientAdRev + element.budget;
             }
         })
@@ -109,12 +111,32 @@ const DetailView = () => {
             <div className="header">
                 <img className="ahold-logo" src={logo}/>
                 <div className="arrow-back">
-                    <Fab style={{
-                        marginRight: '30px',
-                        marginTop: '30px'
-                    }} onClick={() => navigate("/dashboard", {state: {bannerId : campaign.currentCamp.bannerId}})}>
-                        <CloseIcon />
-                    </Fab>
+                <ButtonGroup disableElevation variant="contained">
+                    <Tooltip title="Edit Campaign">
+                        <Fab color="primary" style={{
+                            marginRight: '10px',
+                            marginTop: '30px'
+                        }} onClick={() => navigate("/updateCampaign", {state: {currentCampaign : campaign.currentCamp}})}>
+                            <EditIcon />
+                        </Fab>
+                    </Tooltip>
+                    <Tooltip title="Delete Campaign">   
+                        <Fab color="error" style={{
+                            marginRight: '10px',
+                            marginTop: '30px'
+                        }} onClick={deleteCampaign}>
+                            <DeleteForeverIcon />
+                        </Fab>
+                    </Tooltip>
+                    <Tooltip title="Close">
+                        <Fab style={{
+                            marginRight: '95px',
+                            marginTop: '30px'
+                        }} onClick={() => navigate("/dashboard", {state: {bannerId : campaign.currentCamp.bannerId}})}>
+                            <CloseIcon />
+                        </Fab>
+                    </Tooltip>
+                </ButtonGroup>
                 </div>
             </div>
             <BigContainer>
@@ -164,11 +186,6 @@ const DetailView = () => {
                         </Paper>
                     </Grid>
                 </div>
-                <ButtonGroup disableElevation variant="contained" sx={{margin:'30px 0 30px 0'}}>
-                    <Button variant="outlined" color="success" onClick={() => navigate("/updateCampaign", {state: {currentCampaign : campaign.currentCamp}})}>Edit Campaign</Button>
-                    <Button variant="outlined" color="error" onClick={deleteCampaign}>Delete Campaign</Button>
-                </ButtonGroup>
-            
             </ThemeProvider>
             </BigContainer>
         </div>

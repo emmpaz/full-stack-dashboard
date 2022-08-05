@@ -13,7 +13,6 @@ import DetailView from './pages/detailView';
 
 
 import axios from 'axios';
-import { DashTwo } from './pages/dashboard_2';
 import UploadModule from './components/upload_module';
 import UpdateCampaign from './pages/updateCampaign';
 
@@ -29,10 +28,13 @@ function App() {
               <Route path="/" element = {<Login />}/>
               <Route path="/swap" element = {<Homepage />}/>
               <Route path="/createAcc" element = {<CreateAccount />}/>
+              <Route path="/login" element = {<Login />}/>
               <Route path="/dashboard" element = {<Dashboard />}/>
               <Route path="/createCampaign" element = {<CreateCampaign />}/>
               <Route path="/detailView" element = {<DetailView />}/>
-              <Route path="/dashboard_2" element= {<DashTwo/>}/>
+              <Route path="/dashboard" element = {<Dashboard />}/>
+              <Route path="/createCampaign" element = {<CreateCampaign />}/>
+              <Route path="/detailView" element = {<DetailView />}/>
               <Route path="/updateCampaign" element = {<UpdateCampaign />}/>
             </Routes>
           </Router>
