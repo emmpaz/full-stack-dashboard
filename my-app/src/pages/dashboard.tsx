@@ -104,8 +104,7 @@ const Dashboard = () => {
         if (isMount) {
             //fetchCampaigns("active");
             fetchCampaigns("active", bannerId);
-           // let tmpBanner: string = bannerId as string;
-            //fetchCampaignsByBanner(tmpBanner);
+
             console.log('fetching');
             if(!calculated) {
                 console.log(bannerId);
