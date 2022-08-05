@@ -27,3 +27,8 @@ export type User = {
     username: String;
     password: String;
 }
+
+export type CampImage = {
+    campaignId: number;
+    imageUrl: string;
+}

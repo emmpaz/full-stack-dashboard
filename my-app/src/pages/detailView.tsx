@@ -1,4 +1,4 @@
-import { Box, Paper, Typography, BoxProps, Grid, checkboxClasses, Fab, Button, ThemeProvider } from '@mui/material';
+import { Box, Paper, Typography, BoxProps, Grid, checkboxClasses, Fab, Button, ThemeProvider, ButtonGroup } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -14,6 +14,8 @@ import testImage from '../assets/images/test.jpg';
 import JoshTheme from '../css files/allStyle';
 import Graph from '../components/graph';
 import { inStoreCalculation, offSiteCalculation, onSiteCalculation } from '../components/graphCalculations';
+import { red } from '@mui/material/colors';
+import { green } from '@mui/material/colors';
 
 const DetailView = () => {
     const { state } = useLocation();
@@ -153,10 +155,13 @@ const DetailView = () => {
                         </Paper>
                     </Grid>
                 </div>
+                <ButtonGroup disableElevation variant="contained">
+                    <Button variant="outlined" color="success" onClick={() => navigate("/updateCampaign", {state: {currentCampaign : campaign.currentCamp}})}>Edit Campaign</Button>
+                    <Button variant="outlined" color="error" onClick={deleteCampaign}>Delete Campaign</Button>
+                </ButtonGroup>
+            
             </ThemeProvider>
             </BigContainer>
-            <Button variant="contained" color="success" onClick={() => navigate("/updateCampaign", {state: {currentCampaign : campaign.currentCamp}})}>Edit Campaign</Button>
-            <Button variant="contained" color="error" onClick={deleteCampaign}>Delete Campaign</Button>
         </div>
         
     )

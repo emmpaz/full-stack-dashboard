@@ -8,6 +8,7 @@ import { SocialMedia } from './socialMedia';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CssTextField, ColorButton } from '../css files/customTextField';
 import CloseIcon from '@mui/icons-material/Close';
+import UploadModule from './upload_module';
 
 const defaultCampaign: Campaign = {
     managerId: 123,
@@ -139,7 +140,7 @@ export const CreateCampaignComp = () => {
                 console.log(res.data);
             })
 
-        navigate("/dashboard", {state: {bannerId: initBannerId}});
+        navigate("/upload", {state: {bannerId: initBannerId}});
     }
 
     return (

@@ -6,7 +6,13 @@ const JoshTheme = createTheme({
     },
     palette: {
       primary: {
-        main: '#00C832'
+        main: '#00C832',
+      },
+      error: {
+        main: '#E92C2C'
+      },
+      success: {
+        main: '#00C832',
       }
     }
   });

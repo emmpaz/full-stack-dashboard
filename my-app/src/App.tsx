@@ -24,7 +24,7 @@ function App() {
       <header className="App-header">
         <Router>
             <Routes>
-              <Route path="/upload" element = {<UploadModule />}/>
+              <Route path="/upload" element = {<UploadModule currentCamp="x" />}/>
               <Route path="/" element = {<Homepage />}/>
               <Route path="/createAcc" element = {<CreateAccount />}/>
               <Route path="/login" element = {<Login />}/>
