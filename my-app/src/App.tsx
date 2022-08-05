@@ -25,9 +25,18 @@ function App() {
         <Router>
             <Routes>
 
-              <Route path="/upload" element = {<UploadModule currentCamp="x" />}/>
+              <Route path="/upload" element = {<UploadModule />}/>
               <Route path="/" element = {<Login />}/>
               <Route path="/swap" element = {<Homepage />}/>
+              <Route path="/createAcc" element = {<CreateAccount />}/>
+              <Route path="/login" element = {<Login />}/>
+              <Route path="/dashboard" element = {<Dashboard />}/>
+              <Route path="/createCampaign" element = {<CreateCampaign />}/>
+              <Route path="/detailView" element = {<DetailView />}/>
+              <Route path="/dashboard_2" element= {<DashTwo/>}/>
+              <Route path="/updateCampaign" element = {<UpdateCampaign />}/>
+
+              
             </Routes>
           </Router>
       </header>

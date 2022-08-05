@@ -6,6 +6,6 @@ export const UploadPage = (newCampaign: Campaign) => {
     
     
     return(
-        <UploadModule currentCamp={newCampaign}/>
+        <UploadModule />
     )
 }

@@ -22,6 +22,9 @@ const DetailView = () => {
     const campaign = state as any;
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
     const [filteredCampaigns, setFilteredCampaigns] = useState<Campaign[]>([]);
+    const [campId, setCampId] = useState(0);
+    const [url, setUrl] = useState("");
+    const [set, setSet] = useState(false);
     const navigate = useNavigate();
 
     const [channelSelectionOption, setchannelSelectionOption] = useState<JSX.Element>();
@@ -30,29 +33,31 @@ const DetailView = () => {
     var calculated = false;
     var initBannerId = campaign.currentCamp.bannerId;
 
-   /* function sortCampaignes(): Campaign[] {
-        filteredcampaigns.forEach( (element) => {
-            if(element.company == campaign.currentCamp.company) {
-                // this.setState((filteredcampaigns: any)=>({
-                //     currentCompany: [...filteredcampaigns, element.company]
-                // }));
-                setCampaignss(currentCompany => [...currentCompany, campaign.currentCamp.company]);
-                // currentCompany.push(campaign.currentCamp.company);
-                // setCampaignss(currentCompany);
-            }
-        })
-        return currentCompany;
-
-    }*/
-
     function sortedCampaigns(): Campaign[] {
         let filteredCamps: Campaign[] = [];
         campaigns.forEach( (element) => {
             if(element.company == campaign.currentCamp.company) {
                 filteredCamps.push(element);
+
             }
         })
         return filteredCamps;
+    }
+
+    const getUrls = () => {
+        if(set == false) {
+            axios.get(`https://ps-springboot.azurewebsites.net/images/${campId}`).then((res) => {
+               // return res.data[0];
+               setUrl(res.data[res.data.length-1]);
+            //  console.log(res.data[0]);
+
+            });
+            setSet(true);
+    }}
+
+    function returnUrl(): string {
+        return ((getUrls() as unknown) as string);
+        
     }
 
     function calculateClientRevenue(): number {
@@ -70,13 +75,18 @@ const DetailView = () => {
         axios.get('https://ps-springboot.azurewebsites.net/campaign').then((res) => {
         //console.log(res);
         setCampaigns(res.data);
+        
+        for(let i=0;i<res.data.length;i++) {
+            if(res.data[i].campaignName == campaign.currentCamp.campaignName)
+              setCampId(res.data[i].campaignId);  
+              break;      
+        }
+
         })
         .catch((err) => {
-        //console.log(err);
         });
-       /* if(calculated == false) {
-            calculateClientRevenue();
-        }*/
+
+        getUrls();
     };
 
 
@@ -121,7 +131,7 @@ const DetailView = () => {
                             <div style={{display: 'grid', justifyItems: 'start', paddingLeft:'20px', paddingTop: '15px', paddingBottom:'20px'}}>
                                 <Typography variant='h2'>{campaign.currentCamp.campaignName}</Typography>
                                 <Typography variant='h6'>{campaign.currentCamp.company}</Typography>
-                                <img src={testImage} className="test-image"/>     
+                                <img src={url} className="test-image"/>     
                                 <Typography variant='h5'>Dates:</Typography>
                                 <Typography variant='h6' sx={{marginBottom: '15px'}}>{campaign.currentCamp.startDate} to {campaign.currentCamp.endDate}</Typography>
                                 <Typography variant='h5'>Channel(s):</Typography>
@@ -143,7 +153,6 @@ const DetailView = () => {
                         </Paper>
                         <Paper elevation={3} sx={{borderRadius: 5, marginTop: '15px'}}>
                             <Box p={3}>
-            
                                 <Typography>{TargetAge(campaign.currentCamp)}</Typography>
                                 <Typography>{TargetRegion(campaign.currentCamp)}</Typography>
                             </Box>
@@ -162,6 +171,8 @@ const DetailView = () => {
             
             </ThemeProvider>
             </BigContainer>
+            <Button variant="contained" color="success" onClick={() => navigate("/updateCampaign", {state: {currentCampaign : campaign.currentCamp}})}>Edit Campaign</Button>
+            <Button variant="contained" color="error" onClick={deleteCampaign}>Delete Campaign</Button>
         </div>
         
     )

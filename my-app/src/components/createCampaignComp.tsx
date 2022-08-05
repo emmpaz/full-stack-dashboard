@@ -10,7 +10,7 @@ import { CssTextField, ColorButton } from '../css files/customTextField';
 import CloseIcon from '@mui/icons-material/Close';
 import UploadModule from './upload_module';
 
-const defaultCampaign: Campaign = {
+export const defaultCampaign: Campaign = {
     managerId: 123,
     banner: '',
     bannerId: 1,
@@ -140,7 +140,7 @@ export const CreateCampaignComp = () => {
                 console.log(res.data);
             })
 
-        navigate("/upload", {state: {bannerId: initBannerId}});
+        navigate("/upload", {state: {campaign: newCampaign}});
     }
 
     return (
