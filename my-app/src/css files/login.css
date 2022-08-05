@@ -1,17 +1,26 @@
 .login-background{
-    background: linear-gradient(#1c1c1c, 90%, #454545);
+    background: linear-gradient(white, 90%, white);
     width: 100%;
     height: 100vh;
-    justify-content: center;
     display: grid;
 }
 
-.login-content{
-
+.header-login{
+    width: 100%;
+    height:auto;
 }
 
 .login-title{
-    font-family: "PoppinsMedium";
+    font-family: "PoppinsLight";
     font-size: 3cm;
-    color: 036016;
+    color: black;
+    margin: 0px 0px 20px 0;
+}
+
+.ahold-logo-login{
+    width: auto;
+    height: 6ch;
+    margin-top: 20px;
+    margin-left: 20px;
+    float: left;
 }

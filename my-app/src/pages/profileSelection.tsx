@@ -17,13 +17,19 @@ import { TitleContainer } from '../components/containers';
 //import deepOrange from '@mui/material/colors/deepOrange'
 //import deepPurple from '@mui/material/colors/deepPurple'
 import '../css files/profile-selection.css';
+import logo from '../assets/images/ourLogo.png';
 
 export const Homepage = () => {
   const [myCampaigns, setCampaigns] = useState<Campaign[]>([]);
 
+  const navigate = useNavigate();
+
   return (
     <div className="profile-background">
       <div className="logout">
+      <div className="header-login">
+                <img className="ahold-logo-login" src={logo}/>
+            </div>
         <Box sx={{
           margin: '30px 60px 0 0',
         }}>
@@ -32,7 +38,7 @@ export const Homepage = () => {
             margin: 'top 50px',
             fontFamily: "PoppinsLight",
             fontSize: '25px'
-            }} value="7">Logout</Button>
+            }} value="7" onClick={() => navigate("/")}>Logout</Button>
         </Box>
       </div>
         <CenterContentDiv>

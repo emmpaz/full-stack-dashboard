@@ -1,14 +1,15 @@
 import axios from 'axios';
-import { Button, Input, Paper } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import uploadFileToBlob, { isStorageConfigured } from '../azure-storge-blob';
+import { Box, Button, Fab, Input, Paper, ThemeProvider, Typography } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import uploadFileToBlob, { isStorageConfigured, setContainer} from '../azure-storge-blob';
 import Path from 'path';
-import AliceCarousel from 'react-alice-carousel';
 import Carousel from 'react-material-ui-carousel';
 import { Campaign } from '../helper files/types';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { defaultCampaign } from './createCampaignComp';
 
+import JoshTheme from '../css files/allStyle';
+import { height } from '@mui/system';
 const storageConfigured = isStorageConfigured();
 const UploadModule = () => {
     // all blobs in container
@@ -31,23 +32,20 @@ const UploadModule = () => {
 
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
 
-
     useEffect(() => {
       fetchCampaigns();
     }, [])
 
     const fetchCampaigns = () => {
       axios.get('https://ps-springboot.azurewebsites.net/campaign').then((res) => {
-      //console.log(res);
       setCampaigns(res.data);
       //console.log(res.data);
 
 
       for(let i=0;i<res.data.length;i++) {
-          console.log(tmpCampaign.campaignName);
-          if(res.data[i].campaignName == tmpCampaign.campaignName){
-            setCampId(res.data[i].campaignId);
-          }
+          if(res.data[i].campaignName == tmpCampaign.campaignName)
+            {setCampId(res.data[i].campaignId);
+            setContainer(res.data[i].campaignId);}
       }
 
       })
@@ -80,27 +78,52 @@ const UploadModule = () => {
       };
 
       const DisplayForm = () => (
+        <ThemeProvider theme={JoshTheme}>
         <div>
-          <Input type="file" onChange={onFileChange} key={inputKey || ''} />
-            <Button type="submit" onClick={onFileUpload}>
-                Add File
-            </Button>
-            <Button type="submit" onClick={() => navigate("/dashboard", {state: {bannerId : 1}})}>Return to Dashboard</Button>
+          <label htmlFor="upload-photo">
+          <input
+            style={{ display: 'none' }}
+            id="upload-photo"
+            name="upload-photo"
+            type="file"
+            onChange={onFileChange}
+            key={inputKey || ''}
+          />
+
+          <Button
+            color="primary"
+            size="small"
+            component="span"
+            variant="contained"
+          >
+            Upload Image
+          </Button>
+          </label>
+          
+        
+          <Button type="submit" onClick={onFileUpload}>
+            Add Image
+          </Button>
         </div>
+        </ThemeProvider>
       )
       
       const DisplayImagesFromContainer = () => {
         updateDB();
         return (
-          <Carousel>
-            {blobList.map((item) => (
-                <img src={item} width="500px" />                
+          <>
+          <Box>
+            <Carousel sx={{height: '500px'}} >
+            {blobList.map((image_url) => (
+                <img src={image_url} width='500px' />                
             ))}
           </Carousel>
+          </Box>
+          </>
       )};
      
       const updateDB = () => (
-<>
+        <>
            {blobList.map((item: any) => (
                 axios.post('http://ps-springboot.azurewebsites.net/images',{ "campaignId" : campId, "imageUrl" : item}
             ).then(res => 
@@ -110,14 +133,29 @@ const UploadModule = () => {
       );
 
   return (
-    <Paper elevation={3} sx={{p:2}}>
-      <h1>Upload Campaign Media</h1>
+    <>
+    <Paper elevation={5} sx={{p:5}}>
+    <ThemeProvider theme={JoshTheme}>
+      <Typography variant='h3'>
+        Upload Campaign Media
+      </Typography>
+      <Typography variant='h6'>
+        Upload Images using 'Upload Image' and attatch to campaign using 'Add Image'
+      </Typography>
+        <br/>
+        <br/>
+    </ThemeProvider>
       {storageConfigured && !uploading && DisplayForm()}
       {storageConfigured && uploading && <div>Uploading</div>}
       <hr />
       {storageConfigured && blobList.length > 0 && DisplayImagesFromContainer()}
       {!storageConfigured && <div>Storage is not configured.</div>}
+    <br></br>
+    <ThemeProvider theme={JoshTheme}>
+      <Button fullWidth size="large" variant="outlined">Submit Campaign</Button>
+    </ThemeProvider>
     </Paper>
+    </>
   );
 };
 
