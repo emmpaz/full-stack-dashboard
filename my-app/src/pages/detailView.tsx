@@ -48,14 +48,21 @@ const DetailView = () => {
 
     const getUrls = () => {
         if(set == false) {
-            axios.get(`https://ps-springboot.azurewebsites.net/images/${campId}`).then((res) => {
-               // return res.data[0];
-               setUrl(res.data[res.data.length-1]);
-            //  console.log(res.data[0]);
-
+            axios.get(`https://ps-springboot.azurewebsites.net/images/1183`).then((res) => {
+               // return res.data[0]
+               console.log(campId);
+               setUrl(res.data[0]);
+               //console.log(res.data);
             });
             setSet(true);
     }}
+
+    function createUrl(): string {
+        let tmpurl = "https://med.blob.core.windows.net/"+{campId}+"/?restype=container&comp=list";
+        //let newurl = tmpurl.blobs.blobs.url;
+        setUrl(tmpurl);
+        return tmpurl;
+    }
 
     function returnUrl(): string {
         return ((getUrls() as unknown) as string);
@@ -88,12 +95,9 @@ const DetailView = () => {
         .catch((err) => {
         });
 
+        //createUrl();
         getUrls();
     };
-
-    const getImageUrls = () => {
-        
-    }
 
 
     const deleteCampaign = () => {
