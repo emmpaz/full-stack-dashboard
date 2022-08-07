@@ -180,7 +180,7 @@ export const CreateCampaignComp = () => {
               </Select>
             </FormControl>
             {channelSelectionOption}
-            <CssTextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" placeholder="description" name="copy" value={newCampaign.copy} onChange={handleInputChange}/>
+            <CssTextField sx={{backgroundColor:'#D5F6DC'}} style ={{width: '90%'}} type="text" placeholder="Copy" name="copy" value={newCampaign.copy} onChange={handleInputChange}/>
             <ColorButton variant="contained" type="submit" onClick={handleSubmit}>Submit</ColorButton>
         </Box>
     )

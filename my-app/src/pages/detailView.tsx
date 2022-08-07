@@ -170,11 +170,6 @@ const DetailView = () => {
                                 <Typography align='left'>{campaign.currentCamp.copy}</Typography>
                             </div>
                         </Paper>
-                        <Paper elevation={3} sx={{borderRadius: 5, marginTop:'15px'}}>
-                            <div style={{display: 'grid', justifyItems: 'start', paddingLeft:'20px', paddingTop: '15px', paddingBottom:'20px'}}>
-                                <Typography variant='h2'>Campaign Images</Typography>
-                            </div>
-                        </Paper>
                     </Grid>
                     <Grid direction="column" container sx={{margin: '10px'}}>
                         <Paper elevation={3} sx={{borderRadius: 5}}>
@@ -192,6 +187,7 @@ const DetailView = () => {
                                 <Typography>{TargetRegion(campaign.currentCamp)}</Typography>
                             </Box>
                             <Box p={3}>
+                                <br/>
                                 <Typography variant='h6'>Ad Revenue: </Typography>
                                 <Typography variant='h4' color='#00C832 !important'>{'$'}{calculateClientRevenue()}</Typography>
                                 <Graph inStoreRevenue={inStoreCalculation(sortedCampaigns())} offSiteRevenue={offSiteCalculation(sortedCampaigns())} onSiteRevenue={onSiteCalculation(sortedCampaigns())}></Graph>
@@ -201,8 +197,6 @@ const DetailView = () => {
                 </div>
             </ThemeProvider>
             </BigContainer>
-            <Button variant="contained" color="success" onClick={() => navigate("/updateCampaign", {state: {currentCampaign : campaign.currentCamp}})}>Edit Campaign</Button>
-            <Button variant="contained" color="error" onClick={deleteCampaign}>Delete Campaign</Button>
         </div>
         
     )
