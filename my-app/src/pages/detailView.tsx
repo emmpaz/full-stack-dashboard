@@ -1,4 +1,4 @@
-import { Box, Paper, Typography, BoxProps, Grid, checkboxClasses, Fab, Button, ThemeProvider, ButtonGroup, Tooltip } from '@mui/material';
+import { Box, Paper, Typography, BoxProps, Grid, checkboxClasses, Fab, Button, ThemeProvider, ButtonGroup, Tooltip, Card, CardMedia } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -183,7 +183,13 @@ const DetailView = () => {
                             <div style={{display: 'grid', justifyItems: 'start', paddingLeft:'20px', paddingTop: '15px', paddingBottom:'20px'}}>
                                 <Typography variant='h2'>{campaign.currentCamp.campaignName}</Typography>
                                 <Typography variant='h6'>{campaign.currentCamp.company}</Typography>
-                                <img src={url} className="test-image"/>     
+                                <Card>
+                                    <CardMedia 
+                                    component="img"
+                                    height="300"
+                                    image={url} />
+                                </Card>
+                                {/* <img src={url} className="test-image"/>      */}
                                 <Typography variant='h5'>Dates:</Typography>
                                 <Typography variant='h6' sx={{marginBottom: '15px'}}>{campaign.currentCamp.startDate} to {campaign.currentCamp.endDate}</Typography>
                                 <Typography variant='h5'>Channel(s):</Typography>
