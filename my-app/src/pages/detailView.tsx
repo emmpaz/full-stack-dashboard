@@ -25,9 +25,15 @@ const DetailView = () => {
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
     const [filteredCampaigns, setFilteredCampaigns] = useState<Campaign[]>([]);
     const [campId, setCampId] = useState(0);
-    const [url, setUrl] = useState("");
+     const [url, setUrl] = useState("");
+
+   // var url = '';
     const [set, setSet] = useState(false);
     const navigate = useNavigate();
+
+    var campId2 = 0;
+
+    const [campIdFound, setCampIdFound] = useState(false);
 
     const [channelSelectionOption, setchannelSelectionOption] = useState<JSX.Element>();
 
@@ -46,28 +52,37 @@ const DetailView = () => {
         return filteredCamps;
     }
 
-    const getUrls = () => {
+    function returnUrl(): string {
+        return url;
+    };
+
+    const getUrls = (currentCampId: number) => {
         if(set == false) {
-            axios.get(`https://ps-springboot.azurewebsites.net/images/1183`).then((res) => {
+            console.log(campId2);
+            axios.get(`https://ps-springboot.azurewebsites.net/images/${currentCampId}`).then((res) => {
                // return res.data[0]
-               console.log(campId);
+
                setUrl(res.data[0]);
+               //console.log(res.data[0])
+               //console.log(res.data)
+               //console.log(url);
+               //setUrl(res.data[0]);
                //console.log(res.data);
             });
             setSet(true);
     }}
 
-    function createUrl(): string {
-        let tmpurl = "https://med.blob.core.windows.net/"+{campId}+"/?restype=container&comp=list";
-        //let newurl = tmpurl.blobs.blobs.url;
-        setUrl(tmpurl);
-        return tmpurl;
-    }
+    // function createUrl(): string {
+    //     let tmpurl = "https://med.blob.core.windows.net/"+{campId}+"/?restype=container&comp=list";
+    //     //let newurl = tmpurl.blobs.blobs.url;
+    //     setUrl(tmpurl);
+    //     return tmpurl;
+    // }
 
-    function returnUrl(): string {
-        return ((getUrls() as unknown) as string);
+    // function returnUrl(): string {
+    //     return ((getUrls() as unknown) as string);
         
-    }
+    // }
 
     function calculateClientRevenue(): number {
         campaigns.forEach( (element) => {
@@ -84,19 +99,25 @@ const DetailView = () => {
         axios.get('https://ps-springboot.azurewebsites.net/campaign').then((res) => {
         //console.log(res);
         setCampaigns(res.data);
-        
+
         for(let i=0;i<res.data.length;i++) {
-            if(res.data[i].campaignName == campaign.currentCamp.campaignName)
-              setCampId(res.data[i].campaignId);  
-              break;      
+            console.log(res.data[i]);
+            if(res.data[i].campaignName == campaign.currentCamp.campaignName) {
+                campId2 = res.data[i].campaignId;
+                // setCampId(res.data[i].campaignId);  
+                break;}
+            setCampIdFound(true);
+            
         }
+
+        getUrls(campId2);
 
         })
         .catch((err) => {
         });
 
         //createUrl();
-        getUrls();
+        
     };
 
 
@@ -116,7 +137,8 @@ const DetailView = () => {
     
     useEffect(() => {
        // console.log(campaign.currentCamp);
-        fetchCampaigns();
+        if(campIdFound == false)
+            fetchCampaigns();
     })
     
     
